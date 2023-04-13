@@ -2,12 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class jin : MonoBehaviour
+public class juna : MonoBehaviour
 {
     // Start is called before the first frame update
     void Start()
     {
-        Debug.Log("Áø");
+        Debug.Log("ì¤€í•˜");
     }
 
     // Update is called once per frame
