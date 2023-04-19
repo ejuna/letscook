@@ -2,17 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Food : MonoBehaviour
+public class Food
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+  private string foodName;
+  private int foodTier;
+  private List<Ingredient> ingredients;
+  private int price;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+  public Food(string name,int tier,List<Ingredient> ing,int price){
+    foodName = name;
+    foodTier = tier;
+    ingredients = ing;
+    this.price = price;
+  }
 }

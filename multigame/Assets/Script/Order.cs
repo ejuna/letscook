@@ -2,17 +2,22 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Order : MonoBehaviour
+public class Order
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+  private Food food;
+  private int timeLimit;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+
+  public Order(Food food,int timeLimit){
+    this.food = food;
+    this.timeLimit = timeLimit;
+  }
+  
+  public Food getFood(){
+    return food;
+  }
+
+  public int getTimeLimit(){
+    return timeLimit;
+  }
 }
