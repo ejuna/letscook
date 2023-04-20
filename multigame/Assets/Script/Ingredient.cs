@@ -1,18 +1,15 @@
+using System;
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Ingredient : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public enum Type { StapleFood, Meat, Vegetable };
+    public new string name;
+    public int price;
+    public Type ingredientType;
+}
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }
