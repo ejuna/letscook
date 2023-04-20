@@ -2,18 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BaseScenes : MonoBehaviour
+public abstract class BaseScenes : MonoBehaviour
 {
-    Define.Scene scene= null;
-    // Start is called before the first frame update
-    void Start()
+    public Define.Scene SceneType { get; protected set; } = Define.Scene.None;
+    void Awake()
     {
-        
+        Init();
     }
+    protected virtual void Init()
+    {
 
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
+    public abstract void Clear();
 }
