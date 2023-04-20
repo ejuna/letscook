@@ -11,5 +11,3 @@ public class Ingredient : MonoBehaviour
     public int price;
     public Type ingredientType;
 }
-
-}
