@@ -15,4 +15,18 @@ public class Food
     ingredients = ing;
     this.price = price;
   }
+
+  public Food(string name, int tier, string ing, int price)
+  {
+    foodName = name;
+    foodTier = tier;
+    ingredients = new List<Ingredient>();
+    this.price = price;
+  }
+
+  public List<Ingredient> getIngredients(){
+    return ingredients;
+  }
+
+
 }
