@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class InputManager
 {
+    //키보드 입력에 대한 이벤트 생성
     public Action KeyAction = null;
 
     public void OnUpdate()

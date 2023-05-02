@@ -25,6 +25,7 @@ public class Managers : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Event.OnUpdate();
         Input.OnUpdate();
     }
 
@@ -44,7 +45,10 @@ public class Managers : MonoBehaviour
     }
     public static void Clear()
     {
+        Event.Clear();
+        Date.Clear();
         Scene.Clear();
         Input.Clear();
+
     }
 }
