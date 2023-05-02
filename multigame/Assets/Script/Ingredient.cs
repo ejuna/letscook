@@ -7,7 +7,7 @@ using UnityEngine;
 public class Ingredient : MonoBehaviour
 {
     public enum Type { StapleFood, Meat, Vegetable };
-    public new string name;
+    public string ingredientName;
     public int price;
     public Type ingredientType;
 }
