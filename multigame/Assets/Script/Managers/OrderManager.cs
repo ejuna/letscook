@@ -7,42 +7,46 @@ public class OrderManager
   private Queue<Order> orderList;
   private List<Food> todaysOrder;
   private int complete;
-  private int defaltTime;
-  private const int MAX_GROUP = 4;
+  private const int DEFALT_TIME = 20;
 
   public string fileName = "load_order"; // 불러올 파일의 이름
 
 
-  public OrderManager(int day,int fame){
+  public void init(int day,int fame){
     orderList = new Queue<Order>();
-    todaysOrder = createTodaysOrder(day, fame);
-    defaltTime = getDefaltTime(day, fame);
+    load_order();
     complete = 0;
   }
 
-///txt 파일 불러오고 리스트에 저장.
-  public List<Food> createTodaysOrder(int day, int fame)
-  {
+//txt 파일 다 저장
+  public void load_order(){
     List<Food> list = new List<Food>();
     TextAsset textAsset = Resources.Load<TextAsset>(fileName);
     string fileContent = textAsset.text;
     string[] line = fileContent.Split(new[] { "\r\n", "\r", "\n" }, System.StringSplitOptions.None);
 
-    for(int i=0;i<line.Length;i++){
+    for (int i = 0; i < line.Length; i++)
+    {
       string name = line[i].Split('/')[0];
       int tier = int.Parse(line[i].Split('/')[1]);
       string ingredient = line[i].Split('/')[2];
       int price = int.Parse(line[i].Split('/')[3]);
 
-      
+
+
     }
-    return list;
+  }
+
+///명성과 일수 계산하여 tier 몇까지 받을건지
+  public void createTodaysOrder(int day, int fame)
+  {
+    
   }
 
 
   public void createOrder(){
     int rand = Random.Range(0, todaysOrder.Count);
-    Order order = new Order(todaysOrder[rand], defaltTime);
+    Order order = new Order(todaysOrder[rand], DEFALT_TIME);
     orderList.Enqueue(order);
   }
 
@@ -54,12 +58,15 @@ public class OrderManager
   }
 
 
+
   public void createGourmandOrder(){
-    createOrder((int)(defaltTime - defaltTime * 0.3));
+    createOrder((int)(DEFALT_TIME - DEFALT_TIME * 0.3));
   }
 
-  public void createGroupGuestOrder(){
-    int group_num = Random.Range(2, MAX_GROUP);
+
+
+  public void createGroupGuestOrder(int group_num)
+  {
     for (int i=0;i<= group_num;i++){
       createOrder();
     }
@@ -100,8 +107,10 @@ public class OrderManager
     for(int i = 0; i < order_ingredients_size; i++){
       if (check[i] == false) return false;
     }
+
     return true;
   }
+
 
 
   public bool deleteOrder(){
@@ -113,8 +122,4 @@ public class OrderManager
   }
 
 
-///팀원들과 함께 상의하여 day와 fame에 따라 기본 제한시간을 정하기
-  private int getDefaltTime(int day,int fame){
-    return 0;
-  }
 }
