@@ -7,8 +7,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     float _speed = 10.0f;
 
-    bool _moveToDest = false;
-    // Start is called before the first frame update
+     bool _moveToDest = false;
     void Start()
     {
         Managers.Input.KeyAction -= OnKeyboard;

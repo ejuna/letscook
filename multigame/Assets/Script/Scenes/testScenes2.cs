@@ -15,7 +15,7 @@ public class testScenes2 : BaseScenes
     {
         if (Input.GetKeyDown(KeyCode.Q))
         {
-            SceneManager.LoadScene("test");
+            Managers.Scene.LoadScene(Define.Scene.Test);
         }
     }
     protected override void Init()
@@ -26,9 +26,6 @@ public class testScenes2 : BaseScenes
     }
     public override void Clear()
     {
-        throw new System.NotImplementedException();
+        Debug.Log("test2");
     }
-
-
-
 }
