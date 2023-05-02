@@ -5,22 +5,24 @@ using UnityEngine.SceneManagement;
 
 public class LobbyScene : BaseScenes
 {
-    void Start()
+    void Awake()
     {
         Init();
+    }
+
+    private void Update()
+    {
+        //씬 변경하는 부분
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            Managers.Scene.LoadScene(Define.Scene.None);
+        }
     }
     protected override void Init()
     {
         base.Init();
         SceneType = Define.Scene.Lobby;
     }
-    private void Update()
-    {
-        if(Input.GetKeyDown(KeyCode.Q)) {
-            SceneManager.LoadScene("looding");
-        }
-    }
-
     public override void Clear()
     {
         throw new System.NotImplementedException();

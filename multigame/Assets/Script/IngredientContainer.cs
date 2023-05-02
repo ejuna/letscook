@@ -2,11 +2,11 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static Define;
 
 public class IngredientContainer : MonoBehaviour
 {
-    public enum Type { StapleFood, Meat, Vegetable };
-    public Type ingredientType;
+    public IngredientType ingredientType;
     public Ingredient[] ingredients;
     public int[] counts;
 }

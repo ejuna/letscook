@@ -11,6 +11,13 @@ public class Define
         Game,
         GameEnd,
         Looding,
+        Test,
+        Test2
     }
-
+    public enum IngredientType
+    {
+        StapleFood, 
+        Meat, 
+        Vegetable
+    }
 }
