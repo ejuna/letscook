@@ -14,5 +14,10 @@ public class Define
         Test,
         Test2
     }
-
+    public enum IngredientType
+    {
+        StapleFood, 
+        Meat, 
+        Vegetable
+    }
 }

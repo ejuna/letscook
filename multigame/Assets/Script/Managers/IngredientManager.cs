@@ -4,8 +4,9 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Xml.Linq;
 using UnityEngine;
+using static Define;
 
-public class IngredientManager : MonoBehaviour
+public class IngredientManager
 {
     public List<IngredientContainer> ingredientContainers;
 
@@ -14,7 +15,7 @@ public class IngredientManager : MonoBehaviour
 
     }
 
-    public void ingredientIncrease(string name, Ingredient.Type ingredientType, IngredientContainer ingredientContainer)
+    public void ingredientIncrease(string name, IngredientType ingredientType, IngredientContainer ingredientContainer)
     {
         if (ingredientContainer.ingredientType == ingredientType)
         {
@@ -28,7 +29,7 @@ public class IngredientManager : MonoBehaviour
             }
         }
     }
-    public void ingredientDecrease(string name, Ingredient.Type ingredientType, IngredientContainer ingredientContainer)
+    public void ingredientDecrease(string name, IngredientType ingredientType, IngredientContainer ingredientContainer)
     {
         if (ingredientContainer.ingredientType == ingredientType)
         {
@@ -45,4 +46,5 @@ public class IngredientManager : MonoBehaviour
             }
         }
     }
+    public void Clear() { }
 }
