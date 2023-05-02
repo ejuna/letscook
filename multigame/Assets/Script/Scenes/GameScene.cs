@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class LobbyScene : BaseScenes
+public class GameScene : BaseScenes
 {
     void Awake()
     {
@@ -21,7 +21,7 @@ public class LobbyScene : BaseScenes
     protected override void Init()
     {
         base.Init();
-        SceneType = Define.Scene.Lobby;
+        SceneType = Define.Scene.Game;
     }
     public override void Clear()
     {
