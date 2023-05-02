@@ -3,23 +3,26 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class LobbyScene : BaseScenes
+public class testScenes : BaseScenes
 {
     void Awake()
     {
         Init();
     }
 
-    private void Update()
+    // Update is called once per frame
+    void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Q)) {
-            SceneManager.LoadScene("looding");
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            SceneManager.LoadScene("test2");
         }
     }
     protected override void Init()
     {
         base.Init();
-        SceneType = Define.Scene.Lobby;
+
+        SceneType = Define.Scene.Test;
     }
     public override void Clear()
     {

@@ -9,8 +9,10 @@ public class Managers : MonoBehaviour
 
     EventManager _event = new EventManager();
     DateManager _date =new DateManager();
+    InputManager _input = new InputManager();
     public static EventManager Event { get { return Instance._event; } }
     public static DateManager Date { get { return Instance._date; } }
+    public static InputManager Input { get {  return Instance._input; } }
 
     // Start is called before the first frame update
     void Start()
@@ -21,7 +23,7 @@ public class Managers : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        Input.OnUpdate();
     }
 
     static void init ()
