@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MoneyManager : MonoBehaviour
+public class MoneyManager
 {
     public int money;
 
@@ -14,4 +14,5 @@ public class MoneyManager : MonoBehaviour
     {
         money -= amount;
     }
+    public void Clear() { }
 }

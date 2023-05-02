@@ -11,11 +11,14 @@ public class Managers : MonoBehaviour
     DateManager _date =new DateManager();
     SceneManagerMake _scene = new SceneManagerMake();
     InputManager _input = new InputManager();
+    IngredientManager _ingredient = new IngredientManager();
+    MoneyManager _money = new MoneyManager();
     public static EventManager Event { get { return Instance._event; } }
     public static DateManager Date { get { return Instance._date; } }
     public static SceneManagerMake Scene { get { return Instance._scene; } }
     public static InputManager Input { get {  return Instance._input; } }
-
+    public static IngredientManager Ingredient { get { return Instance._ingredient; } }
+    public static MoneyManager Money { get { return Instance._money; } }
     // Start is called before the first frame update
     void Start()
     {
@@ -49,6 +52,7 @@ public class Managers : MonoBehaviour
         Date.Clear();
         Scene.Clear();
         Input.Clear();
-
+        Ingredient.Clear();
+        Money.Clear();
     }
 }
