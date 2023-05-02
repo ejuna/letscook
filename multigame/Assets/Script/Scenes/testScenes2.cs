@@ -3,29 +3,29 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class LobbyScene : BaseScenes
+public class testScenes2 : BaseScenes
 {
     void Awake()
     {
         Init();
     }
 
-    private void Update()
+    // Update is called once per frame
+    void Update()
     {
-        //씬 변경하는 부분
         if (Input.GetKeyDown(KeyCode.Q))
         {
-            Managers.Scene.LoadScene(Define.Scene.None);
+            Managers.Scene.LoadScene(Define.Scene.Test);
         }
     }
     protected override void Init()
     {
         base.Init();
-        SceneType = Define.Scene.Lobby;
+
+        SceneType = Define.Scene.Test2;
     }
     public override void Clear()
     {
-        throw new System.NotImplementedException();
+        Debug.Log("test2");
     }
-
 }

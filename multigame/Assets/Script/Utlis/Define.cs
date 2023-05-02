@@ -11,6 +11,8 @@ public class Define
         Game,
         GameEnd,
         Looding,
+        Test,
+        Test2
     }
 
 }
