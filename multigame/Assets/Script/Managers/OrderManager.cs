@@ -18,6 +18,7 @@ public class OrderManager
     complete = 0;
   }
 
+
 //txt 파일 다 저장
   public void load_order(){
     List<Food> list = new List<Food>();
@@ -121,5 +122,8 @@ public class OrderManager
     return true;
   }
 
+  public void Clear(){
+
+  }
 
 }

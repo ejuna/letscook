@@ -13,13 +13,15 @@ public class Managers : MonoBehaviour
     InputManager _input = new InputManager();
     IngredientManager _ingredient = new IngredientManager();
     MoneyManager _money = new MoneyManager();
+    OrderManager _order = new OrderManager();
     public static EventManager Event { get { return Instance._event; } }
     public static DateManager Date { get { return Instance._date; } }
     public static SceneManagerMake Scene { get { return Instance._scene; } }
     public static InputManager Input { get {  return Instance._input; } }
     public static IngredientManager Ingredient { get { return Instance._ingredient; } }
     public static MoneyManager Money { get { return Instance._money; } }
-    // Start is called before the first frame update
+    public static OrderManager Order{ get { return Instance._order; } }  
+  // Start is called before the first frame update
     void Start()
     {
         init();
@@ -46,6 +48,7 @@ public class Managers : MonoBehaviour
             s_instance = go.GetComponent<Managers>();
         }
     }
+
     public static void Clear()
     {
         Event.Clear();
@@ -54,5 +57,6 @@ public class Managers : MonoBehaviour
         Input.Clear();
         Ingredient.Clear();
         Money.Clear();
+        Order.Clear();
     }
 }
