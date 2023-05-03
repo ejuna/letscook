@@ -6,7 +6,7 @@ public class OrderManager
 {
   private Queue<Order> orderList;
   private List<Food> todaysOrder;
-  private int complete;
+  public int complete { get; set; }
   private const int DEFALT_TIME = 20;
 
   public string fileName = "load_order"; // 불러올 파일의 이름

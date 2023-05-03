@@ -4,9 +4,8 @@ using UnityEngine;
 
 public class LifeManager
 {
-
-  private int life;
-  private const int MAX_LIFE = 3;
+    private const int MAX_LIFE = 3;
+    private int life;
 
   public int getLife(){
     return life;

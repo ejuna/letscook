@@ -4,19 +4,23 @@ using UnityEngine;
 
 public class EventManager
 {
-    int orderCount = 0;
-    int time = 0;
     public void OnUpdate()
     {
+        //이벤트 이벤트 발생하는 시기에 랜덤한 시간을 생성
+        int randtime=0;
+        //랜덤으로 생성된 단체손님 수
+        int rnadGroupNum = 0;
         //조건을 확인 하면서 이벤트 발생시킨다.
         //오늘 주문횟수가 10이면 미식가 이벤트 발생
-        if (orderCount == 10)
+        if (Managers.Orders.complete == 10)
         {
-            gourmandEvent();
+            //주문생성에 필요한 변수등의 식을 생성
+            Managers.Orders.createGourmandOrder();
         }
-        //현재 시간 1000이면 단체손님 이벤트 발생
-        if (time == 1000) {
-            groupGuestEvent();
+        //그시간을 이용하여 랜덤한 시간에 단체손님 발생
+        if (Managers.Date.time==randtime) {
+            //단체손님 수를 
+            Managers.Orders.createGroupGuestOrder(rnadGroupNum);
         }
     }
     public void gourmandEvent() 
