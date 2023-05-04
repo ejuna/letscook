@@ -6,15 +6,12 @@ public class ObjectController : MonoBehaviour
 {
     GameObject player;
     GameObject hand;
-    PlayerController playerController;
     bool isPlayerEnter;
     // Start is called before the first frame update
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
         hand = GameObject.FindGameObjectWithTag("hand");
-        playerController = player.GetComponent<PlayerController>();
-
         Managers.Input.KeyAction -= OnKeyboard;
         Managers.Input.KeyAction += OnKeyboard;
     }
@@ -33,8 +30,6 @@ public class ObjectController : MonoBehaviour
             transform.localPosition = Vector3.zero;
             transform.rotation = new Quaternion(0, 0, 0, 0);
 
-            playerController.Pickup(gameObject);
-
             isPlayerEnter = false;
         }
     }
@@ -48,7 +43,7 @@ public class ObjectController : MonoBehaviour
     }
     void OnTriggerExit(Collider other)
     {
-        if (player == other.gameObject)
+        if (player.Equals(other))
         {
             isPlayerEnter = false;
         }

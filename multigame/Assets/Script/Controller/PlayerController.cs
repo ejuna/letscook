@@ -7,54 +7,22 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     float _speed = 10.0f;
 
-    bool _moveToDest = false;
-    bool ispicking = false;
-    GameObject hand;
-    
+     bool _moveToDest = false;
     void Start()
     {
         Managers.Input.KeyAction -= OnKeyboard;
         Managers.Input.KeyAction += OnKeyboard;
-
-        hand = GameObject.FindGameObjectWithTag("hand");
     }
 
     void Update()
     {
         
     }
-
-    public void Pickup(GameObject gameObject)
-    {
-        setEquip(gameObject, true);
-        ispicking = true;
-    }
-    public void drop()
-    {
-        GameObject go = hand.GetComponentInChildren<Rigidbody>().gameObject;
-        hand.transform.DetachChildren();
-
-        setEquip(go, false);
-
-
-        ispicking = false;
-    }
-    public void setEquip(GameObject gameObject, bool isEquip)
-    {
-        Collider[] gameObjectColliders = gameObject.GetComponents<Collider>();
-        Rigidbody gameObjectRigidbody = gameObject.GetComponent<Rigidbody>();
-
-        foreach(Collider itemcollider in gameObjectColliders)
-        {
-            itemcollider.enabled = !isEquip;
-        }
-        gameObjectRigidbody.isKinematic = isEquip;
-    }
     void OnKeyboard()
     {
-        if (Input.GetKey(KeyCode.Space)&&ispicking==true)
+        if(Input.GetKey(KeyCode.Space))
         {
-            drop();
+
         }
         if (Input.GetKey(KeyCode.W))
         {
