@@ -92,9 +92,9 @@ public class OrderManager
 
 
     for(int i=0;i< ingredients_size; i++){
-      string ingredient = ingredients[i].name;
+      string ingredient = ingredients[i].ingredientName;
       for(int j=0;j< order_ingredients_size; j++){
-        if(check[j] == false && ingredient.Equals(order_ingredients[j].name)){
+        if(check[j] == false && ingredient.Equals(order_ingredients[j].ingredientName)){
           check[j] = true;
           break;
         }

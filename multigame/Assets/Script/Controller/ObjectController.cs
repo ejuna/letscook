@@ -6,6 +6,8 @@ public class ObjectController : MonoBehaviour
 {
     GameObject player;
     GameObject hand;
+    PlayerController playerController;
+
     bool isPlayerEnter;
     // Start is called before the first frame update
     void Start()
@@ -14,6 +16,8 @@ public class ObjectController : MonoBehaviour
         hand = GameObject.FindGameObjectWithTag("hand");
         Managers.Input.KeyAction -= OnKeyboard;
         Managers.Input.KeyAction += OnKeyboard;
+
+        playerController = player.GetComponent<PlayerController>();
     }
 
     // Update is called once per frame
@@ -24,11 +28,13 @@ public class ObjectController : MonoBehaviour
     void OnKeyboard()
     {
         //오브젝트 상호작용 할 키를 정함
-        if (Input.GetKey(KeyCode.Space)&&isPlayerEnter)
+        if (Input.GetKey(KeyCode.C)&&isPlayerEnter)
         {
             transform.SetParent(hand.transform);
             transform.localPosition = Vector3.zero;
             transform.rotation = new Quaternion(0, 0, 0, 0);
+
+            playerController.Pickup(gameObject);
 
             isPlayerEnter = false;
         }
@@ -43,7 +49,7 @@ public class ObjectController : MonoBehaviour
     }
     void OnTriggerExit(Collider other)
     {
-        if (player.Equals(other))
+        if (player == other.gameObject)
         {
             isPlayerEnter = false;
         }
