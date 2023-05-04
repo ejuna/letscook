@@ -20,4 +20,8 @@ public class Order
   public int getTimeLimit(){
     return timeLimit;
   }
+
+  public void Clear(){
+
+  }
 }
