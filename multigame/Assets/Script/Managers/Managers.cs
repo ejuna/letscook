@@ -51,6 +51,7 @@ public class Managers : MonoBehaviour
             s_instance = go.GetComponent<Managers>();
         }
     }
+
     public static void Clear()
     {
         Event.Clear();
@@ -59,5 +60,6 @@ public class Managers : MonoBehaviour
         Input.Clear();
         Ingredient.Clear();
         Money.Clear();
+        Order.Clear();
     }
 }
