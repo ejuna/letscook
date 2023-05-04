@@ -5,23 +5,25 @@ using UnityEngine;
 public class Managers : MonoBehaviour
 {
     static Managers s_instance;
-    public static Managers Instance{get { init();  return s_instance; } }
+    public static Managers Instance { get { init(); return s_instance; } }
 
     EventManager _event = new EventManager();
-    DateManager _date =new DateManager();
+    DateManager _date = new DateManager();
     SceneManagerMake _scene = new SceneManagerMake();
     InputManager _input = new InputManager();
     IngredientManager _ingredient = new IngredientManager();
     MoneyManager _money = new MoneyManager();
+    LifeManager _life = new LifeManager();
     OrderManager _order = new OrderManager();
     public static EventManager Event { get { return Instance._event; } }
     public static DateManager Date { get { return Instance._date; } }
     public static SceneManagerMake Scene { get { return Instance._scene; } }
-    public static InputManager Input { get {  return Instance._input; } }
+    public static InputManager Input { get { return Instance._input; } }
     public static IngredientManager Ingredient { get { return Instance._ingredient; } }
     public static MoneyManager Money { get { return Instance._money; } }
-    public static OrderManager Order{ get { return Instance._order; } }  
-  // Start is called before the first frame update
+    public static LifeManager Life { get { return Instance._life; } }
+    public static OrderManager Orders { get { return Instance._order; } }
+    
     void Start()
     {
         init();
@@ -32,6 +34,7 @@ public class Managers : MonoBehaviour
     {
         Event.OnUpdate();
         Input.OnUpdate();
+        Date.onUpdate();
     }
 
     static void init ()

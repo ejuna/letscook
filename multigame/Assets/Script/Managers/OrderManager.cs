@@ -6,7 +6,7 @@ public class OrderManager
 {
   private Queue<Order> orderList;
   private List<Food> todaysOrder;
-  private int complete;
+  public int complete { get; set; }
   private const int DEFALT_TIME = 20;
 
   public string fileName = "load_order"; // 불러올 파일의 이름
@@ -93,9 +93,9 @@ public class OrderManager
 
 
     for(int i=0;i< ingredients_size; i++){
-      string ingredient = ingredients[i].name;
+      string ingredient = ingredients[i].ingredientName;
       for(int j=0;j< order_ingredients_size; j++){
-        if(check[j] == false && ingredient.Equals(order_ingredients[j].name)){
+        if(check[j] == false && ingredient.Equals(order_ingredients[j].ingredientName)){
           check[j] = true;
           break;
         }
