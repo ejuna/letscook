@@ -5,10 +5,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using static Define;
 
-public class Ingredient : MonoBehaviour
+[System.Serializable]
+public class Ingredient
 {
-    //public enum Type { StapleFood, Meat, Vegetable };
+    //Type : StapleFood, Meat, Vegetable
     public string ingredientName;
     public int price;
+    public Sprite ingredientImage;
+    //public Mesh ingredientMesh;
     public IngredientType ingredientType;
 }
