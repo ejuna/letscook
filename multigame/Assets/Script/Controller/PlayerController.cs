@@ -14,13 +14,16 @@ public class PlayerController : MonoBehaviour
         Managers.Input.KeyAction += OnKeyboard;
     }
 
-    // Update is called once per frame
     void Update()
     {
         
     }
     void OnKeyboard()
     {
+        if(Input.GetKey(KeyCode.Space))
+        {
+
+        }
         if (Input.GetKey(KeyCode.W))
         {
             transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(Vector3.forward), 0.2f);

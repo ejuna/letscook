@@ -7,12 +7,12 @@ public class EventManager
     public void OnUpdate()
     {
         //이벤트 이벤트 발생하는 시기에 랜덤한 시간을 생성
-        int randtime=0;
+        float randtime=-1.0f;
         //랜덤으로 생성된 단체손님 수
         int rnadGroupNum = 0;
         //조건을 확인 하면서 이벤트 발생시킨다.
         //오늘 주문횟수가 10이면 미식가 이벤트 발생
-        if (Managers.Orders.complete == 10)
+        if (Managers.Orders.complete == -1)
         {
             //주문생성에 필요한 변수등의 식을 생성
             Managers.Orders.createGourmandOrder();
