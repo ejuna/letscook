@@ -60,6 +60,6 @@ public class Managers : MonoBehaviour
         Input.Clear();
         Ingredient.Clear();
         Money.Clear();
-        Order.Clear();
+        Orders.Clear();
     }
 }
