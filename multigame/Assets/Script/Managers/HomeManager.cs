@@ -15,7 +15,7 @@ public class HomeManager : MonoBehaviourPunCallbacks
     public Button enterButton; //서버 접속 버튼
     public TMP_InputField nickName; //유저닉네임
 
-    public void ValueChanged() //인풋필드 입력
+    public void ValueChanged() //인풋필드 입력변화 감지
     {
         enterButton.interactable = true;  //닉네임 입력시 접속버튼 활성화
     }
@@ -25,6 +25,7 @@ public class HomeManager : MonoBehaviourPunCallbacks
     {
         PhotonNetwork.GameVersion = gameVersion;
         PhotonNetwork.ConnectUsingSettings();
+   
 
         enterButton.interactable = false;
         connectionInfoText.text = "마스터 서버에 접속중...";
@@ -34,6 +35,7 @@ public class HomeManager : MonoBehaviourPunCallbacks
     {
         PhotonNetwork.NickName = nickName.text;
         connectionInfoText.text = "온라인: 마스터 서버와 연결됨";
+        PhotonNetwork.JoinLobby();
         SceneManager.LoadScene("Lobby");
     }
 
