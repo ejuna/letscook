@@ -5,7 +5,10 @@ using UnityEngine;
 public class Order
 {
   private Food food;
+  public Food Food{ get { return food; } }
+
   private int timeLimit;
+  public int TimeLimit{ get{ return timeLimit; } }
 
 
   public Order(Food food,int timeLimit){
@@ -13,14 +16,6 @@ public class Order
     this.timeLimit = timeLimit;
   }
   
-  public Food getFood(){
-    return food;
-  }
-
-  public int getTimeLimit(){
-    return timeLimit;
-  }
-
   public void Clear(){
 
   }
