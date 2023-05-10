@@ -18,6 +18,7 @@ public class Define
     {
         StapleFood, 
         Meat, 
-        Vegetable
-    }
+        Vegetable,
+        DairyProduct
+}
 }
