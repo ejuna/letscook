@@ -99,8 +99,6 @@ public class OrderManager
     return true;
   }
 
-
-
   public bool deleteOrder(){
     if(orderList.Count == 0){
       return false;
@@ -109,6 +107,14 @@ public class OrderManager
     return true;
   }
 
+  public bool isOrders()
+    {
+        if (orderList.Count == 0)
+        {
+            return false;
+        }
+        return true; ;
+    }
   public void Clear(){
 
   }

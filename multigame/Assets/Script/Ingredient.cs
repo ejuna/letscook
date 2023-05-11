@@ -6,9 +6,9 @@ using static Define;
 public class Ingredient : MonoBehaviour
 {
   public IngredientData ingredientData;
-  private string ingredientName { get; set; }
-  private int Price { get; set; }
-  private IngredientType Type { get; set; }
+  public string ingredientName { get; set; }
+  public int Price { get; set; }
+  public IngredientType Type { get; set; }
 
 
   public void Start()

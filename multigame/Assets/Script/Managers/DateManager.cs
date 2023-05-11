@@ -8,7 +8,7 @@ public class DateManager
     public float day { get; set; }
     public float time { get; set; }
 
-    public const float Day_MAX_time= 1000;
+    
 
 
     //클래스는 별도의 저장소에서 관리?
@@ -22,10 +22,12 @@ public class DateManager
     public void onUpdate()
     {
         time+=Time.deltaTime;
-        if (time == Day_MAX_time)
-        //오더를 확인하고 남은 오더가 0일 경우 실행 하도록한다.
+        if (time >= Constants.Day_MAX_time&&Managers.Orders.isOrders()==false)
+        {
             dateUpdate();
-        //라이프 초기화 <- 
+            Managers.Life.Init();
+        }
+
         //하루에서 다음날로 넘어갈때 잠깐 다른씬을 보여주는가? -> 씬전환하고 날짜 업데이트를 실행  
         //아니면 그냥 진행 하는가? -> 그냥 넘어간다.
         //날짜 넘어갔을때 실행 해야 함수들을 실행한다.
