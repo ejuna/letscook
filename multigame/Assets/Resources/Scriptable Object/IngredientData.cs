@@ -17,4 +17,9 @@ public class IngredientData : ScriptableObject
   [SerializeField]
   private IngredientType ingredientType;
   public IngredientType IngredientType { get { return ingredientType; } }
+
+  [SerializeField]
+  private Texture2D img;
+  public Texture2D Img { get { return img; } }
+
 }
