@@ -5,38 +5,25 @@ using UnityEngine;
 public class OrderManager
 {
   private Queue<Order> orderList;
-  private List<Food> todaysOrder;
+  private List<Food> AllFoods= getAllFoodList();//게임 프리팹 넣기?
+  private List<Food> todayFoods;
   public int complete { get; set; }
   private const int DEFALT_TIME = 20;
 
-  public string fileName = "load_order"; // 불러올 파일의 이름
+
+  private static List<Food> getAllFoodList() {
+    List<Food> foods = new List<Food>();
+    
+    return foods;
+  }
 
 
   public void init(int day,int fame){
     orderList = new Queue<Order>();
-    load_order();
+    createTodaysOrder(day, fame);
     complete = 0;
   }
 
-
-//txt 파일 다 저장
-  public void load_order(){
-    List<Food> list = new List<Food>();
-    TextAsset textAsset = Resources.Load<TextAsset>(fileName);
-    string fileContent = textAsset.text;
-    string[] line = fileContent.Split(new[] { "\r\n", "\r", "\n" }, System.StringSplitOptions.None);
-
-    for (int i = 0; i < line.Length; i++)
-    {
-      string name = line[i].Split('/')[0];
-      int tier = int.Parse(line[i].Split('/')[1]);
-      string ingredient = line[i].Split('/')[2];
-      int price = int.Parse(line[i].Split('/')[3]);
-
-
-
-    }
-  }
 
 ///명성과 일수 계산하여 tier 몇까지 받을건지
   public void createTodaysOrder(int day, int fame)
@@ -46,15 +33,15 @@ public class OrderManager
 
 
   public void createOrder(){
-    int rand = Random.Range(0, todaysOrder.Count);
-    Order order = new Order(todaysOrder[rand], DEFALT_TIME);
+    int rand = Random.Range(0, AllFoods.Count);
+    Order order = new Order(todayFoods[rand], DEFALT_TIME);
     orderList.Enqueue(order);
   }
 
   public void createOrder(int time)
   {
-    int rand = Random.Range(0, todaysOrder.Count);
-    Order order = new Order(todaysOrder[rand], time);
+    int rand = Random.Range(0, AllFoods.Count);
+    Order order = new Order(todayFoods[rand], time);
     orderList.Enqueue(order);
   }
 
@@ -79,9 +66,9 @@ public class OrderManager
       return false;
     }
 
-    Food order_food = orderList.Dequeue().getFood();
-    List<Ingredient> ingredients = food.getIngredients();
-    List<Ingredient> order_ingredients = order_food.getIngredients();
+    Food order_food = orderList.Dequeue().Food;
+    List<IngredientData> ingredients = food.foodData.Ingredients;
+    List<IngredientData> order_ingredients = order_food.foodData.Ingredients;
     int ingredients_size = ingredients.Count;
     int order_ingredients_size = order_ingredients.Count;
 
@@ -93,9 +80,9 @@ public class OrderManager
 
 
     for(int i=0;i< ingredients_size; i++){
-      string ingredient = ingredients[i].ingredientName;
+      string ingredient = ingredients[i].IngredientName;
       for(int j=0;j< order_ingredients_size; j++){
-        if(check[j] == false && ingredient.Equals(order_ingredients[j].ingredientName)){
+        if(check[j] == false && ingredient.Equals(order_ingredients[j].IngredientName)){
           check[j] = true;
           break;
         }
@@ -112,8 +99,6 @@ public class OrderManager
     return true;
   }
 
-
-
   public bool deleteOrder(){
     if(orderList.Count == 0){
       return false;
@@ -122,6 +107,14 @@ public class OrderManager
     return true;
   }
 
+  public bool isOrders()
+    {
+        if (orderList.Count == 0)
+        {
+            return false;
+        }
+        return true; ;
+    }
   public void Clear(){
 
   }

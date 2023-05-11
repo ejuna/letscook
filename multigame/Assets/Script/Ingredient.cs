@@ -1,17 +1,29 @@
-using System;
-
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using static Define;
 
-[System.Serializable]
-public class Ingredient
+public class Ingredient : MonoBehaviour
 {
-    //Type : StapleFood, Meat, Vegetable
-    public string ingredientName;
-    public int price;
-    public Sprite ingredientImage;
-    //public Mesh ingredientMesh;
-    public IngredientType ingredientType;
+  public IngredientData ingredientData;
+  public string ingredientName { get; set; }
+  public int Price { get; set; }
+  public IngredientType Type { get; set; }
+
+
+  public void Start()
+  {
+    ingredientName = ingredientData.IngredientName;
+    Price = ingredientData.Price;
+    Type = ingredientData.IngredientType;
+  }
+
+
+  public void ingredientInfo()
+  {
+    Debug.Log("재료 이름 :: " + ingredientData.name);
+    Debug.Log("재료 가격 :: " + ingredientData.Price);
+    Debug.Log("재료 종류 :: " + ingredientData.IngredientType);
+  }
+
 }

@@ -92,6 +92,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5155018926246403990}
+  - component: {fileID: 5087776859630814402}
   m_Layer: 0
   m_Name: BaconPasta
   m_TagString: Untagged
@@ -116,6 +117,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5087776859630814402
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5530876408880252204}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 91e138f0854611948a984f79f8d73ce6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  foodData: {fileID: 11400000, guid: 7112b5621ea43e949b5b1ed3803fb694, type: 2}
 --- !u!1001 &5525838726253382542
 PrefabInstance:
   m_ObjectHideFlags: 0

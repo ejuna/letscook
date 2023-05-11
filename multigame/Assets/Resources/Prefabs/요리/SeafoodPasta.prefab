@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 951642115953988376}
+  - component: {fileID: 5652865863662273277}
   m_Layer: 0
   m_Name: SeafoodPasta
   m_TagString: Untagged
@@ -34,6 +35,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5652865863662273277
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 468156498897095074}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 91e138f0854611948a984f79f8d73ce6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  foodData: {fileID: 11400000, guid: f99830bef95585e41964b38bdf8d4303, type: 2}
 --- !u!1 &2601680040678462894
 GameObject:
   m_ObjectHideFlags: 0
