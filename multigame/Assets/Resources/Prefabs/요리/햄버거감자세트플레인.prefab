@@ -258,8 +258,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4602997132870428113}
+  - component: {fileID: -6765826456109662889}
   m_Layer: 0
-  m_Name: "\uD584\uBC84\uAC70\uAC10\uC790\uC138\uD2B8"
+  m_Name: "\uD584\uBC84\uAC70\uAC10\uC790\uC138\uD2B8\uD50C\uB808\uC778"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -286,6 +287,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &-6765826456109662889
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3795110814614191979}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 91e138f0854611948a984f79f8d73ce6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  foodData: {fileID: 11400000, guid: 4d47cc6034df2d3458dc2ef77186991c, type: 2}
 --- !u!1 &8055562443319374471
 GameObject:
   m_ObjectHideFlags: 0

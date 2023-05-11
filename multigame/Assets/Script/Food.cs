@@ -2,30 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Food
+public class Food : MonoBehaviour
 {
-  private string foodName;
-  private int foodTier;
-  private List<Ingredient> ingredients;
-  private int price;
+  public FoodData foodData;
+  private int price { get; set; }
 
-  public Food(string name,int tier,List<Ingredient> ing,int price){
-    foodName = name;
-    foodTier = tier;
-    ingredients = ing;
-    this.price = price;
-  }
 
-  public Food(string name, int tier, string ing, int price)
+  private void Start()
   {
-    foodName = name;
-    foodTier = tier;
-    ingredients = new List<Ingredient>();
-    this.price = price;
-  }
-
-  public List<Ingredient> getIngredients(){
-    return ingredients;
+    int ingredient_size = foodData.Ingredients.Count;
+    for(int i=0;i<ingredient_size;i++){
+      price += foodData.Ingredients[i].Price;
+    }
   }
 
 
