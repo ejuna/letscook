@@ -7,7 +7,7 @@ public class EventManager
     //이벤트 이벤트 발생하는 시기에 랜덤한 시간을 생성
     float randtime = -1.0f;
     //랜덤으로 생성된 단체손님 수
-    int rnadGroupNum = 0;
+    int randGroupNum = 0;
     public void OnUpdate()
     {
 
@@ -32,7 +32,7 @@ public class EventManager
     public void groupGuestEvent() 
     {
         //단체손님 주문생성
-        Managers.Orders.createGroupGuestOrder(rnadGroupNum);
+        Managers.Orders.createGroupGuestOrder(randGroupNum);
     }
 
     public void Clear() { }
