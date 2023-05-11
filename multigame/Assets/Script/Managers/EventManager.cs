@@ -20,15 +20,13 @@ public class EventManager
     }
     public void OnUpdate()
     {
-        
-
-        //조건을 확인 하면서 이벤트 발생시킨다.
-        //오늘 주문횟수가 10이면 미식가 이벤트 발생
+       
+        //조건을 확인 하면서 미식가 이벤트 발생시킨다.
         if (Managers.Orders.complete == randOrderCountTrigger)
         {
             gourmandEvent();
         }
-        //그시간을 이용하여 랜덤한 시간에 단체손님 발생
+        //시간 조건을 확인하고 랜덤한 시간에 단체손님 발생
         if (Managers.Date.time == randTimeTrigger) {
 
             groupGuestEvent();
