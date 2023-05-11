@@ -7,6 +7,10 @@ public class LifeManager
     private const int MAX_LIFE = 3;
     private int life;
 
+    public void Init()
+    {
+        life = MAX_LIFE;
+    }
   public int getLife(){
     return life;
   }
