@@ -49,6 +49,7 @@ public class EventManager
     }
     public void groupGuestEvent() 
     {
+        //명성,현재주문수,
         //단체손님 주문생성
         Managers.Orders.createGroupGuestOrder(randGroupNum);
     }

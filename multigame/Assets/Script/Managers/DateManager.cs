@@ -8,12 +8,6 @@ public class DateManager
     public float day { get; set; }
     public float time { get; set; }
 
-    
-
-
-    //클래스는 별도의 저장소에서 관리?
-    //dateUpadte에서 하루시간이 일정수치에 도달하면 일수가 넘어가면서
-
     public void init()
     {
         day = 1;
@@ -28,9 +22,7 @@ public class DateManager
             Managers.Life.Init();
         }
 
-        //하루에서 다음날로 넘어갈때 잠깐 다른씬을 보여주는가? -> 씬전환하고 날짜 업데이트를 실행  
-        //아니면 그냥 진행 하는가? -> 그냥 넘어간다.
-        //날짜 넘어갔을때 실행 해야 함수들을 실행한다.
+        //아니면 그냥 진행 하여 하루정산 창을 출현 하고 그 화면 뒤에서 초기화 실행
     }
     public void dateUpdate() 
     {
