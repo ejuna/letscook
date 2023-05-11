@@ -9,7 +9,6 @@ public class EventManager
     private float randTimeTrigger;
     //랜덤으로 생성된 단체손님 수
     int randGroupNum = 0;
-    int rnadGroupNum = 0;
 
     public int targetDate { get; set; }//무한이면 -1
     public int targetMoney { get; set; }//무한이면 -1
