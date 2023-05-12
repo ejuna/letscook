@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class Order
 {
-  private Food food;
-  public Food Food{ get { return food; } }
+  private FoodData food;
+  public FoodData Food{ get { return food; } }
 
   private int timeLimit;
   public int TimeLimit{ get{ return timeLimit; } }
 
 
-  public Order(Food food,int timeLimit){
+  public Order(FoodData food,int timeLimit){
     this.food = food;
     this.timeLimit = timeLimit;
   }

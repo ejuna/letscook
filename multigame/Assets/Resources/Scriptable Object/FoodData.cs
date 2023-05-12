@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 [CreateAssetMenu(fileName = "Food Data", menuName = "Scriptable Object/Food Data", order = int.MaxValue)]
 public class FoodData : ScriptableObject
@@ -19,7 +18,7 @@ public class FoodData : ScriptableObject
   public List<IngredientData> Ingredients{ get { return ingredients; } }
 
   [SerializeField]
-  private Image img;
-  public Image Img { get { return img; } }
+  private Texture2D img;
+  public Texture2D Img { get { return img; } }
 
 }
