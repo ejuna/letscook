@@ -2,8 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ObjectController : MonoBehaviour
+public class CountertopController : MonoBehaviour
 {
+    // Start is called before the first frame update
     GameObject player;
     GameObject hand;
     PlayerController playerController;
@@ -23,29 +24,34 @@ public class ObjectController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
     void OnKeyboard()
     {
-        //오브젝트 상호작용 할 키를 정함
-        if (Input.GetKey(KeyCode.C)&&isPlayerEnter)
+        //물건 올리기
+        if (Input.GetKey(KeyCode.C) && isPlayerEnter && playerController.isPicking)
         {
-            setParent(hand.transform);
+            GameObject go = hand.GetComponentInChildren<Rigidbody>().gameObject;
+            ObjectController objectController = go.GetComponent<ObjectController>();
+            // 플레이어 손에 있는 물건을 연결은 끈고(dorp())
+            playerController.drop();
+            //그 물건을 이 물건 위에 올린다.
+            objectController.setParent(transform);
 
-            playerController.Pickup(gameObject);
-
-            isPlayerEnter = false;
+        }
+        //조합하기
+        if (Input.GetKey(KeyCode.D) && isPlayerEnter)
+        {
+            //조리법의 유무 확인
+            //있으면 위에 있는 물건들을 전부 제거하고 조리법에 따라 물건을 던진다.
         }
     }
-    public void setParent(Transform transform)
-    {
-        transform.SetParent(transform);
-        transform.localPosition = Vector3.zero;
-        transform.rotation = new Quaternion(0, 0, 0, 0);
-    }
+
+
+
     void OnTriggerEnter(Collider other)
     {
-        if (player==other.gameObject)
+        if (player == other.gameObject)
         {
             isPlayerEnter = true;
         }

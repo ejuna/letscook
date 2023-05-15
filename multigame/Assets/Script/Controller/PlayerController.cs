@@ -7,7 +7,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     float _speed = 10.0f;
     bool _moveToDest = false;
-    bool ispicking = false;
+    
+    public bool isPicking = false;
     GameObject hand;
     void Start()
     {
@@ -23,7 +24,7 @@ public class PlayerController : MonoBehaviour
     public void Pickup(GameObject gameObject)
     {
         setEquip(gameObject, true);
-        ispicking = true;
+        isPicking = true;
     }
 
     public void drop()
@@ -34,7 +35,7 @@ public class PlayerController : MonoBehaviour
         setEquip(go, false);
 
 
-        ispicking = false;
+        isPicking = false;
     }
 
     public void setEquip(GameObject gameObject, bool isEquip)
@@ -50,7 +51,7 @@ public class PlayerController : MonoBehaviour
     }
     void OnKeyboard()
     {
-        if (Input.GetKey(KeyCode.Space) && ispicking == true)
+        if (Input.GetKey(KeyCode.Space) && isPicking == true)
         {
             drop();
         }
