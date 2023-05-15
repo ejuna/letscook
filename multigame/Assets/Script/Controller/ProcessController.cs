@@ -7,7 +7,8 @@ public class ProcessController : MonoBehaviour
     GameObject player;
     GameObject hand;
     PlayerController playerController;
-
+    //썰기,굽기,다지기
+    //음료수 혼합 , 조합하기
     bool isPlayerEnter;
     // Start is called before the first frame update
     void Start()

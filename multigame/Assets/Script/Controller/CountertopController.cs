@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class CountertopController : MonoBehaviour
 {
-    // Start is called before the first frame update
     GameObject player;
     GameObject hand;
     PlayerController playerController;
@@ -40,9 +39,12 @@ public class CountertopController : MonoBehaviour
 
         }
         //조합하기
-        if (Input.GetKey(KeyCode.D) && isPlayerEnter)
+        if (Input.GetKey(KeyCode.V) && isPlayerEnter)
         {
-            //조리법의 유무 확인
+            //Managers.Orders 체크래시피 참이면 실행 
+            //자식을 불러서 usetfood를 생성
+            //userfood라는 클래스가 생성이 돼고 그 클래스들을 넘겨준다.
+
             //있으면 위에 있는 물건들을 전부 제거하고 조리법에 따라 물건을 던진다.
         }
     }
