@@ -29,7 +29,7 @@ public class RoomData : MonoBehaviour
     void Awake()
     {
         RoomInfoText = GetComponentInChildren<TMP_Text>();
-        userIdText = GameObject.Find("InputField (TMP) - Nickname").GetComponent<TMP_InputField>();
+        userIdText = GameObject.Find("NickName").GetComponent<TMP_InputField>();
     }
 
     void OnEnterRoom(string roomName)
