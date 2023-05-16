@@ -10,8 +10,7 @@ public class TestManager : MonoBehaviour
 
   void Start()
     {
-        orderManager = new OrderManager();
-        orderManager.init(1,10);
+
     }
 
     void Update()

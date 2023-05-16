@@ -9,24 +9,48 @@ public class OrderManager
   public List<FoodData> todayFoods=new List<FoodData>();
   public int complete { get; set; }
   private const int DEFALT_TIME = 20;
+  private static float timer = 0f;
+  static bool isInit = false;
 
+
+  public OrderManager(){
+  }
 
   private void getAllFoodList() {
     FoodData[] foodDataArr = Resources.LoadAll<FoodData>("Scriptable Object/Food");
     foreach(FoodData foodData in foodDataArr){
       allFoods.Add(foodData);
+      Debug.Log(foodData.FoodName);
     }
   }
 
-
-  public void init(int day,int fame){
-    orderList = new Queue<Order>();
-    getAllFoodList();
-    createTodaysOrder(day, fame);
-    complete = 0;
+  
+  public void init(){
+    if(!isInit){
+      orderList = new Queue<Order>();
+      getAllFoodList();
+      complete = 0;
+      createTodaysOrder(1, 0);
+      Debug.Log("초기화 완료");
+      isInit = true;
+    }
   }
 
+  public void DateUpdate(int day,int fame){
+    orderList.Clear();
+    todayFoods.Clear();
+    complete = 0;
+    createTodaysOrder(day, fame);
+  }
 
+  public void OnUpdate(){
+    timer += Time.deltaTime;
+    if (timer >= 1f)
+    {
+      createOrder(50);
+      timer = 0f;
+    }
+  }
 
 
 ///명성과 일수 계산하여 tier 몇까지 받을건지
@@ -74,22 +98,18 @@ public class OrderManager
 
 
     public void createOrder(){
-    Debug.Log("in");
-    int rand = Random.Range(0, todayFoods.Count);
+      int rand = Random.Range(0, todayFoods.Count);
       Order order = new Order(todayFoods[rand], DEFALT_TIME);
       orderList.Enqueue(order);
     Debug.Log(order.Food.FoodName);
-    Debug.Log(order.Food.FoodTier);
   }
 
     public void createOrder(int time)
     {
-      Debug.Log("in");
       int rand = Random.Range(0, todayFoods.Count);
       Order order = new Order(todayFoods[rand], time);
       orderList.Enqueue(order);
-      Debug.Log(order.Food.FoodName);
-      Debug.Log(order.Food.FoodTier);
+    Debug.Log(order.Food.FoodName);
   }
 
 
@@ -107,7 +127,7 @@ public class OrderManager
     }
 
   /* 사용자 Food에 대해서 생각해봐야 할 필요 보임
-  public bool checkOrder(Food food){
+  public bool checkOrder(UserFood userFood){
     if (orderList.Count == 0)
     {
       return false;
@@ -145,7 +165,14 @@ public class OrderManager
 
     return true;
   }
+
+
+  public bool checkRecipe(UserFood userFood){
+    return true;
+  }
 */
+
+
   public bool deleteOrder(){
     if(orderList.Count == 0){
       return false;
@@ -153,6 +180,7 @@ public class OrderManager
     orderList.Dequeue();
     return true;
   }
+
 
   public bool isOrders()
     {
