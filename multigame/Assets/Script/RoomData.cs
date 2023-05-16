@@ -44,7 +44,7 @@ public class RoomData : MonoBehaviour
         string[] password = room.Split('_');
 
         GameObject.Find("Panel-BackGround").transform.Find("Panel-Password").gameObject.SetActive(true);
-        joinRoomName.text = password[1];
+        GameObject.Find("JoinRoomName").gameObject.GetComponent<TextMeshProUGUI>().text= password[0];
 
     }
 

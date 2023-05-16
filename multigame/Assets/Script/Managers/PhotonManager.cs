@@ -179,15 +179,17 @@ public class PhotonManager : MonoBehaviourPunCallbacks
     public void JoinButtonClick()
     {
         string tempName=GameObject.Find("JoinRoomName").gameObject.GetComponent<TextMeshProUGUI>().text;
-        string tempPassword = GameObject.Find("InputField-Password").gameObject.GetComponent<TextMeshProUGUI>().text;
+        string tempPassword = GameObject.Find("InputField-Password").gameObject.GetComponent<TMP_InputField>().text;
         string tempRoom = tempName + "_" + tempPassword;
         PhotonNetwork.JoinRoom(tempRoom);
+        //비밀번호 입력창 비활성화
         GameObject.Find("Panel-BackGround").transform.Find("Panel-Password").gameObject.SetActive(false);
     }
 
     //비밀번호 입력창 나가기
     public void PasswordExitClick()
     {
+        //비밀번호 입력창 비활성화
         GameObject.Find("Panel-BackGround").transform.Find("Panel-Password").gameObject.SetActive(false);
     }
 
