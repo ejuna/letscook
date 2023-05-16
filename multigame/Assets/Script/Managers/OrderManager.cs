@@ -14,6 +14,7 @@ public class OrderManager
 
 
   public OrderManager(){
+
   }
 
   private void getAllFoodList() {
@@ -126,17 +127,17 @@ public class OrderManager
       }
     }
 
-  /* 사용자 Food에 대해서 생각해봐야 할 필요 보임
+
   public bool checkOrder(UserFood userFood){
     if (orderList.Count == 0)
     {
       return false;
     }
 
-    Food order_food = orderList.Dequeue().Food;
-    List<IngredientData> ingredients = food.foodData.Ingredients;
-    List<IngredientData> order_ingredients = order_food.foodData.Ingredients;
-    int ingredients_size = ingredients.Count;
+    FoodData order_food = orderList.Dequeue().Food;
+    List<IngredientData> user_ingredients = userFood.Ingredients;
+    List<IngredientData> order_ingredients = order_food.Ingredients;
+    int ingredients_size = user_ingredients.Count;
     int order_ingredients_size = order_ingredients.Count;
 
 
@@ -147,7 +148,7 @@ public class OrderManager
 
 
     for(int i=0;i< ingredients_size; i++){
-      string ingredient = ingredients[i].IngredientName;
+      string ingredient = user_ingredients[i].IngredientName;
       for(int j=0;j< order_ingredients_size; j++){
         if(check[j] == false && ingredient.Equals(order_ingredients[j].IngredientName)){
           check[j] = true;
@@ -167,10 +168,10 @@ public class OrderManager
   }
 
 
+//레시피 체크하려는 이유가 뭔지 물어보기
   public bool checkRecipe(UserFood userFood){
     return true;
   }
-*/
 
 
   public bool deleteOrder(){
