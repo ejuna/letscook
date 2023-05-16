@@ -12,9 +12,10 @@ public class Managers : MonoBehaviour
     SceneManagerMake _scene = new SceneManagerMake();
     InputManager _input = new InputManager();
     IngredientManager _ingredient = new IngredientManager();
+    OrderManager _order = new OrderManager();
     MoneyManager _money = new MoneyManager();
     LifeManager _life = new LifeManager();
-    OrderManager _order = new OrderManager();
+    FameManager _fame = new FameManager();
     public static EventManager Event { get { return Instance._event; } }
     public static DateManager Date { get { return Instance._date; } }
     public static SceneManagerMake Scene { get { return Instance._scene; } }
@@ -23,10 +24,14 @@ public class Managers : MonoBehaviour
     public static MoneyManager Money { get { return Instance._money; } }
     public static LifeManager Life { get { return Instance._life; } }
     public static OrderManager Orders { get { return Instance._order; } }
-    
-    void Start()
+    public static FameManager Fame { get{ return Instance._fame; } }
+
+ 
+
+  void Start()
     {
         init();
+        _order.init();
     }
 
     // Update is called once per frame
@@ -34,7 +39,15 @@ public class Managers : MonoBehaviour
     {
         Event.OnUpdate();
         Input.OnUpdate();
-        Date.onUpdate();
+        Date.OnUpdate();
+/*
+        Orders.OnUpdate();
+        
+        if(Date.isChangeDay == true){ //날짜 바뀌면
+          Orders.DateUpdate(Date.day, Fame.fame);
+          Date.isChangeDay = false;
+        }
+        */
     }
 
     static void init ()
