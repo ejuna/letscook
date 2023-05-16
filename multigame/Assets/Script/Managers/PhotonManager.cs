@@ -13,13 +13,14 @@ public class PhotonManager : MonoBehaviourPunCallbacks
 
     public TMP_InputField userIdText; //유저 입력 닉네임
     public TMP_InputField roomNameText; //방 이름
+    public TMP_InputField roomPassword; //방 비밀번호
 
-    
+
     private Dictionary<string, GameObject> roomDict = new Dictionary<string, GameObject>(); //방 목록 
     public GameObject roomPrefab; //방 프리팹
     public Transform scrollContent; //방 표시 콘텐츠
 
-    public GameObject[] roomPlayer;
+    public GameObject[] roomPlayer; //방 접속 플레이어 리스트
 
     private void Awake()
     {
@@ -85,7 +86,12 @@ public class PhotonManager : MonoBehaviourPunCallbacks
 
         //룸 플레이어 업데이트
         PlayerUpdate();
+    }
 
+    public override void OnJoinRoomFailed(short returnCode, string message)
+    {
+        Debug.Log("방 접속실패");
+        GameObject.Find("Panel-BackGround").transform.Find("Panel-Password").gameObject.SetActive(false);
     }
 
     //방 퇴장
@@ -145,15 +151,44 @@ public class PhotonManager : MonoBehaviourPunCallbacks
         }
     }
 
-    //방 옵션 설정후 방생성 버튼 클릭
+    //create 버튼 클릭
+    public void CreateButtonClick()
+    {
+        //방만들기 메뉴 설정 활성화
+        GameObject.Find("Panel-BackGround").transform.Find("Panel-CreateRoom").gameObject.SetActive(true);
+       
+    }
+
+
+    //방 옵션 설정후 방만들기 버튼 클릭
     public void OnMakeRoomClick()
     {
+        string roomNamePassword = roomNameText.text + "_" + roomPassword.text;
+
         RoomOptions ro = new RoomOptions();
         ro.IsOpen = true;
         ro.IsVisible = true;
         ro.MaxPlayers = 4;
 
-        PhotonNetwork.CreateRoom(roomNameText.text, ro);
+        PhotonNetwork.CreateRoom(roomNamePassword, ro);
+        //방만들기 메뉴 설정 비활성화
+        GameObject.Find("Panel-CreateRoom").SetActive(false);
+    }
+
+    //방 참가 버튼 클릭
+    public void JoinButtonClick()
+    {
+        string tempName=GameObject.Find("JoinRoomName").gameObject.GetComponent<TextMeshProUGUI>().text;
+        string tempPassword = GameObject.Find("InputField-Password").gameObject.GetComponent<TextMeshProUGUI>().text;
+        string tempRoom = tempName + "_" + tempPassword;
+        PhotonNetwork.JoinRoom(tempRoom);
+        GameObject.Find("Panel-BackGround").transform.Find("Panel-Password").gameObject.SetActive(false);
+    }
+
+    //비밀번호 입력창 나가기
+    public void PasswordExitClick()
+    {
+        GameObject.Find("Panel-BackGround").transform.Find("Panel-Password").gameObject.SetActive(false);
     }
 
     //방 퇴장 버튼 클릭
