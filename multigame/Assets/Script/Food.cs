@@ -15,6 +15,4 @@ public class Food : MonoBehaviour
       price += foodData.Ingredients[i].Price;
     }
   }
-
-
 }
