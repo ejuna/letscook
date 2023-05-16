@@ -4,55 +4,219 @@ using UnityEngine;
 using Photon.Pun; 
 using Photon.Realtime;
 using UnityEngine.UI;
+using TMPro;
 
 public class PhotonManager : MonoBehaviourPunCallbacks
 {
+    private string gameVersion = "1"; // 게임 버전
+    private string userId; //유저 닉네임
 
-    InputField m_InputField;
-    Text m_textConnectLog;
-    Text m_textPlayerList;
+    public TMP_InputField userIdText; //유저 입력 닉네임
+    public TMP_InputField roomNameText; //방 이름
+    public TMP_InputField roomPassword; //방 비밀번호
 
-    void Start()
+
+    private Dictionary<string, GameObject> roomDict = new Dictionary<string, GameObject>(); //방 목록 
+    public GameObject roomPrefab; //방 프리팹
+    public Transform scrollContent; //방 표시 콘텐츠
+
+    public GameObject[] roomPlayer; //방 접속 플레이어 리스트
+
+    private void Awake()
     {
-        Screen.SetResolution(1920, 1080, false);
+        //씬 자동싱크 설정
+        PhotonNetwork.AutomaticallySyncScene = true;
 
-        m_InputField = GameObject.Find("Canvas/InputField").GetComponent<InputField>();
-        m_textPlayerList = GameObject.Find("Canvas/TextPlayerList").GetComponent<Text>();
-        m_textConnectLog = GameObject.Find("Canvas/TextConnectLog").GetComponent<Text>();
+        // 게임 버전 설정
+        PhotonNetwork.GameVersion = gameVersion;
 
-        m_textConnectLog.text = "접속로그\n";
-    }
-
-    public override void OnConnectedToMaster()
-    {
-        RoomOptions options = new RoomOptions();
-        options.MaxPlayers = 4;
-
-        PhotonNetwork.LocalPlayer.NickName = m_InputField.text;
-        PhotonNetwork.JoinOrCreateRoom("Room1", options, null);
-
-    }
-    public override void OnJoinedRoom()
-    {
-        updatePlayer();
-        m_textConnectLog.text += m_InputField.text;
-        m_textConnectLog.text += " 님이 방에 참가하였습니다.\n";
-    }
-
-
-    public void Connect()
-    {
+        //포톤서버 접속
         PhotonNetwork.ConnectUsingSettings();
     }
 
-    void updatePlayer()
+
+    void Start()
     {
-        m_textPlayerList.text = "접속자";
-        for (int i = 0; i < PhotonNetwork.PlayerList.Length; i++)
+        Debug.Log("포톤 매니저 시작");
+        userId = PlayerPrefs.GetString("User_ID", $"User_{Random.Range(0, 100):00}");
+        userIdText.text = userId;
+        PhotonNetwork.NickName = userId;
+        Screen.SetResolution(1920, 1080, false);
+    }
+
+    //포톤 마스터 서버에 접속
+    public override void OnConnectedToMaster()
+    {
+        Debug.Log("포톤 서버 접속");
+
+        PhotonNetwork.JoinLobby();
+    }
+
+    //로비에 접속
+    public override void OnJoinedLobby()
+    {
+        Debug.Log("로비 접속");
+
+        //룸화면 비활성화
+        GameObject.Find("View").transform.Find("RoomView").gameObject.SetActive(false);
+        //로비화면 할성화
+        GameObject.Find("View").transform.Find("LobbyView").gameObject.SetActive(true);
+    }
+
+    //방 생성
+    public override void OnCreatedRoom()
+    {
+        Debug.Log("방 생성");
+    }
+
+    //방 접속
+    public override void OnJoinedRoom()
+    {
+        Debug.Log("방 접속");
+
+        /*if (PhotonNetwork.IsMasterClient)
         {
-            m_textPlayerList.text += "\n";
-            m_textPlayerList.text += PhotonNetwork.PlayerList[i].NickName;
+            PhotonNetwork.LoadLevel("Level_1");
+        }*/
+
+        //로비화면 비할성화
+        GameObject.Find("View").transform.Find("LobbyView").gameObject.SetActive(false);
+        //룸화면 활성화
+        GameObject.Find("View").transform.Find("RoomView").gameObject.SetActive(true);
+
+        //룸 플레이어 업데이트
+        PlayerUpdate();
+    }
+
+    public override void OnJoinRoomFailed(short returnCode, string message)
+    {
+        Debug.Log("방 접속실패");
+        GameObject.Find("Panel-BackGround").transform.Find("Panel-Password").gameObject.SetActive(false);
+    }
+
+    //방 퇴장
+    public override void OnLeftRoom()
+    {
+        Debug.Log("방 퇴장");
+    }
+
+    //새로운 플레이어 방에 접속
+    public override void OnPlayerEnteredRoom(Photon.Realtime.Player newPlayer)
+    {
+        Debug.Log($"플레이어 {newPlayer.NickName} 가 방에 참가.");
+
+        //룸 플레이어 업데이트
+        PlayerUpdate();
+    }
+
+    //플레이어 방에서 퇴장
+    public override void OnPlayerLeftRoom(Photon.Realtime.Player otherPlayer)
+    {
+        Debug.Log($"플레이어 {otherPlayer.NickName} 가 방에서 퇴장.");
+
+        //룸 플레이어 업데이트
+        PlayerUpdate();
+    }
+
+
+    //방 목록 업데이트
+    public override void OnRoomListUpdate(List<RoomInfo> roomList)
+    {
+        GameObject tempRoom = null;
+        foreach(var room in roomList)
+        {
+            //방이 제거됐을 경우
+            if (room.RemovedFromList == true)
+            {
+                roomDict.TryGetValue(room.Name, out tempRoom);
+                Destroy(tempRoom);
+                roomDict.Remove(room.Name);
+            }
+            else
+            {
+                //방이 생성됐을 경우
+                if (roomDict.ContainsKey(room.Name) == false)
+                {
+                    GameObject _room = Instantiate(roomPrefab, scrollContent);
+                    _room.GetComponent<RoomData>().RoomInfo = room;
+                    roomDict.Add(room.Name, _room);
+                }
+                //방이 변경됐을 경우
+                else
+                {
+                    roomDict.TryGetValue(room.Name, out tempRoom);
+                    tempRoom.GetComponent<RoomData>().RoomInfo = room;
+                }
+            }
         }
     }
 
+    //create 버튼 클릭
+    public void CreateButtonClick()
+    {
+        //방만들기 메뉴 설정 활성화
+        GameObject.Find("Panel-BackGround").transform.Find("Panel-CreateRoom").gameObject.SetActive(true);
+       
+    }
+
+
+    //방 옵션 설정후 방만들기 버튼 클릭
+    public void OnMakeRoomClick()
+    {
+        string roomNamePassword = roomNameText.text + "_" + roomPassword.text;
+
+        RoomOptions ro = new RoomOptions();
+        ro.IsOpen = true;
+        ro.IsVisible = true;
+        ro.MaxPlayers = 4;
+
+        PhotonNetwork.CreateRoom(roomNamePassword, ro);
+        //방만들기 메뉴 설정 비활성화
+        GameObject.Find("Panel-CreateRoom").SetActive(false);
+    }
+
+    //방 참가 버튼 클릭
+    public void JoinButtonClick()
+    {
+        string tempName=GameObject.Find("JoinRoomName").gameObject.GetComponent<TextMeshProUGUI>().text;
+        string tempPassword = GameObject.Find("InputField-Password").gameObject.GetComponent<TMP_InputField>().text;
+        string tempRoom = tempName + "_" + tempPassword;
+        PhotonNetwork.JoinRoom(tempRoom);
+        //비밀번호 입력창 비활성화
+        GameObject.Find("Panel-BackGround").transform.Find("Panel-Password").gameObject.SetActive(false);
+    }
+
+    //비밀번호 입력창 나가기
+    public void PasswordExitClick()
+    {
+        //비밀번호 입력창 비활성화
+        GameObject.Find("Panel-BackGround").transform.Find("Panel-Password").gameObject.SetActive(false);
+    }
+
+    //방 퇴장 버튼 클릭
+    public void ExitClick()
+    {
+        PhotonNetwork.LeaveRoom();
+    }
+
+
+    //플레이어 리스트 업데이트
+    public void PlayerUpdate()
+    {
+        //초기화 
+        for(int i=0; i<4; i++)
+        {
+            roomPlayer[i].transform.GetChild(1).gameObject.GetComponent<TextMeshProUGUI>().text = " ";
+            roomPlayer[i].transform.GetChild(2).gameObject.SetActive(false);
+        }
+
+        //설정
+        for(int i=0; i<PhotonNetwork.PlayerList.Length; i++)
+        {
+            //유저 닉네임 표시
+            roomPlayer[i].transform.GetChild(1).gameObject.GetComponent<TextMeshProUGUI>().text = PhotonNetwork.PlayerList[i].NickName;
+            //유저 이미지 표시
+            roomPlayer[i].transform.GetChild(2).gameObject.SetActive(true);
+        }
+    }
 }
