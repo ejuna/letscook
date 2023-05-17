@@ -10,7 +10,9 @@ public class RoomData : MonoBehaviour
     private TMP_Text RoomInfoText;
     private RoomInfo _roomInfo;
 
+
     public TMP_InputField userIdText;
+    public TextMeshProUGUI joinRoomName;
 
     public RoomInfo RoomInfo
     {
@@ -21,26 +23,31 @@ public class RoomData : MonoBehaviour
         set
         {
             _roomInfo = value;
-            RoomInfoText.text = $"{_roomInfo.Name}({_roomInfo.PlayerCount}/{_roomInfo.MaxPlayers})";
-            GetComponent<UnityEngine.UI.Button>().onClick.AddListener(() => OnEnterRoom(_roomInfo.Name));
+            string[] roomName = _roomInfo.Name.Split('_');
+            RoomInfoText.text = $"{roomName[0]}({_roomInfo.PlayerCount}/{_roomInfo.MaxPlayers})";
+            GetComponent<UnityEngine.UI.Button>().onClick.AddListener(() => OnClickRoom(_roomInfo.Name));
         }
     }
+
+    
+
+
 
     void Awake()
     {
         RoomInfoText = GetComponentInChildren<TMP_Text>();
-        userIdText = GameObject.Find("InputField (TMP) - Nickname").GetComponent<TMP_InputField>();
+        userIdText = GameObject.Find("NickName").GetComponent<TMP_InputField>();
     }
 
-    void OnEnterRoom(string roomName)
+    void OnClickRoom(string room)
     {
-        RoomOptions ro = new RoomOptions();
-        ro.IsOpen = true;
-        ro.IsVisible = true;
-        ro.MaxPlayers = 4;
+        string[] password = room.Split('_');
 
-        PhotonNetwork.NickName = userIdText.text;
-        PhotonNetwork.JoinOrCreateRoom(roomName, ro, TypedLobby.Default);
+        GameObject.Find("Panel-BackGround").transform.Find("Panel-Password").gameObject.SetActive(true);
+        GameObject.Find("JoinRoomName").gameObject.GetComponent<TextMeshProUGUI>().text= password[0];
+
     }
+
+    
 
 }
