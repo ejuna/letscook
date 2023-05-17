@@ -10,6 +10,7 @@ public class ProcessController : MonoBehaviour
     //썰기,굽기,다지기
     //음료수 혼합 , 조합하기
     bool isPlayerEnter;
+    public float thorwForce;
     // Start is called before the first frame update
     void Start()
     {
@@ -43,17 +44,21 @@ public class ProcessController : MonoBehaviour
         }
     }
 
-    void prepIngredients(GameObject go)
+    public virtual void prepIngredients(GameObject go)
     {
-        Ingredient ig = go.GetComponent<Ingredient>();
-        Destroy(ig);//오브젝트 제거
-        //오브젝트를 넘겨 받고 오브젝트의 상태/종류에 따라서 손질한다.
-        if (ig.Type == Define.IngredientType.Meat)
-        {
-            //새로 조리된 오브젝트를 생성후 주변에 던진다.
-            //문제1 해당 오브젝트가 어떤 조리대인가를 확인 해야함;
-            //문제2 지금 조리과정이 생략됨
-        }
+
+    }
+    public void throwObject(GameObject go)
+    {
+        //go의 Rigidbody를 가져온다.
+        Rigidbody rigidbody = go.GetComponent<Rigidbody>();
+
+        //던질 각도,및 힘 선언 및 조절
+        Vector3 thorwAngle = Vector3.zero;
+        thorwAngle.y = 25f;
+        thorwForce = 10f;
+        //
+        rigidbody.AddForce(thorwAngle * thorwForce, ForceMode.Impulse);
     }
 
     void OnTriggerEnter(Collider other)

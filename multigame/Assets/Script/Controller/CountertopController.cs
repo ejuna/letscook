@@ -36,7 +36,6 @@ public class CountertopController : MonoBehaviour
             playerController.drop();
             //그 물건을 이 물건 위에 올린다.
             objectController.setParent(transform);
-
         }
         //조합하기
         if (Input.GetKey(KeyCode.V) && isPlayerEnter)
