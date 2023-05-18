@@ -6,9 +6,13 @@ using static Define;
 public class Ingredient : MonoBehaviour
 {
   public IngredientData ingredientData;
-  public string ingredientName { get; set; }
-  public int Price { get; set; }
-  public IngredientType Type { get; set; }
+
+    [SerializeField]
+    public string ingredientName { get; set; }
+    [SerializeField]
+    public int Price { get; set; }
+    [SerializeField]
+    public IngredientType Type { get; set; }
 
 
   public void Start()
