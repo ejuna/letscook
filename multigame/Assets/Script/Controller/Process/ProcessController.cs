@@ -30,7 +30,7 @@ public class ProcessController : MonoBehaviour
     void OnKeyboard()
     {
         //오브젝트 상호작용 할 키를 정함
-        if (Input.GetKey(KeyCode.C) && isPlayerEnter&& playerController.isPicking)
+        if (Input.GetKey(KeyCode.V) && isPlayerEnter&& playerController.isPicking)
         {
             GameObject go = hand.GetComponentInChildren<Rigidbody>().gameObject;
             ObjectController objectController = go.GetComponent<ObjectController>();
@@ -40,23 +40,20 @@ public class ProcessController : MonoBehaviour
             objectController.setParent(transform);
             //그 물건의 상태및 종류에 따라 가공하는 함수를 실행 한다.
             prepIngredients(go);
-
         }
     }
 
-    public virtual void prepIngredients(GameObject go)
-    {
-
-    }
+    public virtual void prepIngredients(GameObject go){}
     public void throwObject(GameObject go)
     {
+        Debug.Log("던지기");
         //go의 Rigidbody를 가져온다.
         Rigidbody rigidbody = go.GetComponent<Rigidbody>();
 
         //던질 각도,및 힘 선언 및 조절
         Vector3 thorwAngle = Vector3.zero;
-        thorwAngle.y = 25f;
-        thorwForce = 10f;
+        thorwAngle.y = 5f;
+        thorwForce = 1f;
         //
         rigidbody.AddForce(thorwAngle * thorwForce, ForceMode.Impulse);
     }

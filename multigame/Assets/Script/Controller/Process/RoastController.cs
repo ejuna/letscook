@@ -6,6 +6,7 @@ public class RoastController : ProcessController
 {
     public override void prepIngredients(GameObject go)
     {
+        Debug.Log("굽기");
         //굽기 조리
         Ingredient ig = go.GetComponent<Ingredient>();
         Destroy(ig);//오브젝트 제거

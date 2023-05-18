@@ -6,6 +6,7 @@ public class SlicingController : ProcessController
 {
     public override void prepIngredients(GameObject go)
     {
+        Debug.Log("썰기");
         //썰기
         Ingredient ig = go.GetComponent<Ingredient>();
         

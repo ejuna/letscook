@@ -6,6 +6,7 @@ public class Mincing : ProcessController
 {
     public override void prepIngredients(GameObject go)
     {
+        Debug.Log("다지기");
         //다지기 조리과정
         Ingredient ig = go.GetComponent<Ingredient>();
         Destroy(ig);//오브젝트 제거
