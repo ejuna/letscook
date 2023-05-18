@@ -37,9 +37,9 @@ public class ObjectController : MonoBehaviour
             isPlayerEnter = false;
         }
     }
-    public void setParent(Transform transform)
+    public void setParent(Transform tf)
     {
-        transform.SetParent(transform);
+        transform.SetParent(tf);
         transform.localPosition = Vector3.zero;
         transform.rotation = new Quaternion(0, 0, 0, 0);
     }

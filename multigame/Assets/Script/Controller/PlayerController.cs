@@ -7,7 +7,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     float _speed = 10.0f;
     bool _moveToDest = false;
-    
+
+    [SerializeField]
     public bool isPicking = false;
     GameObject hand;
     void Start()
