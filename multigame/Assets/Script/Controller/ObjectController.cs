@@ -30,16 +30,19 @@ public class ObjectController : MonoBehaviour
         //오브젝트 상호작용 할 키를 정함
         if (Input.GetKey(KeyCode.C)&&isPlayerEnter)
         {
-            transform.SetParent(hand.transform);
-            transform.localPosition = Vector3.zero;
-            transform.rotation = new Quaternion(0, 0, 0, 0);
+            setParent(hand.transform);
 
             playerController.Pickup(gameObject);
 
             isPlayerEnter = false;
         }
     }
-
+    public void setParent(Transform tf)
+    {
+        transform.SetParent(tf);
+        transform.localPosition = Vector3.zero;
+        transform.rotation = new Quaternion(0, 0, 0, 0);
+    }
     void OnTriggerEnter(Collider other)
     {
         if (player==other.gameObject)
