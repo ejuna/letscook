@@ -31,8 +31,8 @@ public class Managers : MonoBehaviour
   void Start()
     {
         init();
-        Orders.init();
-  }
+        _order.init();
+    }
 
     // Update is called once per frame
     void Update()
@@ -40,17 +40,19 @@ public class Managers : MonoBehaviour
         Event.OnUpdate();
         Input.OnUpdate();
         Date.OnUpdate();
+/*
+        Orders.OnUpdate();
         
         if(Date.isChangeDay == true){ //날짜 바뀌면
           Orders.DateUpdate(Date.day, Fame.fame);
           Date.isChangeDay = false;
         }
-        
+        */
     }
 
     static void init ()
     {
-    if (s_instance == null)
+        if (s_instance == null)
         {
             GameObject go = GameObject.Find("@Managers");
             if(go == null)
@@ -61,7 +63,7 @@ public class Managers : MonoBehaviour
             DontDestroyOnLoad(go);
             s_instance = go.GetComponent<Managers>();
         }
-  }
+    }
 
     public static void Clear()
     {
