@@ -4,19 +4,19 @@ using UnityEngine;
 
 public class LifeManager
 {
-    private const int MAX_LIFE = 3;
+    
     private int life;
 
     public void Init()
     {
-        life = MAX_LIFE;
+        life = Constants.MAX_LIFE;
     }
   public int getLife(){
     return life;
   }
 
   public bool lifeIncrease(){
-    if(life == MAX_LIFE)
+    if(life == Constants.MAX_LIFE)
     { //라이프가 꽉 차있으면
       return false;
     }
