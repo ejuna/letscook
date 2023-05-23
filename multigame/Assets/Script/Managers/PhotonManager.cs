@@ -248,6 +248,15 @@ public class PhotonManager : MonoBehaviourPunCallbacks
         PhotonNetwork.LeaveRoom();
     }
 
+    //게임 시작 버튼 클릭
+    public void GameStartClick()
+    {
+        if (PhotonNetwork.IsMasterClient)
+        {
+            PhotonNetwork.LoadLevel("Game");
+        }
+    }
+
 
     //플레이어 리스트 업데이트
     public void PlayerUpdate()
@@ -267,6 +276,17 @@ public class PhotonManager : MonoBehaviourPunCallbacks
             //유저 이미지 표시
             roomPlayer[i].transform.GetChild(2).gameObject.SetActive(true);
         }
+
+        //방에 4명이면 게임시작 버튼 활성화
+        if (PhotonNetwork.PlayerList.Length == 4)
+        {
+            GameObject.Find("GameStartButton").gameObject.GetComponent<Button>().interactable = true;
+        }
+        else
+        {
+            GameObject.Find("GameStartButton").gameObject.GetComponent<Button>().interactable = false;
+        }
+
     }
 
 
