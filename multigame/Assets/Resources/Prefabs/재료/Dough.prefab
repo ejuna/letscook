@@ -93,9 +93,11 @@ GameObject:
   m_Component:
   - component: {fileID: 8614195387927811128}
   - component: {fileID: 602485228767284494}
+  - component: {fileID: -6972697805692885996}
+  - component: {fileID: 2706227827040062148}
   m_Layer: 0
   m_Name: Dough
-  m_TagString: Untagged
+  m_TagString: Pickup
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -129,3 +131,32 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ingredientData: {fileID: 11400000, guid: 0994fc8c50e0fed45bb78852f941140f, type: 2}
+--- !u!54 &-6972697805692885996
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6173555098168729124}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 112
+  m_CollisionDetection: 0
+--- !u!65 &2706227827040062148
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6173555098168729124}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1.2, z: 1}
+  m_Center: {x: 0, y: 0.7, z: 0}
