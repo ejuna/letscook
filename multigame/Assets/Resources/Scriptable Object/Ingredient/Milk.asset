@@ -15,3 +15,4 @@ MonoBehaviour:
   ingredientName: Milk
   price: 15
   ingredientType: 3
+  img: {fileID: 2800000, guid: 7b6563ca0edb5cb4f982cc1dd8a20f0f, type: 3}

@@ -15,3 +15,4 @@ MonoBehaviour:
   ingredientName: Strawberry
   price: 5
   ingredientType: 2
+  img: {fileID: 2800000, guid: bfa5c195f3ded77408df86bc7cde9388, type: 3}

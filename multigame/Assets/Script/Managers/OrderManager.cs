@@ -9,7 +9,6 @@ public class OrderManager
   public List<FoodData> todayFoods=new List<FoodData>();
   public int complete { get; set; }
   private const int DEFALT_TIME = 20;
-  private static float timer = 0f;
   static bool isInit = false;
 
 
@@ -44,14 +43,6 @@ public class OrderManager
     createTodaysOrder(day, fame);
   }
 
-  public void OnUpdate(){
-    timer += Time.deltaTime;
-    if (timer >= 1f)
-    {
-      createOrder(50);
-      timer = 0f;
-    }
-  }
 
 
 ///명성과 일수 계산하여 tier 몇까지 받을건지
@@ -105,12 +96,13 @@ public class OrderManager
     Debug.Log(order.Food.FoodName);
   }
 
-    public void createOrder(int time)
+    public Order createOrder(int time)
     {
       int rand = Random.Range(0, todayFoods.Count);
       Order order = new Order(todayFoods[rand], time);
       orderList.Enqueue(order);
-    Debug.Log(order.Food.FoodName);
+      Debug.Log(order.Food.FoodName);
+      return order;
   }
 
 
@@ -137,42 +129,63 @@ public class OrderManager
     FoodData order_food = orderList.Dequeue().Food;
     List<IngredientData> user_ingredients = userFood.Ingredients;
     List<IngredientData> order_ingredients = order_food.Ingredients;
-    int ingredients_size = user_ingredients.Count;
-    int order_ingredients_size = order_ingredients.Count;
+    return isSameRecipe(user_ingredients, order_ingredients);
+  }
+
+
+
+  public bool checkRecipe(UserFood userFood){
+    List<IngredientData> user_ingredients = userFood.Ingredients;
+    List<IngredientData> food_ingredients;
+
+    for (int i = 0; i < allFoods.Count; i++)
+    {
+      food_ingredients = allFoods[i].Ingredients;
+      if(isSameRecipe(user_ingredients, food_ingredients)){
+        return true;
+      }
+    }
+    return false;
+
+  }
+
+
+  public bool isSameRecipe(List<IngredientData> my_ingredients, List<IngredientData> target_ingredients){
+    int my_size = my_ingredients.Count;
+    int target_size = target_ingredients.Count;
 
 
     List<bool> check = new List<bool>();
-    for(int i=0;i<order_ingredients.Count;i++){
+    for (int i = 0; i < target_size; i++)
+    {
       check.Add(false);
     }
 
 
-    for(int i=0;i< ingredients_size; i++){
-      string ingredient = user_ingredients[i].IngredientName;
-      for(int j=0;j< order_ingredients_size; j++){
-        if(check[j] == false && ingredient.Equals(order_ingredients[j].IngredientName)){
+    for (int i = 0; i < my_size; i++)
+    {
+      string ingredient = my_ingredients[i].IngredientName;
+
+      for (int j = 0; j < target_size; j++)
+      {
+        if (check[j] == false && ingredient.Equals(target_ingredients[j].IngredientName))
+        {
           check[j] = true;
           break;
         }
 
         //일치하는 재료가 없을때
-        if (j == order_ingredients_size - 1) return false;
+        if (j == target_size - 1) return false;
       }
     }
 
-    for(int i = 0; i < order_ingredients_size; i++){
+    for (int i = 0; i < target_size; i++)
+    {
       if (check[i] == false) return false;
     }
 
     return true;
   }
-
-
-//레시피 체크하려는 이유가 뭔지 물어보기
-  public bool checkRecipe(UserFood userFood){
-    return true;
-  }
-
 
   public bool deleteOrder(){
     if(orderList.Count == 0){
