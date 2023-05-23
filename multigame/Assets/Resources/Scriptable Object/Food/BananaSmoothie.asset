@@ -15,5 +15,6 @@ MonoBehaviour:
   foodName: BananaSmoothie
   foodTier: 1
   ingredients:
-  - {fileID: 11400000, guid: 4586cfb57ae76e34080c11e0ce4b5235, type: 2}
+  - {fileID: 11400000, guid: 3ca1cc06c46ef4e47b3664b595842c45, type: 2}
   - {fileID: 11400000, guid: 069438584f382e943bdec180ccb21de5, type: 2}
+  img: {fileID: 2800000, guid: 33de6d2240608bc409036ceb2be8921b, type: 3}
