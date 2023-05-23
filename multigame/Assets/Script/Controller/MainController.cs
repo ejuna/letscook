@@ -7,6 +7,12 @@ public class MainController : MonoBehaviour
     public float speed;
     float hAxis;
     float vAxis;
+    public Transform character;
+    public Transform GameObject;
+
+    private GameObject interactingObject;
+    private Rigidbody interactingRigidbody;
+    private bool isPicking;
 
     Vector3 moveVec;
 
@@ -22,6 +28,7 @@ public class MainController : MonoBehaviour
     }
     void Update()
     {
+        // 이동
         hAxis = Input.GetAxisRaw("Horizontal");
         vAxis = Input.GetAxisRaw("Vertical");
 
@@ -32,5 +39,49 @@ public class MainController : MonoBehaviour
         animator.SetBool("isWalking", moveVec != Vector3.zero);
 
         transform.LookAt(transform.position + moveVec);
+
+        // item 들고 내리기
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            if (!isPicking)
+            {
+                interactingObject = FindInteractableObject();
+                if (interactingObject != null)
+                {
+                    interactingRigidbody = interactingObject.GetComponent<Rigidbody>();
+                    interactingRigidbody.isKinematic = true;
+
+                    interactingObject.transform.SetParent(GameObject);
+                    interactingObject.transform.localPosition = Vector3.zero;
+                    isPicking = true;
+                    animator.SetBool("isPicking", true);
+                }
+            }
+            else
+            {
+                interactingRigidbody.isKinematic = false;
+
+                interactingObject.transform.SetParent(null);
+                interactingObject = null;
+                isPicking = false;
+                animator.SetBool("isPicking", false);
+            }
+        }
+    }
+
+    // item 인식(캐릭터 앞)
+    private GameObject FindInteractableObject()
+    {
+        RaycastHit hit;
+        if (Physics.Raycast(character.position, character.forward, out hit, 1.2f))
+        {
+            GameObject objectHit = hit.collider.gameObject;
+            if (objectHit.CompareTag("Pickup"))
+            {
+                return objectHit;
+            }
+        }
+
+        return null;
     }
 }
