@@ -17,7 +17,8 @@ public class TestManager : MonoBehaviour
     {
     timer += Time.deltaTime;
     if (timer >= 1f){
-      orderManager.createOrder(50);
+      //에러 발생때문에 꺼둠 
+      //orderManager.createOrder(50);
       timer = 0f;
     }
    
