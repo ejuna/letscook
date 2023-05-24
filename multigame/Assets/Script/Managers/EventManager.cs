@@ -70,7 +70,23 @@ public class EventManager
     {
         //명성,현재주문수,
         //단체손님 주문생성
-        Managers.Orders.createGroupGuestOrder(randGroupNum);
+        int fameLogicCount = 0;
+        int fame = Managers.Fame.fame;
+        int complete = Managers.Orders.complete;
+        while (fame >= 1)
+        {
+            fame = fame / 2;
+            fameLogicCount++;
+        }
+        fameLogicCount = fameLogicCount + complete;
+        while (fameLogicCount >= 10)
+        {
+            fameLogicCount=fameLogicCount / 2;
+        }
+        if (fameLogicCount < 4) fameLogicCount=fameLogicCount * 2;
+
+
+        Managers.Orders.createGroupGuestOrder(fameLogicCount);
     }
 
     public void gameOver()
@@ -80,7 +96,7 @@ public class EventManager
 
     public void gameClear()
     {
-        Managers.Scene.LoadScene(Define.Scene.GameEnd);
+        Managers.Scene.LoadScene(Define.Scene.GameClear);
     }
     public void Clear() { }
 }
