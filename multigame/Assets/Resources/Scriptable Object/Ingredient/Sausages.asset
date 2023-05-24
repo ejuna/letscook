@@ -15,3 +15,4 @@ MonoBehaviour:
   ingredientName: Sausages
   price: 20
   ingredientType: 1
+  img: {fileID: 2800000, guid: 2255687d4c8804a4eb7775b827da62f8, type: 3}

@@ -15,3 +15,4 @@ MonoBehaviour:
   ingredientName: Beans
   price: 5
   ingredientType: 2
+  img: {fileID: 2800000, guid: 93091d856842af844baa592ab3aaf9a8, type: 3}

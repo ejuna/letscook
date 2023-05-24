@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba273b57ec42fd146b34742391a4cfd3, type: 3}
   m_Name: Meat
   m_EditorClassIdentifier: 
-  ingredientName: Sausages
+  ingredientName: Meat
   price: 20
   ingredientType: 1
+  img: {fileID: 2800000, guid: 56c31b11b08d974438ca7c16ffba7a4d, type: 3}
