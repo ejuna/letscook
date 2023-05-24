@@ -1,22 +1,26 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class LifeManager
 {
-    private const int MAX_LIFE = 3;
+    
     private int life;
 
+    public Action minusLifeAction = null;
+    public Action resetLifeAction = null;
     public void Init()
     {
-        life = MAX_LIFE;
+        life = Constants.MAX_LIFE;
+        resetLifeAction();
     }
   public int getLife(){
     return life;
   }
 
   public bool lifeIncrease(){
-    if(life == MAX_LIFE)
+    if(life == Constants.MAX_LIFE)
     { //라이프가 꽉 차있으면
       return false;
     }
@@ -29,6 +33,7 @@ public class LifeManager
       return false;
     }
     life--;
+    minusLifeAction();
     return true;
   }
 }

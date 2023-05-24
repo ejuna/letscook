@@ -37,7 +37,7 @@ public class DateManager
     {
         day = 0;
         time = 0;
-    isChangeDay = false;
+        isChangeDay = false;
     }
 }
 
