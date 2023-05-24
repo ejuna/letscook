@@ -15,6 +15,6 @@ public class UI_Money : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        tmp.text = "Money : " + Managers.Money.money;
     }
 }

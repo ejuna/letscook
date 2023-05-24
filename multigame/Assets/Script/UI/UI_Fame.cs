@@ -15,6 +15,6 @@ public class UI_Fame : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        tmp.text = "Fame : " + Managers.Fame.fame;
     }
 }
