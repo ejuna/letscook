@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,6 +8,8 @@ public class LifeManager
     
     private int life;
 
+    public Action minusLifeAction = null;
+    public Action resetLifeAction = null;
     public void Init()
     {
         life = Constants.MAX_LIFE;

@@ -114,8 +114,8 @@ public class OrderManager
   }
 
 
-    public void createGourmandOrder(){
-      createOrder((int)(DEFALT_TIME - DEFALT_TIME * 0.3));
+    public void createGourmandOrder(int time){
+      createOrder((int)(DEFALT_TIME - time));
     }
 
 
