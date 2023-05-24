@@ -7,7 +7,6 @@ TagManager:
   - hand
   - ROOM
   - Pickup
-  - Container
   layers:
   - Default
   - TransparentFX
