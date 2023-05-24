@@ -88,9 +88,20 @@ public class PhotonManager : MonoBehaviourPunCallbacks
         PlayerUpdate();
     }
 
+    //방 접속 실패
     public override void OnJoinRoomFailed(short returnCode, string message)
     {
         Debug.Log("방 접속실패");
+
+        //returnCode 32758 = 비밀번호 틀림
+        if (returnCode == 32758)
+        {
+            //다른 터치 방지벽 활성화
+            GameObject.Find("Panel-BackGround").transform.Find("Blocker").gameObject.SetActive(true);
+
+            //비밀번호 오류창 활성화
+            GameObject.Find("Panel-BackGround").transform.Find("Panel-PasswordError").gameObject.SetActive(true);
+        }
         GameObject.Find("Panel-BackGround").transform.Find("Panel-Password").gameObject.SetActive(false);
     }
 
@@ -153,10 +164,16 @@ public class PhotonManager : MonoBehaviourPunCallbacks
 
     //create 버튼 클릭
     public void CreateButtonClick()
-    {
+    { 
+        //다른 터치 방지벽 활성화
+        GameObject.Find("Panel-BackGround").transform.Find("Blocker").gameObject.SetActive(true);
+
         //방만들기 메뉴 설정 활성화
         GameObject.Find("Panel-BackGround").transform.Find("Panel-CreateRoom").gameObject.SetActive(true);
-       
+
+        //방 옵션 입력창 초기화
+        GameObject.Find("InputField-roomName").gameObject.GetComponent<TMP_InputField>().text = "";
+        GameObject.Find("InputField-password").gameObject.GetComponent<TMP_InputField>().text = "";
     }
 
 
@@ -171,9 +188,24 @@ public class PhotonManager : MonoBehaviourPunCallbacks
         ro.MaxPlayers = 4;
 
         PhotonNetwork.CreateRoom(roomNamePassword, ro);
+
         //방만들기 메뉴 설정 비활성화
         GameObject.Find("Panel-CreateRoom").SetActive(false);
+
+        //다른 터치 방지벽 비활성화
+        GameObject.Find("Panel-BackGround").transform.Find("Blocker").gameObject.SetActive(false);
     }
+
+    //방 옵션 설정창 나가기
+    public void CreateRoomExitClick()
+    {
+        //방 옵션 설정창 비활성화
+        GameObject.Find("Panel-BackGround").transform.Find("Panel-CreateRoom").gameObject.SetActive(false);
+
+        //다른 터치 방지벽 비활성화
+        GameObject.Find("Panel-BackGround").transform.Find("Blocker").gameObject.SetActive(false);
+    }
+
 
     //방 참가 버튼 클릭
     public void JoinButtonClick()
@@ -182,8 +214,12 @@ public class PhotonManager : MonoBehaviourPunCallbacks
         string tempPassword = GameObject.Find("InputField-Password").gameObject.GetComponent<TMP_InputField>().text;
         string tempRoom = tempName + "_" + tempPassword;
         PhotonNetwork.JoinRoom(tempRoom);
+
         //비밀번호 입력창 비활성화
         GameObject.Find("Panel-BackGround").transform.Find("Panel-Password").gameObject.SetActive(false);
+
+        //다른 터치 방지벽 비활성화
+        GameObject.Find("Panel-BackGround").transform.Find("Blocker").gameObject.SetActive(false);
     }
 
     //비밀번호 입력창 나가기
@@ -191,12 +227,34 @@ public class PhotonManager : MonoBehaviourPunCallbacks
     {
         //비밀번호 입력창 비활성화
         GameObject.Find("Panel-BackGround").transform.Find("Panel-Password").gameObject.SetActive(false);
+
+        //다른 터치 방지벽 비활성화
+        GameObject.Find("Panel-BackGround").transform.Find("Blocker").gameObject.SetActive(false);
+    }
+
+    //비밀번호 오류창 나가기
+    public void PasswordErrorExitClick()
+    {
+        //비밀번호 오류창 비활성화
+        GameObject.Find("Panel-BackGround").transform.Find("Panel-PasswordError").gameObject.SetActive(false);
+
+        //다른 터치 방지벽 비활성화
+        GameObject.Find("Panel-BackGround").transform.Find("Blocker").gameObject.SetActive(false);
     }
 
     //방 퇴장 버튼 클릭
     public void ExitClick()
     {
         PhotonNetwork.LeaveRoom();
+    }
+
+    //게임 시작 버튼 클릭
+    public void GameStartClick()
+    {
+        if (PhotonNetwork.IsMasterClient)
+        {
+            PhotonNetwork.LoadLevel("Game");
+        }
     }
 
 
@@ -218,5 +276,23 @@ public class PhotonManager : MonoBehaviourPunCallbacks
             //유저 이미지 표시
             roomPlayer[i].transform.GetChild(2).gameObject.SetActive(true);
         }
+
+        //방에 4명이면 게임시작 버튼 활성화
+        if (PhotonNetwork.PlayerList.Length == 4)
+        {
+            GameObject.Find("GameStartButton").gameObject.GetComponent<Button>().interactable = true;
+        }
+        else
+        {
+            GameObject.Find("GameStartButton").gameObject.GetComponent<Button>().interactable = false;
+        }
+
+    }
+
+
+    //닉네임 변경
+    public void NickNameChange()
+    {
+        PhotonNetwork.NickName = userIdText.text;
     }
 }

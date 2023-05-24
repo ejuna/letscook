@@ -43,8 +43,15 @@ public class RoomData : MonoBehaviour
     {
         string[] password = room.Split('_');
 
+        //비밀번호 입력창 활성화
         GameObject.Find("Panel-BackGround").transform.Find("Panel-Password").gameObject.SetActive(true);
-        GameObject.Find("JoinRoomName").gameObject.GetComponent<TextMeshProUGUI>().text= password[0];
+        GameObject.Find("JoinRoomName").gameObject.GetComponent<TextMeshProUGUI>().text = password[0];
+
+        //비밀번호 입력필드 초기화
+        GameObject.Find("InputField-Password").gameObject.GetComponent<TMP_InputField>().text = "";
+
+        //다른 터치 방지벽 활성화
+        GameObject.Find("Panel-BackGround").transform.Find("Blocker").gameObject.SetActive(true);
 
     }
 
