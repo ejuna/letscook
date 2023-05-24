@@ -16,6 +16,7 @@ public class Managers : MonoBehaviour
     MoneyManager _money = new MoneyManager();
     LifeManager _life = new LifeManager();
     FameManager _fame = new FameManager();
+    ResourceManager _resource = new ResourceManager();
     public static EventManager Event { get { return Instance._event; } }
     public static DateManager Date { get { return Instance._date; } }
     public static SceneManagerMake Scene { get { return Instance._scene; } }
@@ -25,14 +26,15 @@ public class Managers : MonoBehaviour
     public static LifeManager Life { get { return Instance._life; } }
     public static OrderManager Orders { get { return Instance._order; } }
     public static FameManager Fame { get{ return Instance._fame; } }
+    public static ResourceManager Resource { get { return Instance._resource;} }
 
  
 
   void Start()
     {
         init();
-        _order.init();
-    }
+        Orders.init();
+  }
 
     // Update is called once per frame
     void Update()
@@ -40,19 +42,17 @@ public class Managers : MonoBehaviour
         Event.OnUpdate();
         Input.OnUpdate();
         Date.OnUpdate();
-/*
-        Orders.OnUpdate();
         
         if(Date.isChangeDay == true){ //날짜 바뀌면
           Orders.DateUpdate(Date.day, Fame.fame);
           Date.isChangeDay = false;
         }
-        */
+        
     }
 
     static void init ()
     {
-        if (s_instance == null)
+    if (s_instance == null)
         {
             GameObject go = GameObject.Find("@Managers");
             if(go == null)
@@ -63,7 +63,7 @@ public class Managers : MonoBehaviour
             DontDestroyOnLoad(go);
             s_instance = go.GetComponent<Managers>();
         }
-    }
+  }
 
     public static void Clear()
     {

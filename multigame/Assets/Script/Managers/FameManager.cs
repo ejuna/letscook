@@ -14,5 +14,7 @@ public class FameManager
   {
     fame -= amount;
   }
-  public void Clear() { }
+  public void Clear() {
+        fame = 0;
+    }
 }
