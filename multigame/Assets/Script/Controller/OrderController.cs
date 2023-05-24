@@ -8,7 +8,6 @@ public class OrderController : MonoBehaviour
 {
     private static float timer = 0f;
     OrderManager Orders;
-    public GameObject orderPrefab;
     public Canvas canvas;
 
     void Start()
@@ -21,44 +20,68 @@ public class OrderController : MonoBehaviour
     timer += Time.deltaTime;
     if (timer >= 5f)
     {
-      Order order = Orders.createOrder(50);
-      GameObject orderUI = Instantiate(orderPrefab,canvas.transform);
-      
-      //음식 설정
-      TextMeshProUGUI foodText = orderUI.transform.Find("FoodName").GetComponent<TextMeshProUGUI>();
-      foodText.text = order.Food.FoodName;
-
-      Image image = orderUI.transform.Find("Food").GetComponent<Image>();
-      //Sprite sprite = Sprite.Create(order.Food.Img, image.rectTransform.rect, Vector2.one * 0.5f);
-      Texture2D texture = order.Food.Img;
-      Sprite sprite = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), Vector2.one * 0.5f);
-
-      image.sprite = sprite;
-
-      //재료 설정
-
-      Image ingredients = orderUI.transform.Find("Ingredients").GetComponent<Image>();
-      Image ingredient1 = ingredients.transform.Find("Ingredient1").GetComponent<Image>();
-      Image ingredient2 = ingredients.transform.Find("Ingredient2").GetComponent<Image>();
-
-      Texture2D ingre1_texture = order.Food.Ingredients[0].Img;
-      Texture2D ingre2_texture = order.Food.Ingredients[1].Img;
-
-      Sprite ingre1_sprite = Sprite.Create(ingre1_texture, new Rect(0, 0, ingre1_texture.width, ingre1_texture.height), Vector2.one * 0.5f);
-      Sprite ingre2_sprite = Sprite.Create(ingre2_texture, new Rect(0, 0, ingre2_texture.width, ingre2_texture.height), Vector2.one * 0.5f);
-
-      ingredient1.sprite = ingre1_sprite;
-      ingredient2.sprite = ingre2_sprite;
-
-      TextMeshProUGUI ingre1_text = ingredient1.GetComponentInChildren<TextMeshProUGUI>();
-      TextMeshProUGUI ingre2_text = ingredient2.GetComponentInChildren<TextMeshProUGUI>();
-
-      ingre1_text.text = order.Food.Ingredients[0].IngredientName;
-      ingre2_text.text = order.Food.Ingredients[1].IngredientName;
+      Order order = Orders.createOrder();
+      setOrderRecipe(order);
 
       //타이머 초기화
       timer = 0f;
     }
 
+  //order에서 검사해서 
+  }
+
+  public void setOrderRecipe(Order order){
+    GameObject orderPrefab;
+    int recipeSize = order.Food.Ingredients.Count;
+
+  //프리팹 선택
+    string prefabLocation = "";
+    switch(recipeSize){
+      case 2:
+        prefabLocation = "OrderTwo";
+        break;
+      case 3:
+        prefabLocation = "OrderThree";
+        break;
+      case 4:
+        prefabLocation = "OrderFour";
+        break;
+      case 5:
+        prefabLocation = "OrderFive";
+        break;
+      default: break;
+    }
+    orderPrefab = Resources.Load<GameObject>("Prefabs/OrderRecipe/" + prefabLocation);
+    GameObject orderUI = Instantiate(orderPrefab, canvas.transform);
+
+    //음식 설정
+    TextMeshProUGUI foodText = orderUI.transform.Find("FoodName").GetComponent<TextMeshProUGUI>();
+    foodText.text = order.Food.FoodName;
+
+    Image image = orderUI.transform.Find("Food").GetComponent<Image>();
+    Texture2D texture = order.Food.Img;
+    Sprite sprite = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), Vector2.one * 0.5f);
+
+    image.sprite = sprite;
+
+    //재료 설정
+
+    Image ingredients = orderUI.transform.Find("Ingredients").GetComponent<Image>();
+
+    for(int i=0;i<recipeSize;i++){
+      Image ingredient = ingredients.transform.Find("Ingredient"+(i+1)).GetComponent<Image>();
+      Texture2D ingre_texture = order.Food.Ingredients[i].Img;
+      Sprite ingre_sprite = Sprite.Create(ingre_texture, new Rect(0, 0, ingre_texture.width, ingre_texture.height), Vector2.one * 0.5f);
+      ingredient.sprite = ingre_sprite;
+
+      TextMeshProUGUI ingre_text = ingredient.GetComponentInChildren<TextMeshProUGUI>();
+
+      ingre_text.text = order.Food.Ingredients[i].IngredientName;
+
+    }
+
+    //타임 설정
+    Slider timer = orderPrefab.GetComponentInChildren<Slider>();
+    timer.maxValue = order.TimeLimit;
   }
 }
