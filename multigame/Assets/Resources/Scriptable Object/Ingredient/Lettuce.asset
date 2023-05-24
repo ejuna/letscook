@@ -15,3 +15,4 @@ MonoBehaviour:
   ingredientName: Lettuce
   price: 5
   ingredientType: 2
+  img: {fileID: 2800000, guid: 804b409aa81fac54fbc8fc85677ad0af, type: 3}
