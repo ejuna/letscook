@@ -7,7 +7,6 @@ using UnityEngine.UI;
 public class SliderTimer : MonoBehaviour
 {
     Slider timer;
-    private float defaltTime=2.0f;
     OrderManager Orders;
 
     // Start is called before the first frame update
@@ -15,7 +14,6 @@ public class SliderTimer : MonoBehaviour
     {
     Orders = Managers.Orders;
     timer = GetComponent<Slider>();
-    timer.maxValue = defaltTime;
     }
 
     // Update is called once per frame

@@ -8,11 +8,15 @@ public class OrderManager
   public List<FoodData> allFoods=new List<FoodData>();//게임 프리팹 넣기?
   public List<FoodData> todayFoods=new List<FoodData>();
   public int complete { get; set; }
-  private const int DEFALT_TIME = 20;
+  private const float DEFALT_TIME = 20.0f;
   static bool isInit = false;
 
 
   public OrderManager(){
+
+  }
+
+  public void OnUpdate(){
 
   }
 
@@ -89,11 +93,12 @@ public class OrderManager
   }
 
 
-    public void createOrder(){
+    public Order createOrder(){
       int rand = Random.Range(0, todayFoods.Count);
       Order order = new Order(todayFoods[rand], DEFALT_TIME);
       orderList.Enqueue(order);
     Debug.Log(order.Food.FoodName);
+    return order;
   }
 
     public Order createOrder(int time)
@@ -106,8 +111,9 @@ public class OrderManager
   }
 
 
-    public void createGourmandOrder(int time){
-      createOrder((int)(DEFALT_TIME - time));
+  
+    public void createGourmandOrder(){
+      createOrder((int)(DEFALT_TIME - DEFALT_TIME * 0.3f));
     }
 
 
