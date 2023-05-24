@@ -66,12 +66,12 @@ public class EventManager
 
   public void gameOver()
     {
-        //게임 오버씬으로 전환한다.
+        Managers.Scene.LoadScene(Define.Scene.GameEnd);
     }
 
     public void gameClear()
     {
-        //게임 클리어씬으로 전환한다.
+        Managers.Scene.LoadScene(Define.Scene.GameEnd);
     }
     public void Clear() { }
 }
