@@ -43,6 +43,7 @@ public class ProcessController : MonoBehaviour
         }
     }
 
+    //요리하는동안 캐릭터 웅직임 없어진다.
     public virtual void prepIngredients(GameObject go){}
     public void throwObject(GameObject go)
     {
@@ -52,7 +53,7 @@ public class ProcessController : MonoBehaviour
 
         //던질 각도,및 힘 선언 및 조절
         Vector3 thorwAngle = Vector3.zero;
-        thorwAngle.y = 5f;
+        thorwAngle.y = 3f;
         thorwForce = 1f;
         //
         rigidbody.AddForce(thorwAngle * thorwForce, ForceMode.Impulse);
