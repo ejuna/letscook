@@ -73,8 +73,7 @@ public class EventManager
         Managers.Orders.createGroupGuestOrder(randGroupNum);
     }
 
-
-  public void gameOver()
+    public void gameOver()
     {
         Managers.Scene.LoadScene(Define.Scene.GameEnd);
     }
