@@ -8,6 +8,10 @@ public class UI_Life : MonoBehaviour
     void Start()
     {
         init();
+        Managers.Life.minusLifeAction -= minusLife;
+        Managers.Life.minusLifeAction += minusLife;
+        Managers.Life.resetLifeAction -= resetLife;
+        Managers.Life.resetLifeAction += resetLife;
     }
     void init()
     {

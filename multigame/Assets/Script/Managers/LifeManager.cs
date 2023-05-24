@@ -13,6 +13,7 @@ public class LifeManager
     public void Init()
     {
         life = Constants.MAX_LIFE;
+        resetLifeAction();
     }
   public int getLife(){
     return life;
@@ -32,6 +33,7 @@ public class LifeManager
       return false;
     }
     life--;
+    minusLifeAction();
     return true;
   }
 }
