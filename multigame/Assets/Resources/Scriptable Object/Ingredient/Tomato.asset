@@ -15,3 +15,4 @@ MonoBehaviour:
   ingredientName: Tomato
   price: 5
   ingredientType: 2
+  img: {fileID: 2800000, guid: e789e7f0cdaabf2459417ee44a72fa57, type: 3}
