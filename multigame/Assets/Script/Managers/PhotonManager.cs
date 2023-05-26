@@ -24,6 +24,8 @@ public class PhotonManager : MonoBehaviourPunCallbacks
 
     private void Awake()
     {
+        DontDestroyOnLoad(transform.gameObject);
+
         //씬 자동싱크 설정
         PhotonNetwork.AutomaticallySyncScene = true;
 
@@ -74,15 +76,11 @@ public class PhotonManager : MonoBehaviourPunCallbacks
     {
         Debug.Log("방 접속");
 
-        /*if (PhotonNetwork.IsMasterClient)
-        {
-            PhotonNetwork.LoadLevel("Level_1");
-        }*/
-
         //로비화면 비할성화
         GameObject.Find("View").transform.Find("LobbyView").gameObject.SetActive(false);
         //룸화면 활성화
         GameObject.Find("View").transform.Find("RoomView").gameObject.SetActive(true);
+
 
         //룸 플레이어 업데이트
         PlayerUpdate();
@@ -253,7 +251,9 @@ public class PhotonManager : MonoBehaviourPunCallbacks
     {
         if (PhotonNetwork.IsMasterClient)
         {
+
             PhotonNetwork.LoadLevel("Game");
+
         }
     }
 
@@ -278,7 +278,7 @@ public class PhotonManager : MonoBehaviourPunCallbacks
         }
 
         //방에 4명이면 게임시작 버튼 활성화
-        if (PhotonNetwork.PlayerList.Length == 4)
+        if (PhotonNetwork.PlayerList.Length == 1)
         {
             GameObject.Find("GameStartButton").gameObject.GetComponent<Button>().interactable = true;
         }
@@ -294,5 +294,37 @@ public class PhotonManager : MonoBehaviourPunCallbacks
     public void NickNameChange()
     {
         PhotonNetwork.NickName = userIdText.text;
+    }
+
+    //인게임 신 호출
+    private void OnLevelWasLoaded(int level)
+    {
+
+        Debug.Log("온레벨로드 호출");
+        InstantiatePlayer();
+    }
+
+
+    //캐릭터 생성
+    public void InstantiatePlayer()
+    {
+
+        Debug.Log("플레이어생성" + PhotonNetwork.PlayerList[0].NickName + " " + PhotonNetwork.NickName);
+        if (PhotonNetwork.PlayerList[0].NickName == PhotonNetwork.NickName)
+        {
+            PhotonNetwork.Instantiate("Badger_Jasper", new Vector3(-5, 1, -5), Quaternion.identity, 0);
+        }
+        else if (PhotonNetwork.PlayerList[1].NickName == PhotonNetwork.NickName)
+        {
+            PhotonNetwork.Instantiate("Frog_Shanks", new Vector3(-2, 1, -5), Quaternion.identity, 0);
+        }
+        else if (PhotonNetwork.PlayerList[2].NickName == PhotonNetwork.NickName)
+        {
+            PhotonNetwork.Instantiate("Panda_Apple", new Vector3(2, 1, -5), Quaternion.identity, 0);
+        }
+        else if (PhotonNetwork.PlayerList[3].NickName == PhotonNetwork.NickName)
+        {
+            PhotonNetwork.Instantiate("Rabbit_Sydney", new Vector3(5, 1, -5), Quaternion.identity, 0);
+        }
     }
 }
