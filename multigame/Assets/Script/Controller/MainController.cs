@@ -2,6 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
+//============이준하 수정=============//
+using Photon.Pun;
+using Photon.Realtime;
+//====================================//
+
 public class MainController : MonoBehaviour
 {
     public float speed;
@@ -18,9 +24,21 @@ public class MainController : MonoBehaviour
 
     Animator animator;
 
+
+    //============이준하 수정=============//
+    private PhotonView pv;
+    //====================================//
+
+
     void Awake()
     {
         animator = GetComponent<Animator>();
+
+        //============이준하 수정=============//
+        pv = GetComponent<PhotonView>();
+        //====================================//
+
+
     }
     void Start()
     {
@@ -28,58 +46,64 @@ public class MainController : MonoBehaviour
     }
     void Update()
     {
-        // 이동
-        hAxis = Input.GetAxisRaw("Horizontal");
-        vAxis = Input.GetAxisRaw("Vertical");
-
-        moveVec = new Vector3(hAxis, 0, vAxis).normalized;
-
-        transform.position += moveVec * speed * Time.deltaTime;
-
-        animator.SetBool("isWalking", moveVec != Vector3.zero);
-
-        transform.LookAt(transform.position + moveVec);
-
-        // item 들고 내리기
-        if (Input.GetKeyDown(KeyCode.E))
+        //============이준하 수정=============//
+        if (pv.IsMine)
+        //====================================//
         {
-            if (!isPicking)
-            {
-                interactingObject = FindInteractableObject();
-                if (interactingObject != null && interactingObject.CompareTag("Pickup"))
-                {
-                    interactingRigidbody = interactingObject.GetComponent<Rigidbody>();
-                    interactingRigidbody.isKinematic = true;
+            // 이동
+            hAxis = Input.GetAxisRaw("Horizontal");
+            vAxis = Input.GetAxisRaw("Vertical");
 
-                    interactingObject.transform.SetParent(GameObject);
-                    interactingObject.transform.localPosition = Vector3.zero;
-                    isPicking = true;
-                    animator.SetBool("isPicking", true);
+            moveVec = new Vector3(hAxis, 0, vAxis).normalized;
+
+            transform.position += moveVec * speed * Time.deltaTime;
+
+            animator.SetBool("isWalking", moveVec != Vector3.zero);
+
+            transform.LookAt(transform.position + moveVec);
+
+            // item 들고 내리기
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+                if (!isPicking)
+                {
+                    interactingObject = FindInteractableObject();
+                    if (interactingObject != null && interactingObject.CompareTag("Pickup"))
+                    {
+                        interactingRigidbody = interactingObject.GetComponent<Rigidbody>();
+                        interactingRigidbody.isKinematic = true;
+
+                        interactingObject.transform.SetParent(GameObject);
+                        interactingObject.transform.localPosition = Vector3.zero;
+                        isPicking = true;
+                        animator.SetBool("isPicking", true);
+                    }
+                }
+                else if (isPicking)
+                {
+                    interactingRigidbody.isKinematic = false;
+
+                    interactingObject.transform.SetParent(null);
+                    interactingObject = null;
+                    isPicking = false;
+                    animator.SetBool("isPicking", false);
                 }
             }
-            else if (isPicking)
+            if (Input.GetKeyDown(KeyCode.Space))
             {
-                interactingRigidbody.isKinematic = false;
-
-                interactingObject.transform.SetParent(null);
-                interactingObject = null;
-                isPicking = false;
-                animator.SetBool("isPicking", false);
+                interactingObject = FindInteractableObject2();
+                if (interactingObject != null && interactingObject.CompareTag("Container"))
+                {
+                    IngredientContainer ic = interactingObject.GetComponent<IngredientContainer>();
+                    ic.Enter();
+                }
+            }
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                Exit();
             }
         }
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            interactingObject = FindInteractableObject2();
-            if (interactingObject != null && interactingObject.CompareTag("Container"))
-            {
-                IngredientContainer ic = interactingObject.GetComponent<IngredientContainer>();
-                ic.Enter();
-            }
-        }
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            Exit();
-        }
+        
         
     }
 
