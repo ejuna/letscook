@@ -15,4 +15,4 @@ MonoBehaviour:
   ingredientName: Chicken
   price: 20
   ingredientType: 1
-  img: {fileID: 2800000, guid: a5a0e7a2186260b46b7a520f300cc891, type: 3}
+  img: {fileID: 2800000, guid: 196181251a4a74043b603114fd38d54f, type: 3}

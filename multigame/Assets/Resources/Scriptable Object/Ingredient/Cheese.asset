@@ -15,4 +15,4 @@ MonoBehaviour:
   ingredientName: Cheese
   price: 15
   ingredientType: 3
-  img: {fileID: 2800000, guid: 713643f335765b340a5971e4cbf9bf01, type: 3}
+  img: {fileID: 2800000, guid: 3787cd4f2d4d259419f711bf709a78af, type: 3}
