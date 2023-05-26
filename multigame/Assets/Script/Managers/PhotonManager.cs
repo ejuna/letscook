@@ -296,11 +296,10 @@ public class PhotonManager : MonoBehaviourPunCallbacks
         PhotonNetwork.NickName = userIdText.text;
     }
 
-    //인게임 씬 호출
+    //LoadLevel 함수 호출시 자동으로 호출되는 함수
     private void OnLevelWasLoaded(int level)
     {
-
-        Debug.Log("온레벨로드 호출");
+        
         InstantiatePlayer();
     }
 
@@ -308,8 +307,7 @@ public class PhotonManager : MonoBehaviourPunCallbacks
     //캐릭터 생성
     public void InstantiatePlayer()
     {
-
-        Debug.Log("플레이어생성" + PhotonNetwork.PlayerList[0].NickName + " " + PhotonNetwork.LocalPlayer.NickName);
+        //플레이어 넘버에 따라 다른 캐릭터 생성
         if (PhotonNetwork.PlayerList[0].NickName == PhotonNetwork.NickName)
         {
             PhotonNetwork.Instantiate("Badger_Jasper", new Vector3(-5, 1, -5), Quaternion.identity, 0);
