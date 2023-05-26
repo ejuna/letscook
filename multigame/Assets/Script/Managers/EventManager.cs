@@ -12,7 +12,8 @@ public class EventManager
 
     bool isTodayGourmand;
     bool isTodayGroupGeuset;
-
+    bool isClera;
+    bool isGameOver;
     public int targetDate { get; set; }//무한이면 -1
     public int targetMoney { get; set; }//무한이면 -1
 
@@ -25,6 +26,12 @@ public class EventManager
 
         isTodayGourmand = true;
         isTodayGroupGeuset = true;
+        isClera = true;
+        isGameOver = true;
+
+        //TEST
+        targetDate = int.MaxValue;
+        targetMoney = int.MaxValue;
     }
 
 
@@ -33,23 +40,24 @@ public class EventManager
 
         //조건을 확인 하면서 미식가 이벤트 발생시킨다.
         if (Managers.Orders.complete == randOrderCountTrigger && isTodayGourmand)
-          {
+        {
               gourmandEvent();
               isTodayGourmand = false;
-          }
-          //시간 조건을 확인하고 랜덤한 시간에 단체손님 발생
-          if (Managers.Date.time == randTimeTrigger && isTodayGroupGeuset) {
+        }
+        //시간 조건을 확인하고 랜덤한 시간에 단체손님 발생
+        if (Managers.Date.time == randTimeTrigger && isTodayGroupGeuset) {
               groupGuestEvent();
               isTodayGroupGeuset = false;
         }
         //목표일짜 및 목표 금액 달성시 게임 클리어
         if (Managers.Date.day == targetDate || Managers.Money.money >= targetMoney)
         {
-            //gameClear();
+            Debug.Log("hello"+ targetDate+ Managers.Date.day +" "+ targetMoney+ "," + Managers.Money.money);
+            gameClear();
         }
         if (Managers.Life.getLife() <= 0)
         {
-            //gameOver();
+            gameOver();
         }
     }
 

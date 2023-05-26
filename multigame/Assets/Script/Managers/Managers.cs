@@ -34,6 +34,8 @@ public class Managers : MonoBehaviour
     {
         init();
         Orders.init();
+        Event.init();
+        Life.Init();
   }
 
     // Update is called once per frame
