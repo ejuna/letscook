@@ -278,7 +278,7 @@ public class PhotonManager : MonoBehaviourPunCallbacks
         }
 
         //방에 4명이면 게임시작 버튼 활성화
-        if (PhotonNetwork.PlayerList.Length == 1)
+        if (PhotonNetwork.PlayerList.Length == 2)
         {
             GameObject.Find("GameStartButton").gameObject.GetComponent<Button>().interactable = true;
         }
@@ -296,7 +296,7 @@ public class PhotonManager : MonoBehaviourPunCallbacks
         PhotonNetwork.NickName = userIdText.text;
     }
 
-    //인게임 신 호출
+    //인게임 씬 호출
     private void OnLevelWasLoaded(int level)
     {
 
@@ -309,7 +309,7 @@ public class PhotonManager : MonoBehaviourPunCallbacks
     public void InstantiatePlayer()
     {
 
-        Debug.Log("플레이어생성" + PhotonNetwork.PlayerList[0].NickName + " " + PhotonNetwork.NickName);
+        Debug.Log("플레이어생성" + PhotonNetwork.PlayerList[0].NickName + " " + PhotonNetwork.LocalPlayer.NickName);
         if (PhotonNetwork.PlayerList[0].NickName == PhotonNetwork.NickName)
         {
             PhotonNetwork.Instantiate("Badger_Jasper", new Vector3(-5, 1, -5), Quaternion.identity, 0);
