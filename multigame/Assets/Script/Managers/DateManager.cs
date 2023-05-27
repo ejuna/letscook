@@ -32,6 +32,7 @@ public class DateManager
     {
         day++;
         time = 0;
+        Managers.Orders.DateUpdate();
     }
     public void Clear() 
     {

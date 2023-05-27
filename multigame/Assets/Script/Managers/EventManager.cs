@@ -50,14 +50,9 @@ public class EventManager
               isTodayGroupGeuset = false;
         }
         //목표일짜 및 목표 금액 달성시 게임 클리어
-        if (Managers.Date.day == targetDate || Managers.Money.money >= targetMoney)
+        if (Managers.Date.day == targetDate || Managers.Money.money >= targetMoney|| Managers.Life.getLife() <= 0)
         {
-            Debug.Log("hello"+ targetDate+ Managers.Date.day +" "+ targetMoney+ "," + Managers.Money.money);
             gameClear();
-        }
-        if (Managers.Life.getLife() <= 0)
-        {
-            gameOver();
         }
     }
 
@@ -95,11 +90,6 @@ public class EventManager
 
 
         Managers.Orders.createGroupGuestOrder(fameLogicCount);
-    }
-
-    public void gameOver()
-    {
-        Managers.Scene.LoadScene(Define.Scene.GameEnd);
     }
 
     public void gameClear()

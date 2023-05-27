@@ -39,8 +39,13 @@ public class OrderManager
       isInit = true;
     }
   }
-
-  public void DateUpdate(int day,int fame){
+    
+    public void DateUpdate()
+    {
+        DateUpdate(Managers.Date.day, Managers.Fame.fame);
+    }
+  
+    public void DateUpdate(int day,int fame){
     orderList.Clear();
     todayFoods.Clear();
     complete = 0;

@@ -9,7 +9,6 @@ public class Define
         None,
         Lobby,
         Game,
-        GameEnd,
         GameClear,
         Looding,
         Test,
