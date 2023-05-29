@@ -15,4 +15,4 @@ MonoBehaviour:
   ingredientName: Pepperoni
   price: 20
   ingredientType: 1
-  img: {fileID: 2800000, guid: d673ea4dd669ecd41a02bcde486bb238, type: 3}
+  img: {fileID: 2800000, guid: 31fdd0fb0227bc44ba1b11f0ab31a466, type: 3}
