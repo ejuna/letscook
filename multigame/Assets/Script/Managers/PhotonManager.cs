@@ -90,22 +90,14 @@ public class PhotonManager : MonoBehaviourPunCallbacks
         //룸 플레이어 업데이트
         PlayerUpdate();
 
-        //현재 룸의 목표 금액,일수 설정
+        //현재 룸의 목표 금액,일수 설정으로 연동
         if (PhotonNetwork.InRoom)
         {
             Hashtable cp = PhotonNetwork.CurrentRoom.CustomProperties;
-            Debug.Log("목표일수" + targetDay);
-            Debug.Log("목표금액" + targetMoney);
-            Debug.Log(int.Parse(cp["m"].ToString()));
-            Debug.Log(int.Parse(cp["d"].ToString()));
-            targetMoney = int.Parse(cp["m"].ToString());
-            targetDay= int.Parse(cp["d"].ToString());
-            Debug.Log("목표일수" + targetDay);
-            Debug.Log("목표금액" + targetMoney);
-        }
 
-        
-        
+            targetMoney = int.Parse(cp["m"].ToString());
+            targetDay = int.Parse(cp["d"].ToString());
+        }
 
     }
 
@@ -376,7 +368,7 @@ public class PhotonManager : MonoBehaviourPunCallbacks
         }
 
         //방에 4명이면 게임시작 버튼 활성화
-        if (PhotonNetwork.PlayerList.Length == 1)
+        if (PhotonNetwork.PlayerList.Length == 2)
         {
             GameObject.Find("GameStartButton").gameObject.GetComponent<Button>().interactable = true;
         }
