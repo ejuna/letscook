@@ -8,6 +8,8 @@ TagManager:
   - ROOM
   - Pickup
   - Container
+  - Bullet
+  - Prep
   layers:
   - Default
   - TransparentFX
