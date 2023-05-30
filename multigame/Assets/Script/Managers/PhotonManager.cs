@@ -94,12 +94,17 @@ public class PhotonManager : MonoBehaviourPunCallbacks
         if (PhotonNetwork.InRoom)
         {
             Hashtable cp = PhotonNetwork.CurrentRoom.CustomProperties;
+            Debug.Log("목표일수" + targetDay);
+            Debug.Log("목표금액" + targetMoney);
+            Debug.Log(int.Parse(cp["m"].ToString()));
+            Debug.Log(int.Parse(cp["d"].ToString()));
             targetMoney = int.Parse(cp["m"].ToString());
             targetDay= int.Parse(cp["d"].ToString());
+            Debug.Log("목표일수" + targetDay);
+            Debug.Log("목표금액" + targetMoney);
         }
 
-        Debug.Log("목표일수" +targetDay);
-        Debug.Log("목표금액" + targetMoney);
+        
         
 
     }
@@ -212,7 +217,7 @@ public class PhotonManager : MonoBehaviourPunCallbacks
                 targetMoney = -1;
                 break;
         }
-
+        
     }
 
     //목표 일수 설정
@@ -235,13 +240,16 @@ public class PhotonManager : MonoBehaviourPunCallbacks
                 targetDay = -1;
                 break;
         }
-
     }
 
 
     //방 옵션 설정후 방만들기 버튼 클릭
     public void OnMakeRoomClick()
     {
+        TargetMoneySetting();
+        TargetDaySetting();
+
+
         string roomNamePassword = roomNameText.text + "_" + roomPassword.text;
 
         RoomOptions ro = new RoomOptions();

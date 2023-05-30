@@ -11464,6 +11464,8 @@ MonoBehaviour:
   - {fileID: 353602976}
   - {fileID: 746092352}
   - {fileID: 1521823182}
+  targetMoney: 0
+  targetDay: 0
 --- !u!4 &1673954440
 Transform:
   m_ObjectHideFlags: 0
