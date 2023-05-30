@@ -205,6 +205,28 @@ public class PhotonManager : MonoBehaviourPunCallbacks
         GameObject.Find("Panel-BackGround").transform.Find("Blocker").gameObject.SetActive(false);
     }
 
+    //사운드 설정 버튼 클릭
+    public void SoundSettingClick()
+    {
+        //다른 터치 방지벽 활성화
+        GameObject.Find("Panel-BackGround").transform.Find("Blocker").gameObject.SetActive(true);
+
+        //사운드 설정 창 활성화
+        GameObject.Find("View").transform.Find("SoundView").gameObject.SetActive(true);
+
+        
+    }
+
+    //사운드 설정 완료 버튼 클릭
+    public void SoundSettingExit()
+    {
+        //사운드 설정창 비활성화
+        GameObject.Find("View").transform.Find("SoundView").gameObject.SetActive(false);
+
+        //다른 터치 방지벽 비활성화
+        GameObject.Find("Panel-BackGround").transform.Find("Blocker").gameObject.SetActive(false);
+    }
+
 
     //방 참가 버튼 클릭
     public void JoinButtonClick()
@@ -268,7 +290,7 @@ public class PhotonManager : MonoBehaviourPunCallbacks
         for(int i=0; i<4; i++)
         {
             roomPlayer[i].transform.GetChild(1).gameObject.GetComponent<TextMeshProUGUI>().text = " ";
-            roomPlayer[i].transform.GetChild(2).gameObject.SetActive(false);
+            roomPlayer[i].transform.GetChild(0).gameObject.SetActive(false);
         }
 
         //설정
@@ -277,7 +299,7 @@ public class PhotonManager : MonoBehaviourPunCallbacks
             //유저 닉네임 표시
             roomPlayer[i].transform.GetChild(1).gameObject.GetComponent<TextMeshProUGUI>().text = PhotonNetwork.PlayerList[i].NickName;
             //유저 이미지 표시
-            roomPlayer[i].transform.GetChild(2).gameObject.SetActive(true);
+            roomPlayer[i].transform.GetChild(0).gameObject.SetActive(true);
         }
 
         //방에 4명이면 게임시작 버튼 활성화
@@ -302,8 +324,8 @@ public class PhotonManager : MonoBehaviourPunCallbacks
     //LoadLevel 함수 호출시 자동으로 호출되는 함수
     private void OnLevelWasLoaded(int level)
     {
-        //level=0 -> 게임 씬임
-        if (level == 0)
+        //level=1 -> 게임 씬임
+        if (level == 1)
         {
             InstantiatePlayer();
         }
