@@ -5855,7 +5855,7 @@ MonoBehaviour:
   transmitEnabled: 1
   samplingRate: 24000
   frameDuration: 20000
-  bitrate: 30000
+  bitrate: 32653
   sourceType: 0
   microphoneType: 0
   audioClip: {fileID: 0}

@@ -5,6 +5,8 @@ using Photon.Pun;
 using Photon.Realtime;
 using UnityEngine.UI;
 using TMPro;
+using Hashtable = ExitGames.Client.Photon.Hashtable;
+
 
 public class PhotonManager : MonoBehaviourPunCallbacks
 {
@@ -21,6 +23,9 @@ public class PhotonManager : MonoBehaviourPunCallbacks
     public Transform scrollContent; //방 표시 콘텐츠
 
     public GameObject[] roomPlayer; //방 접속 플레이어 리스트
+
+    public int targetMoney;
+    public int targetDay;
 
     private void Awake()
     {
@@ -82,9 +87,21 @@ public class PhotonManager : MonoBehaviourPunCallbacks
         //룸화면 활성화
         GameObject.Find("View").transform.Find("RoomView").gameObject.SetActive(true);
 
-
         //룸 플레이어 업데이트
         PlayerUpdate();
+
+        //현재 룸의 목표 금액,일수 설정
+        if (PhotonNetwork.InRoom)
+        {
+            Hashtable cp = PhotonNetwork.CurrentRoom.CustomProperties;
+            targetMoney = int.Parse(cp["m"].ToString());
+            targetDay= int.Parse(cp["d"].ToString());
+        }
+
+        Debug.Log("목표일수" +targetDay);
+        Debug.Log("목표금액" + targetMoney);
+        
+
     }
 
     //방 접속 실패
@@ -175,6 +192,52 @@ public class PhotonManager : MonoBehaviourPunCallbacks
         GameObject.Find("InputField-password").gameObject.GetComponent<TMP_InputField>().text = "";
     }
 
+    //목표 금액 설정
+    public void TargetMoneySetting()
+    {
+        int temp = GameObject.Find("Dropdown-targetMoney").gameObject.GetComponent<TMP_Dropdown>().value;
+
+        switch (temp)
+        {
+            case 0:
+                targetMoney = 1000000;
+                break;
+            case 1:
+                targetMoney = 5000000;
+                break;
+            case 2:
+                targetMoney = 10000000;
+                break;
+            case 3:
+                targetMoney = -1;
+                break;
+        }
+
+    }
+
+    //목표 일수 설정
+    public void TargetDaySetting()
+    {
+        int temp = GameObject.Find("Dropdown-targetDay").gameObject.GetComponent<TMP_Dropdown>().value;
+
+        switch (temp)
+        {
+            case 0:
+                targetDay = 30;
+                break;
+            case 1:
+                targetDay = 45;
+                break;
+            case 2:
+                targetDay = 60;
+                break;
+            case 3:
+                targetDay = -1;
+                break;
+        }
+
+    }
+
 
     //방 옵션 설정후 방만들기 버튼 클릭
     public void OnMakeRoomClick()
@@ -185,6 +248,8 @@ public class PhotonManager : MonoBehaviourPunCallbacks
         ro.IsOpen = true;
         ro.IsVisible = true;
         ro.MaxPlayers = 4;
+        ro.CustomRoomProperties = new Hashtable() { { "m", targetMoney }, { "d", targetDay } };
+      
 
         PhotonNetwork.CreateRoom(roomNamePassword, ro);
 
