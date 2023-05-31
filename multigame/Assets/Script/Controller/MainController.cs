@@ -2,6 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
+//============이준하 수정=============//
+using Photon.Pun;
+using Photon.Realtime;
+//====================================//
+
 public class MainController : MonoBehaviour
 {
     public float speed;
@@ -19,9 +25,21 @@ public class MainController : MonoBehaviour
     Vector3 moveVec;
     Animator animator;
 
+
+    //============이준하 수정=============//
+    private PhotonView pv;
+    //====================================//
+
+
     void Awake()
     {
         animator = GetComponent<Animator>();
+
+        //============이준하 수정=============//
+        pv = GetComponent<PhotonView>();
+        //====================================//
+
+
     }
     void Start()
     {
@@ -30,11 +48,15 @@ public class MainController : MonoBehaviour
     }
     void Update()
     {
+        //============이준하 수정=============//
+        if (pv.IsMine)
+        //====================================//
         if ( !isFreeze )
         {
             // 이동
             hAxis = Input.GetAxisRaw("Horizontal");
             vAxis = Input.GetAxisRaw("Vertical");
+
 
             moveVec = new Vector3(hAxis, 0, vAxis).normalized;
 

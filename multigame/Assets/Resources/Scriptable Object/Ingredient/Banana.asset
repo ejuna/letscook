@@ -15,4 +15,4 @@ MonoBehaviour:
   ingredientName: Banana
   price: 5
   ingredientType: 2
-  img: {fileID: 2800000, guid: ab3be06de3f23ce44810a07fbb123a71, type: 3}
+  img: {fileID: 2800000, guid: 54ebdc751f634cd43896369b3d8cdfbf, type: 3}

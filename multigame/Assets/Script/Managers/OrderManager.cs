@@ -8,6 +8,7 @@ public class OrderManager
   public List<FoodData> allFoods=new List<FoodData>();//게임 프리팹 넣기?
   public List<FoodData> todayFoods=new List<FoodData>();
   public int complete { get; set; }
+  public int totalComplete{ get; set; }
   private const float DEFALT_TIME = 20.0f;
   static bool isInit = false;
 
@@ -34,7 +35,7 @@ public class OrderManager
       orderList = new Queue<Order>();
       getAllFoodList();
       complete = 0;
-      createTodaysOrder(1, 0);
+      createTodaysOrder(30, 100);
       Debug.Log("초기화 완료");
       isInit = true;
     }

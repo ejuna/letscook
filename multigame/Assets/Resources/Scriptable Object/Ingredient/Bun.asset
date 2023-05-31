@@ -15,4 +15,4 @@ MonoBehaviour:
   ingredientName: Bun
   price: 10
   ingredientType: 0
-  img: {fileID: 2800000, guid: 65a262c733e48b84a8c6f91aa12155a1, type: 3}
+  img: {fileID: 2800000, guid: 538dd182e547b31419b0b4d166ce97e1, type: 3}

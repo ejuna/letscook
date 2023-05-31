@@ -5,6 +5,8 @@ using Photon.Pun;
 using Photon.Realtime;
 using UnityEngine.UI;
 using TMPro;
+using Hashtable = ExitGames.Client.Photon.Hashtable;
+
 
 public class PhotonManager : MonoBehaviourPunCallbacks
 {
@@ -22,8 +24,14 @@ public class PhotonManager : MonoBehaviourPunCallbacks
 
     public GameObject[] roomPlayer; //방 접속 플레이어 리스트
 
+    public int targetMoney;
+    public int targetDay;
+
     private void Awake()
     {
+        //씬이 바뀌어도 포톤매니저 오브젝트 삭제 방지
+        DontDestroyOnLoad(transform.gameObject);
+
         //씬 자동싱크 설정
         PhotonNetwork.AutomaticallySyncScene = true;
 
@@ -74,11 +82,6 @@ public class PhotonManager : MonoBehaviourPunCallbacks
     {
         Debug.Log("방 접속");
 
-        /*if (PhotonNetwork.IsMasterClient)
-        {
-            PhotonNetwork.LoadLevel("Level_1");
-        }*/
-
         //로비화면 비할성화
         GameObject.Find("View").transform.Find("LobbyView").gameObject.SetActive(false);
         //룸화면 활성화
@@ -86,6 +89,16 @@ public class PhotonManager : MonoBehaviourPunCallbacks
 
         //룸 플레이어 업데이트
         PlayerUpdate();
+
+        //현재 룸의 목표 금액,일수 설정으로 연동
+        if (PhotonNetwork.InRoom)
+        {
+            Hashtable cp = PhotonNetwork.CurrentRoom.CustomProperties;
+
+            targetMoney = int.Parse(cp["m"].ToString());
+            targetDay = int.Parse(cp["d"].ToString());
+        }
+
     }
 
     //방 접속 실패
@@ -176,24 +189,91 @@ public class PhotonManager : MonoBehaviourPunCallbacks
         GameObject.Find("InputField-password").gameObject.GetComponent<TMP_InputField>().text = "";
     }
 
+    //목표 금액 설정
+    public void TargetMoneySetting()
+    {
+        int temp = GameObject.Find("Dropdown-targetMoney").gameObject.GetComponent<TMP_Dropdown>().value;
+
+        switch (temp)
+        {
+            case 0:
+                targetMoney = 1000000;
+                break;
+            case 1:
+                targetMoney = 5000000;
+                break;
+            case 2:
+                targetMoney = 10000000;
+                break;
+            case 3:
+                targetMoney = -1;
+                break;
+        }
+        
+    }
+
+    //목표 일수 설정
+    public void TargetDaySetting()
+    {
+        int temp = GameObject.Find("Dropdown-targetDay").gameObject.GetComponent<TMP_Dropdown>().value;
+
+        switch (temp)
+        {
+            case 0:
+                targetDay = 30;
+                break;
+            case 1:
+                targetDay = 45;
+                break;
+            case 2:
+                targetDay = 60;
+                break;
+            case 3:
+                targetDay = -1;
+                break;
+        }
+    }
+
 
     //방 옵션 설정후 방만들기 버튼 클릭
     public void OnMakeRoomClick()
-    {
-        string roomNamePassword = roomNameText.text + "_" + roomPassword.text;
+    { 
+        //방이름과 비밀번호 입력 했는지 체크
+        if (roomNameText.text != "" && roomPassword.text != "")
+        {
+            //목표 금액,일수 설정
+            TargetMoneySetting();
+            TargetDaySetting();
 
-        RoomOptions ro = new RoomOptions();
-        ro.IsOpen = true;
-        ro.IsVisible = true;
-        ro.MaxPlayers = 4;
 
-        PhotonNetwork.CreateRoom(roomNamePassword, ro);
+            //룸 옵션 설정
+            string roomNamePassword = roomNameText.text + "_" + roomPassword.text;
 
-        //방만들기 메뉴 설정 비활성화
-        GameObject.Find("Panel-CreateRoom").SetActive(false);
+            RoomOptions ro = new RoomOptions();
+            ro.IsOpen = true;
+            ro.IsVisible = true;
+            ro.MaxPlayers = 4;
+            ro.CustomRoomProperties = new Hashtable() { { "m", targetMoney }, { "d", targetDay } };
 
-        //다른 터치 방지벽 비활성화
-        GameObject.Find("Panel-BackGround").transform.Find("Blocker").gameObject.SetActive(false);
+
+            PhotonNetwork.CreateRoom(roomNamePassword, ro);
+
+            //방만들기 메뉴 설정 비활성화
+            GameObject.Find("Panel-CreateRoom").SetActive(false);
+
+            //다른 터치 방지벽 비활성화
+            GameObject.Find("Panel-BackGround").transform.Find("Blocker").gameObject.SetActive(false);
+        }
+        else
+        {
+            //방만들기 메뉴 설정 비활성화
+            GameObject.Find("Panel-CreateRoom").SetActive(false);
+
+            //방만들기 오류창 활성화
+            GameObject.Find("Panel-BackGround").transform.Find("Panel-CreateRoomError").gameObject.SetActive(true);
+        }
+
+        
     }
 
     //방 옵션 설정창 나가기
@@ -201,6 +281,38 @@ public class PhotonManager : MonoBehaviourPunCallbacks
     {
         //방 옵션 설정창 비활성화
         GameObject.Find("Panel-BackGround").transform.Find("Panel-CreateRoom").gameObject.SetActive(false);
+
+        //다른 터치 방지벽 비활성화
+        GameObject.Find("Panel-BackGround").transform.Find("Blocker").gameObject.SetActive(false);
+    }
+
+    //방만들기 오류창 나가기
+    public void CreateRoomErrorExitClick()
+    {
+        //방만들기 오류창 비활성화
+        GameObject.Find("Panel-BackGround").transform.Find("Panel-CreateRoomError").gameObject.SetActive(false);
+
+        //다른 터치 방지벽 비활성화
+        GameObject.Find("Panel-BackGround").transform.Find("Blocker").gameObject.SetActive(false);
+    }
+
+    //사운드 설정 버튼 클릭
+    public void SoundSettingClick()
+    {
+        //다른 터치 방지벽 활성화
+        GameObject.Find("Panel-BackGround").transform.Find("Blocker").gameObject.SetActive(true);
+
+        //사운드 설정 창 활성화
+        GameObject.Find("View").transform.Find("SoundView").gameObject.SetActive(true);
+
+        
+    }
+
+    //사운드 설정 완료 버튼 클릭
+    public void SoundSettingExit()
+    {
+        //사운드 설정창 비활성화
+        GameObject.Find("View").transform.Find("SoundView").gameObject.SetActive(false);
 
         //다른 터치 방지벽 비활성화
         GameObject.Find("Panel-BackGround").transform.Find("Blocker").gameObject.SetActive(false);
@@ -251,9 +363,13 @@ public class PhotonManager : MonoBehaviourPunCallbacks
     //게임 시작 버튼 클릭
     public void GameStartClick()
     {
+
+        //방장일 경우에만 게임 씬으로 이동
         if (PhotonNetwork.IsMasterClient)
         {
+            
             PhotonNetwork.LoadLevel("Game");
+
         }
     }
 
@@ -265,7 +381,7 @@ public class PhotonManager : MonoBehaviourPunCallbacks
         for(int i=0; i<4; i++)
         {
             roomPlayer[i].transform.GetChild(1).gameObject.GetComponent<TextMeshProUGUI>().text = " ";
-            roomPlayer[i].transform.GetChild(2).gameObject.SetActive(false);
+            roomPlayer[i].transform.GetChild(0).gameObject.SetActive(false);
         }
 
         //설정
@@ -274,11 +390,11 @@ public class PhotonManager : MonoBehaviourPunCallbacks
             //유저 닉네임 표시
             roomPlayer[i].transform.GetChild(1).gameObject.GetComponent<TextMeshProUGUI>().text = PhotonNetwork.PlayerList[i].NickName;
             //유저 이미지 표시
-            roomPlayer[i].transform.GetChild(2).gameObject.SetActive(true);
+            roomPlayer[i].transform.GetChild(0).gameObject.SetActive(true);
         }
 
         //방에 4명이면 게임시작 버튼 활성화
-        if (PhotonNetwork.PlayerList.Length == 4)
+        if (PhotonNetwork.PlayerList.Length == 2)
         {
             GameObject.Find("GameStartButton").gameObject.GetComponent<Button>().interactable = true;
         }
@@ -294,5 +410,39 @@ public class PhotonManager : MonoBehaviourPunCallbacks
     public void NickNameChange()
     {
         PhotonNetwork.NickName = userIdText.text;
+    }
+
+    //LoadLevel 함수 호출시 자동으로 호출되는 함수
+    private void OnLevelWasLoaded(int level)
+    {
+        //level=1 -> 게임 씬임
+        if (level == 1)
+        {
+            InstantiatePlayer();
+        }
+       
+    }
+
+
+    //캐릭터 생성
+    public void InstantiatePlayer()
+    {
+        //플레이어 넘버에 따라 다른 캐릭터 생성
+        if (PhotonNetwork.PlayerList[0].NickName == PhotonNetwork.NickName)
+        {
+            PhotonNetwork.Instantiate("Prefabs/Player/Badger_Jasper", new Vector3(-5, 1, -5), Quaternion.identity, 0);
+        }
+        else if (PhotonNetwork.PlayerList[1].NickName == PhotonNetwork.NickName)
+        {
+            PhotonNetwork.Instantiate("Prefabs/Player/Frog_Shanks", new Vector3(-2, 1, -5), Quaternion.identity, 0);
+        }
+        else if (PhotonNetwork.PlayerList[2].NickName == PhotonNetwork.NickName)
+        {
+            PhotonNetwork.Instantiate("Prefabs/Player/Panda_Apple", new Vector3(2, 1, -5), Quaternion.identity, 0);
+        }
+        else if (PhotonNetwork.PlayerList[3].NickName == PhotonNetwork.NickName)
+        {
+            PhotonNetwork.Instantiate("Prefabs/Player/Rabbit_Sydney", new Vector3(5, 1, -5), Quaternion.identity, 0);
+        }
     }
 }

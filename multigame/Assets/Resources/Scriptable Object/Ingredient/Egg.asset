@@ -15,4 +15,4 @@ MonoBehaviour:
   ingredientName: Egg
   price: 20
   ingredientType: 1
-  img: {fileID: 2800000, guid: 98ba2dd5f37e35449a3a30271794be88, type: 3}
+  img: {fileID: 2800000, guid: b5f20828d4eaf26418c882eb2dfcdcee, type: 3}
