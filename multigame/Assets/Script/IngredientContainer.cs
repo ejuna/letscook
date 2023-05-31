@@ -13,23 +13,43 @@ public class IngredientContainer : MonoBehaviour
     public GameObject uiContainer;
     public GameObject[] ingredientObject;
     public Transform[] pos;
+
+    private bool isActive;
+    MainController mainController;
+
     void Start()
     {
+        isActive = false;
         uiContainer.SetActive(false);
+        mainController = FindObjectOfType<MainController>();
     }
 
-    public void Enter()
+    public void enter()
     {
-        uiContainer.SetActive(true);
+        isActive = !isActive;
+        uiContainer.SetActive(isActive);
+        if (isActive && mainController != null)
+        {
+            mainController.freeze();
+        }
+        else if (!isActive && mainController != null)
+        {
+            mainController.unfreeze();
+        }
     }
-    public void Exit()
+    public void exit()
     {
+        isActive = false;
         uiContainer.SetActive(false);
+        if (mainController != null)
+        {
+            mainController.unfreeze();
+        }
     }
-    public void getIngredient(int index)
+    public void getIngredient(int index) // 재료오브젝트 생성
     {
-        Vector3 newPosition = pos[index].position + new Vector3(0f, 1f, 0f); // y축 값을 1만큼 올림
+        Vector3 newPosition = pos[index].position + new Vector3(0f, 1f, 0f);
         Instantiate(ingredientObject[index], newPosition, pos[index].rotation);
-        Exit();
+        exit();
     }
 }
