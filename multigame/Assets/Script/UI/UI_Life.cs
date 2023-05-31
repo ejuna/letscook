@@ -33,9 +33,9 @@ public class UI_Life : MonoBehaviour
     }
     public void resetLife()
     {
-        if (Managers.Life.getLife() < Constants.MAX_LIFE)
+        if (Managers.Life.life < Constants.MAX_LIFE)
         {
-            for (int i = Managers.Life.getLife(); i < Constants.MAX_LIFE; i++)
+            for (int i = Managers.Life.life; i < Constants.MAX_LIFE; i++)
             {
                 GameObject life = Managers.Resource.Instantiate("life");
                 life.transform.SetParent(transform);

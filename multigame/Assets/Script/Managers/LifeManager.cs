@@ -6,7 +6,7 @@ using UnityEngine;
 public class LifeManager
 {
     
-    private int life;
+    public int life { get; set; }
 
     public Action minusLifeAction = null;
     public Action resetLifeAction = null;
@@ -15,9 +15,6 @@ public class LifeManager
         life = Constants.MAX_LIFE;
         resetLifeAction();
     }
-  public int getLife(){
-    return life;
-  }
 
   public bool lifeIncrease(){
     if(life == Constants.MAX_LIFE)

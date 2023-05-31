@@ -54,7 +54,7 @@ public class EventManager
         {
             //gameClear();
         }
-        if (Managers.Life.getLife() <= 0)
+        if (Managers.Life.life <= 0)
         {
             //gameOver();
         }
