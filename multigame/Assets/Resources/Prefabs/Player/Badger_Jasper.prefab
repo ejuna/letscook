@@ -3147,7 +3147,7 @@ GameObject:
   - component: {fileID: 6654196314338824256}
   m_Layer: 0
   m_Name: Badger_Jasper
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3233,7 +3233,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 5
-  character: {fileID: 7161398377384540658}
+  Player: {fileID: 7161398377384540658}
   GameObject: {fileID: 2326655032877469000}
 --- !u!114 &2848814957975292476
 MonoBehaviour:

@@ -319,7 +319,7 @@ GameObject:
   - component: {fileID: 8000371788559321666}
   m_Layer: 0
   m_Name: Rabbit_Sydney
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -405,7 +405,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 5
-  character: {fileID: 7542437552614274657}
+  Player: {fileID: 7542437552614274657}
   GameObject: {fileID: 8172287454394528946}
 --- !u!114 &5166856693331493545
 MonoBehaviour:

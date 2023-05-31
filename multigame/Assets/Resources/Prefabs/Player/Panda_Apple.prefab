@@ -2933,7 +2933,7 @@ GameObject:
   - component: {fileID: 5695625064760126270}
   m_Layer: 0
   m_Name: Panda_Apple
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3019,7 +3019,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 5
-  character: {fileID: 6978154041678091849}
+  Player: {fileID: 6978154041678091849}
   GameObject: {fileID: 3925464562995590063}
 --- !u!114 &8545224259211698949
 MonoBehaviour:

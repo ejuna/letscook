@@ -2562,7 +2562,7 @@ GameObject:
   - component: {fileID: 8332686337805388394}
   m_Layer: 0
   m_Name: Frog_Shanks
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2648,7 +2648,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 5
-  character: {fileID: 5699635284955431375}
+  Player: {fileID: 5699635284955431375}
   GameObject: {fileID: 718537346458356695}
 --- !u!114 &5614877497704862510
 MonoBehaviour:
