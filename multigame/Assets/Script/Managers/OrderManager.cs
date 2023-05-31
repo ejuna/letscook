@@ -7,17 +7,29 @@ public class OrderManager
   private Queue<Order> orderList;
   public List<FoodData> allFoods=new List<FoodData>();//게임 프리팹 넣기?
   public List<FoodData> todayFoods=new List<FoodData>();
+
+  public bool isDestroy { get; set; }
   public int complete { get; set; }
   public int totalComplete{ get; set; }
+
   private const float DEFALT_TIME = 20.0f;
-  static bool isInit = false;
+
+  private static bool isInit = false;
+  private float timer;
 
 
   public OrderManager(){
-
+    timer = 0f;
   }
 
   public void OnUpdate(){
+    timer += Time.deltaTime;
+    if (timer >= 15f)
+    {
+      timer = 0f;
+      Order order = createOrder();
+      order.Recipe.onDisplay();
+    }
 
   }
 
@@ -38,14 +50,15 @@ public class OrderManager
       createTodaysOrder(30, 100);
       Debug.Log("초기화 완료");
       isInit = true;
+      isDestroy = false;
     }
   }
 
-  public void DateUpdate(int day,int fame){
+  public void DateUpdate(){
     orderList.Clear();
     todayFoods.Clear();
     complete = 0;
-    createTodaysOrder(day, fame);
+    createTodaysOrder(Managers.Date.day, Managers.Fame.fame);
   }
 
 
@@ -98,8 +111,8 @@ public class OrderManager
       int rand = Random.Range(0, todayFoods.Count);
       Order order = new Order(todayFoods[rand], DEFALT_TIME);
       orderList.Enqueue(order);
-    Debug.Log(order.Food.FoodName);
-    return order;
+      Debug.Log(order.Food.FoodName);
+      return order;
   }
 
     public Order createOrder(int time)
@@ -109,7 +122,7 @@ public class OrderManager
       orderList.Enqueue(order);
       Debug.Log(order.Food.FoodName);
       return order;
-  }
+    }
 
 
   
@@ -199,6 +212,7 @@ public class OrderManager
       return false;
     }
     orderList.Dequeue();
+    isDestroy = true;
     return true;
   }
 
