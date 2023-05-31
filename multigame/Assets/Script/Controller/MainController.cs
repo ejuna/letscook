@@ -51,58 +51,60 @@ public class MainController : MonoBehaviour
         //============이준하 수정=============//
         if (pv.IsMine)
         //====================================//
-        if ( !isFreeze )
         {
-            // 이동
-            hAxis = Input.GetAxisRaw("Horizontal");
-            vAxis = Input.GetAxisRaw("Vertical");
-
-
-            moveVec = new Vector3(hAxis, 0, vAxis).normalized;
-
-            transform.position += moveVec * speed * Time.deltaTime;
-
-            animator.SetBool("isWalking", moveVec != Vector3.zero);
-
-            transform.LookAt(transform.position + moveVec);
-        }
-        // item 들고 내리기
-        if (Input.GetKeyDown(KeyCode.LeftControl))
-        {
-            if (!isPicking)
+            if (!isFreeze)
             {
-                interactingObject = findInteractableObject();
-                if (interactingObject != null && interactingObject.CompareTag("Pickup"))
-                {
-                    interactingRigidbody = interactingObject.GetComponent<Rigidbody>();
-                    interactingRigidbody.isKinematic = true;
+                // 이동
+                hAxis = Input.GetAxisRaw("Horizontal");
+                vAxis = Input.GetAxisRaw("Vertical");
 
-                    interactingObject.transform.SetParent(GameObject);
-                    Collider ioc = interactingObject.GetComponent<Collider>();
-                    ioc.isTrigger = true;
-                    interactingObject.transform.localPosition = Vector3.zero;
-                    isPicking = true; // 들고 있는지 아닌지 체크
-                    animator.SetBool("isPicking", true); // 애니메이션에서 위의 isPicking과 다름
+
+                moveVec = new Vector3(hAxis, 0, vAxis).normalized;
+
+                transform.position += moveVec * speed * Time.deltaTime;
+
+                animator.SetBool("isWalking", moveVec != Vector3.zero);
+
+                transform.LookAt(transform.position + moveVec);
+            }
+            // item 들고 내리기
+            if (Input.GetKeyDown(KeyCode.LeftControl))
+            {
+                if (!isPicking)
+                {
+                    interactingObject = findInteractableObject();
+                    if (interactingObject != null && interactingObject.CompareTag("Pickup"))
+                    {
+                        interactingRigidbody = interactingObject.GetComponent<Rigidbody>();
+                        interactingRigidbody.isKinematic = true;
+
+                        interactingObject.transform.SetParent(GameObject);
+                        Collider ioc = interactingObject.GetComponent<Collider>();
+                        ioc.isTrigger = true;
+                        interactingObject.transform.localPosition = Vector3.zero;
+                        isPicking = true; // 들고 있는지 아닌지 체크
+                        animator.SetBool("isPicking", true); // 애니메이션에서 위의 isPicking과 다름
+                    }
+                }
+                else if (isPicking)
+                {
+                    drop();
                 }
             }
-            else if (isPicking)
+            // 재료 컨테이너 UI 생성, 삭제
+            if (Input.GetKeyDown(KeyCode.LeftAlt))
             {
-                drop();
+                interactingContainer = findInteractableContainer();
+                if (interactingContainer != null && interactingContainer.CompareTag("Container"))
+                {
+                    IngredientContainer ic = interactingContainer.GetComponent<IngredientContainer>();
+                    ic.enter();
+                }
             }
-        }
-        // 재료 컨테이너 UI 생성, 삭제
-        if (Input.GetKeyDown(KeyCode.LeftAlt))
-        {
-            interactingContainer = findInteractableContainer();
-            if (interactingContainer != null && interactingContainer.CompareTag("Container"))
+            if (Input.GetKeyDown(KeyCode.Escape))
             {
-                IngredientContainer ic = interactingContainer.GetComponent<IngredientContainer>();
-                ic.enter();
+                exit();
             }
-        }
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            exit();
         }
     }
 
