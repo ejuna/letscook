@@ -3020,7 +3020,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 5
-  Player: {fileID: 0}
+  Player: {fileID: 7898141059300454279}
   GameObject: {fileID: 7362026519178281560}
 --- !u!1 &7703548656897182347
 GameObject:

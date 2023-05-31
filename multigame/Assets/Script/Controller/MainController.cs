@@ -5,18 +5,18 @@ using UnityEngine;
 public class MainController : MonoBehaviour
 {
     public float speed;
-    float hAxis;
-    float vAxis;
     public Transform Player;
     public Transform GameObject;
 
     private GameObject interactingObject;
     private GameObject interactingContainer;
     private Rigidbody interactingRigidbody;
+
+    float hAxis;
+    float vAxis;
     bool isPicking;
-
+    bool isFreeze;
     Vector3 moveVec;
-
     Animator animator;
 
     void Awake()
@@ -26,27 +26,30 @@ public class MainController : MonoBehaviour
     void Start()
     {
         moveVec = Vector3.zero;
+        isFreeze = false;
     }
     void Update()
     {
-        // 이동
-        hAxis = Input.GetAxisRaw("Horizontal");
-        vAxis = Input.GetAxisRaw("Vertical");
-
-        moveVec = new Vector3(hAxis, 0, vAxis).normalized;
-
-        transform.position += moveVec * speed * Time.deltaTime;
-
-        animator.SetBool("isWalking", moveVec != Vector3.zero);
-
-        transform.LookAt(transform.position + moveVec);
-
-        // item 들고 내리기
-        if (Input.GetKeyDown(KeyCode.E))
+        if ( !isFreeze )
         {
-            interactingObject = findInteractableObject();
+            // 이동
+            hAxis = Input.GetAxisRaw("Horizontal");
+            vAxis = Input.GetAxisRaw("Vertical");
+
+            moveVec = new Vector3(hAxis, 0, vAxis).normalized;
+
+            transform.position += moveVec * speed * Time.deltaTime;
+
+            animator.SetBool("isWalking", moveVec != Vector3.zero);
+
+            transform.LookAt(transform.position + moveVec);
+        }
+        // item 들고 내리기
+        if (Input.GetKeyDown(KeyCode.LeftControl))
+        {
             if (!isPicking)
             {
+                interactingObject = findInteractableObject();
                 if (interactingObject != null && interactingObject.CompareTag("Pickup"))
                 {
                     interactingRigidbody = interactingObject.GetComponent<Rigidbody>();
@@ -66,7 +69,7 @@ public class MainController : MonoBehaviour
             }
         }
         // 재료 컨테이너 UI 생성, 삭제
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.LeftAlt))
         {
             interactingContainer = findInteractableContainer();
             if (interactingContainer != null && interactingContainer.CompareTag("Container"))
@@ -130,6 +133,17 @@ public class MainController : MonoBehaviour
         interactingObject = null;
         isPicking = false;
         animator.SetBool("isPicking", false);
+    }
+
+    public void freeze()
+    {
+        isFreeze = true;
+        animator.SetBool("isWalking", false);
+        animator.SetBool("isPicking", false);
+    }
+    public void unfreeze()
+    {
+        isFreeze = false;
     }
 
     public GameObject getInteractingObject()
