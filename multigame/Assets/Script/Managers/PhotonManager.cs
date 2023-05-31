@@ -237,27 +237,43 @@ public class PhotonManager : MonoBehaviourPunCallbacks
 
     //방 옵션 설정후 방만들기 버튼 클릭
     public void OnMakeRoomClick()
-    {
-        TargetMoneySetting();
-        TargetDaySetting();
+    { 
+        //방이름과 비밀번호 입력 했는지 체크
+        if (roomNameText.text != "" && roomPassword.text != "")
+        {
+            //목표 금액,일수 설정
+            TargetMoneySetting();
+            TargetDaySetting();
 
 
-        string roomNamePassword = roomNameText.text + "_" + roomPassword.text;
+            //룸 옵션 설정
+            string roomNamePassword = roomNameText.text + "_" + roomPassword.text;
 
-        RoomOptions ro = new RoomOptions();
-        ro.IsOpen = true;
-        ro.IsVisible = true;
-        ro.MaxPlayers = 4;
-        ro.CustomRoomProperties = new Hashtable() { { "m", targetMoney }, { "d", targetDay } };
-      
+            RoomOptions ro = new RoomOptions();
+            ro.IsOpen = true;
+            ro.IsVisible = true;
+            ro.MaxPlayers = 4;
+            ro.CustomRoomProperties = new Hashtable() { { "m", targetMoney }, { "d", targetDay } };
 
-        PhotonNetwork.CreateRoom(roomNamePassword, ro);
 
-        //방만들기 메뉴 설정 비활성화
-        GameObject.Find("Panel-CreateRoom").SetActive(false);
+            PhotonNetwork.CreateRoom(roomNamePassword, ro);
 
-        //다른 터치 방지벽 비활성화
-        GameObject.Find("Panel-BackGround").transform.Find("Blocker").gameObject.SetActive(false);
+            //방만들기 메뉴 설정 비활성화
+            GameObject.Find("Panel-CreateRoom").SetActive(false);
+
+            //다른 터치 방지벽 비활성화
+            GameObject.Find("Panel-BackGround").transform.Find("Blocker").gameObject.SetActive(false);
+        }
+        else
+        {
+            //방만들기 메뉴 설정 비활성화
+            GameObject.Find("Panel-CreateRoom").SetActive(false);
+
+            //방만들기 오류창 활성화
+            GameObject.Find("Panel-BackGround").transform.Find("Panel-CreateRoomError").gameObject.SetActive(true);
+        }
+
+        
     }
 
     //방 옵션 설정창 나가기
@@ -265,6 +281,16 @@ public class PhotonManager : MonoBehaviourPunCallbacks
     {
         //방 옵션 설정창 비활성화
         GameObject.Find("Panel-BackGround").transform.Find("Panel-CreateRoom").gameObject.SetActive(false);
+
+        //다른 터치 방지벽 비활성화
+        GameObject.Find("Panel-BackGround").transform.Find("Blocker").gameObject.SetActive(false);
+    }
+
+    //방만들기 오류창 나가기
+    public void CreateRoomErrorExitClick()
+    {
+        //방만들기 오류창 비활성화
+        GameObject.Find("Panel-BackGround").transform.Find("Panel-CreateRoomError").gameObject.SetActive(false);
 
         //다른 터치 방지벽 비활성화
         GameObject.Find("Panel-BackGround").transform.Find("Blocker").gameObject.SetActive(false);
