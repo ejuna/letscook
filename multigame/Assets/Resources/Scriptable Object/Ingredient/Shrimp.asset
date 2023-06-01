@@ -15,4 +15,4 @@ MonoBehaviour:
   ingredientName: Shrimp
   price: 20
   ingredientType: 1
-  img: {fileID: 2800000, guid: d5efb007e55bc8748883799d9055b6d9, type: 3}
+  img: {fileID: 2800000, guid: e964d07d673166b4f8d366c4b34de1d6, type: 3}

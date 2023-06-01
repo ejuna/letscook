@@ -26,12 +26,13 @@ public class EventManager
 
         isTodayGourmand = true;
         isTodayGroupGeuset = true;
-        isClera = true;
-        isGameOver = true;
 
-        //TEST
-        targetDate = int.MaxValue;
-        targetMoney = int.MaxValue;
+        //============이준하 수정=============//
+        GameObject obj = GameObject.Find("PhotonManager");
+
+        targetDate = obj.GetComponent<PhotonManager>().targetDay;
+        targetMoney = obj.GetComponent<PhotonManager>().targetMoney;
+        //====================================//
     }
 
 

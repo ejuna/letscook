@@ -1,3 +1,4 @@
+using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -44,9 +45,12 @@ public class Managers : MonoBehaviour
         Event.OnUpdate();
         Input.OnUpdate();
         Date.OnUpdate();
+        if(PhotonNetwork.IsMasterClient){
+          Orders.OnUpdate();
+        }
         
         if(Date.isChangeDay == true){ //날짜 바뀌면
-          Orders.DateUpdate(Date.day, Fame.fame);
+          Orders.DateUpdate();
           Date.isChangeDay = false;
         }
         
@@ -61,12 +65,34 @@ public class Managers : MonoBehaviour
             {
                 go = new GameObject { name = "@Managers"};
                 go.AddComponent<Managers>();
+                go.AddComponent<PhotonView>();
             }
             DontDestroyOnLoad(go);
             s_instance = go.GetComponent<Managers>();
         }
   }
+    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    {
+        if (stream.IsWriting)
+        {
+            // We own this player: send the others our data
+            stream.SendNext(Life.life);
+            stream.SendNext(Date.day);
+            stream.SendNext(Date.time);
+            stream.SendNext(Fame.fame);
+            stream.SendNext(Money.money);
+        }
+        else
+        {
+            // Network player, receive data
+            Life.life = (int)stream.ReceiveNext();
+            Date.day = (int)stream.ReceiveNext();
+            Date.time = (int)stream.ReceiveNext();
+            Fame.fame = (int)stream.ReceiveNext();
+            Money.money = (int)stream.ReceiveNext();
 
+        }
+    }
     public static void Clear()
     {
         Event.Clear();
