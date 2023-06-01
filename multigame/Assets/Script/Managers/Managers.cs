@@ -43,7 +43,9 @@ public class Managers : MonoBehaviour
         Event.OnUpdate();
         Input.OnUpdate();
         Date.OnUpdate();
-        Orders.OnUpdate();
+        if(PhotonNetwork.IsMasterClient){
+          Orders.OnUpdate();
+        }
         
         if(Date.isChangeDay == true){ //날짜 바뀌면
           Orders.DateUpdate();
