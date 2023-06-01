@@ -6,33 +6,65 @@ using UnityEngine.UI;
 
 public class OrderRecipe : MonoBehaviour
 {
-    private GameObject orderUI;
+    public GameObject orderUI;
     public GameObject OrderUI{ get { return orderUI; } }
-  // Update is called once per frame
+    public Slider timer;
+
+    public bool isCreate;
+    public int id;
+
 
   private void Awake()
   {
+
   }
 
   void Update()
-    {
-        
+  {
+    if(isCreate){
+      if (timer.value > 0.0f)
+      {
+        timer.value -= Time.deltaTime;
+      }
+      else
+      {
+        Managers.Orders.deleteOrder(id);
+      }
     }
+  }
 
   public void onDisplay(){
+    orderUI.SetActive(true);
+  }
+
+  public void onDisplayFirstOrder(){
+    Image image = orderUI.transform.Find("Image").GetComponent<Image>(); ;
+    image.color = new Color32(255,129,124,255);
 
   }
 
   public void deleteRecipe()
   {
+    isCreate = false;
     Destroy(orderUI);
   }
 
-  public void setRecipe(Order order,GameObject orderPrefab)
+
+  public OrderRecipe GetRecipe(Order order, GameObject orderPrefab, int id)
   {
+    orderUI = Instantiate(orderPrefab);
+    OrderRecipe recipe = orderUI.GetComponent<OrderRecipe>();
+    recipe.setRecipe(order, orderUI, id);
+    return recipe;
+  }
+
+
+  public void setRecipe(Order order,GameObject orderUI,int id)
+  {
+      this.id = id;
       Canvas canvas = GameObject.Find("Orders").GetComponent<Canvas>();
       int recipeSize = order.Food.Ingredients.Count;
-      orderUI = Instantiate(orderPrefab);
+      orderUI.name = id.ToString();
 
       //음식 설정
       TextMeshProUGUI foodText = orderUI.transform.Find("FoodName").GetComponent<TextMeshProUGUI>();
@@ -62,9 +94,13 @@ public class OrderRecipe : MonoBehaviour
       }
 
       //타임 설정
-      Slider timer = orderPrefab.GetComponentInChildren<Slider>();
+      timer = orderUI.GetComponentInChildren<Slider>();
       timer.maxValue = order.TimeLimit;
 
-    orderUI.transform.SetParent(canvas.transform);
+      orderUI.transform.SetParent(canvas.transform);
+
+      this.orderUI = orderUI;
+      orderUI.SetActive(false);
+      isCreate = true;
   }
 }
