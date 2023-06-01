@@ -38,7 +38,6 @@ public class EventManager
 
     public void OnUpdate()
       {
-
         //조건을 확인 하면서 미식가 이벤트 발생시킨다.
         if (Managers.Orders.complete == randOrderCountTrigger && isTodayGourmand)
         {
@@ -51,7 +50,7 @@ public class EventManager
               isTodayGroupGeuset = false;
         }
         //목표일짜 및 목표 금액 달성시 게임 클리어
-        if (Managers.Date.day == targetDate || Managers.Money.money >= targetMoney|| Managers.Life.getLife() <= 0)
+        if (Managers.Date.day == targetDate || Managers.Money.money >= targetMoney|| Managers.Life.life <= 0)
         {
             gameClear();
         }

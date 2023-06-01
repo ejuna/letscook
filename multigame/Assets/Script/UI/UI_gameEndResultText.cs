@@ -9,7 +9,7 @@ public class UI_gameEndResultText : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if (Managers.Life.getLife() <= 0)
+        if (Managers.Life.life <= 0)
         {
             tmp.text = "게임오버";
         }
