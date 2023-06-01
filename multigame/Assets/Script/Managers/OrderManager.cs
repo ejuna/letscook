@@ -4,11 +4,10 @@ using UnityEngine;
 
 public class OrderManager
 {
-  private Queue<Order> orderList;
+  private List<Order> orderList;
   public List<FoodData> allFoods=new List<FoodData>();//게임 프리팹 넣기?
   public List<FoodData> todayFoods=new List<FoodData>();
 
-  public bool isDestroy { get; set; }
   public int complete { get; set; }
   public int totalComplete{ get; set; }
 
@@ -17,6 +16,7 @@ public class OrderManager
   private static bool isInit = false;
   private float timer;
 
+  private int displayCount = 0;
 
   public OrderManager(){
     timer = 0f;
@@ -24,13 +24,21 @@ public class OrderManager
 
   public void OnUpdate(){
     timer += Time.deltaTime;
-    if (timer >= 15f)
+
+    if (timer >= 5f)
     {
       timer = 0f;
-      Order order = createOrder();
-      order.Recipe.onDisplay();
+      createOrder();
     }
 
+    if(displayCount < 5){
+      if(displayCount < orderList.Count){
+        orderList[displayCount++].Recipe.onDisplay();
+      }
+      if(0 < orderList.Count){
+        orderList[0].Recipe.onDisplayFirstOrder();
+      }
+    }
   }
 
   private void getAllFoodList() {
@@ -44,13 +52,12 @@ public class OrderManager
   
   public void init(){
     if(!isInit){
-      orderList = new Queue<Order>();
+      orderList = new List<Order>();
       getAllFoodList();
       complete = 0;
       createTodaysOrder(30, 100);
       Debug.Log("초기화 완료");
       isInit = true;
-      isDestroy = false;
     }
   }
 
@@ -107,21 +114,19 @@ public class OrderManager
   }
 
 
-    public Order createOrder(){
+    public void createOrder(){
       int rand = Random.Range(0, todayFoods.Count);
       Order order = new Order(todayFoods[rand], DEFALT_TIME);
-      orderList.Enqueue(order);
+      orderList.Add(order);
       Debug.Log(order.Food.FoodName);
-      return order;
   }
 
-    public Order createOrder(int time)
+    public void createOrder(int time)
     {
       int rand = Random.Range(0, todayFoods.Count);
       Order order = new Order(todayFoods[rand], time);
-      orderList.Enqueue(order);
+      orderList.Add(order);
       Debug.Log(order.Food.FoodName);
-      return order;
     }
 
 
@@ -146,7 +151,7 @@ public class OrderManager
       return false;
     }
 
-    FoodData order_food = orderList.Dequeue().Food;
+    FoodData order_food = orderList[0].Food;
     List<IngredientData> user_ingredients = userFood.Ingredients;
     List<IngredientData> order_ingredients = order_food.Ingredients;
     return isSameRecipe(user_ingredients, order_ingredients);
@@ -211,11 +216,25 @@ public class OrderManager
     if(orderList.Count == 0){
       return false;
     }
-    orderList.Dequeue();
-    isDestroy = true;
+    orderList[0].deleteRecipe();
+    orderList.Remove(orderList[0]);
+    displayCount--;
     return true;
   }
 
+
+  public bool deleteOrder(int id)
+  {
+    for(int i=0;i<orderList.Count;i++){
+      if(orderList[i].Id == id){
+        orderList[i].deleteRecipe();
+        orderList.Remove(orderList[i]);
+        displayCount--;
+        return true;
+      }
+    }
+    return false;
+  }
 
   public bool isOrders()
     {

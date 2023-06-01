@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class Order
 {
+  private static int count = 0;
+  private int id;
+  public int Id{ get { return id; } }
+
   private FoodData food;
   public FoodData Food{ get { return food; } }
 
@@ -15,14 +19,17 @@ public class Order
   public OrderRecipe Recipe{ get { return recipe; } }
   
 
-
   public Order(FoodData food,float timeLimit){
     this.food = food;
     this.timeLimit = timeLimit;
+    this.id = count;
+    count++;
 
     prefab = setPrefab();
-    recipe = prefab.AddComponent<OrderRecipe>();
-    recipe.setRecipe(this,prefab);
+    recipe = prefab.GetComponent<OrderRecipe>();
+//이건 프리팹에서 불러온 스크립트. 
+    recipe = recipe.GetRecipe(this,prefab,id);
+//여기선 OrderUI를 설정하고 있고, 나는 OrderUI 스크립트를 바꿔야지,,
   }
 
 
