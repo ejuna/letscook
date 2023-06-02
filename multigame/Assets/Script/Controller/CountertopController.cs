@@ -1,23 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class CountertopController : MonoBehaviour
 {
-    GameObject player;
-    GameObject hand;
-    PlayerController playerController;
-
+    List<GameObject> ingres;
     bool isPlayerEnter;
     // Start is called before the first frame update
     void Start()
     {
-        player = GameObject.FindGameObjectWithTag("Player");
-        hand = GameObject.FindGameObjectWithTag("hand");
         Managers.Input.KeyAction -= OnKeyboard;
         Managers.Input.KeyAction += OnKeyboard;
-
-        playerController = player.GetComponent<PlayerController>();
     }
 
     // Update is called once per frame
@@ -27,19 +21,10 @@ public class CountertopController : MonoBehaviour
     }
     void OnKeyboard()
     {
-        //물건 올리기
-        if (Input.GetKey(KeyCode.C) && isPlayerEnter && playerController.isPicking)
-        {
-            GameObject go = hand.GetComponentInChildren<Rigidbody>().gameObject;
-            ObjectController objectController = go.GetComponent<ObjectController>();
-            // 플레이어 손에 있는 물건을 연결은 끈고(dorp())
-            playerController.drop();
-            //그 물건을 이 물건 위에 올린다.
-            objectController.setParent(transform);
-        }
         //조합하기
         if (Input.GetKey(KeyCode.V) && isPlayerEnter)
         {
+            List<FoodData> tempAllFood = Managers.Orders.allFoods.ToList();
             //Managers.Orders 체크래시피 참이면 실행 
             //자식을 불러서 usetfood를 생성
             //userfood라는 클래스가 생성이 돼고 그 클래스들을 넘겨준다.
@@ -48,18 +33,37 @@ public class CountertopController : MonoBehaviour
         }
     }
 
+    public void setEquip(GameObject gameObject, bool isEquip)
+    {
+        Collider[] gameObjectColliders = gameObject.GetComponents<Collider>();
+        Rigidbody gameObjectRigidbody = gameObject.GetComponent<Rigidbody>();
+
+        foreach (Collider itemcollider in gameObjectColliders)
+        {
+            itemcollider.enabled = !isEquip;
+        }
+        gameObjectRigidbody.isKinematic = isEquip;
+    }
 
 
     void OnTriggerEnter(Collider other)
     {
-        if (player == other.gameObject)
+        if (other.gameObject.tag=="Player")
         {
             isPlayerEnter = true;
+        }
+        if (other.gameObject.tag == "Pickup")
+        {
+            other.transform.SetParent(transform, false);
+            other.transform.localPosition = Vector3.zero;
+            other.transform.rotation = new Quaternion(0, 1, 0, 0);
+            ingres.Add(other.gameObject);
+            setEquip(other.gameObject, true);
         }
     }
     void OnTriggerExit(Collider other)
     {
-        if (player == other.gameObject)
+        if (other.gameObject.tag == "Player")
         {
             isPlayerEnter = false;
         }
