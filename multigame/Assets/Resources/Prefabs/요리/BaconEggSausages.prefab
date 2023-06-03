@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3967253707500056658}
   - component: {fileID: -7223651519098213646}
   m_Layer: 0
-  m_Name: bacon_egg_sausage
+  m_Name: BaconEggSausages
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
