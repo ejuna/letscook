@@ -5616,8 +5616,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: "\uC77C \uC77C \uC815 \uC0B0"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 14ec168794b9c8a449ad11e4de7a590f, type: 2}
-  m_sharedMaterial: {fileID: 6147147580115920364, guid: 14ec168794b9c8a449ad11e4de7a590f, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 22d8312888208514d97f28999a91a751, type: 2}
+  m_sharedMaterial: {fileID: -2862738951578292844, guid: 22d8312888208514d97f28999a91a751, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -5641,13 +5641,13 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 90
-  m_fontSizeBase: 90
+  m_fontSize: 100
+  m_fontSizeBase: 100
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 1
+  m_fontStyle: 0
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
