@@ -13,13 +13,15 @@ public class Ingredient : MonoBehaviour
     public int Price { get; set; }
     [SerializeField]
     public IngredientType Type { get; set; }
+    [SerializeField]
+    public GameObject PrepIngredient { get; set; }
 
-
-  public void Start()
+    public void Start()
   {
     ingredientName = ingredientData.IngredientName;
     Price = ingredientData.Price;
     Type = ingredientData.IngredientType;
+    PrepIngredient = ingredientData.PrepIngredient;
   }
 
 

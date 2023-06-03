@@ -20,6 +20,10 @@ public class IngredientData : ScriptableObject
 
   [SerializeField]
   private Texture2D img;
-  public Texture2D Img { get { return img; } }
+  public Texture2D Img { get { return img;} }
+
+  [SerializeField]
+  private GameObject prepIngredient;
+  public GameObject PrepIngredient { get { return prepIngredient; } }
 
 }
