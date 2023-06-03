@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class ProcessController1 : MonoBehaviour
 {
@@ -11,6 +12,7 @@ public class ProcessController1 : MonoBehaviour
     GameObject cooker;
     GameObject player;
     bool isPlayerEnter;
+    public GameObject effect;
 
     void Start()
     {
@@ -33,12 +35,16 @@ public class ProcessController1 : MonoBehaviour
         Ingredient ingredient = interactingObject.GetComponent<Ingredient>();
         IngredientData ingredientData = ingredient.ingredientData;
         GameObject prepIngredient = ingredientData.PrepIngredient;
+
+        Vector3 position = pos.position + new Vector3(1f, 3f, 0f);
+        GameObject fxObject = Instantiate(effect, position, Quaternion.identity);
+        fxObject.transform.SetParent(effect.transform);
+        Destroy(fxObject, 4);
+
         mainController.drop();
         Destroy(interactingObject);
+        yield return new WaitForSeconds(4f); // 5초 대기
 
-        yield return new WaitForSeconds(2f); // 2초 대기
-
-        Vector3 position = pos.position + new Vector3(0f, 3f, 0f);
         GameObject prepObject = Instantiate(prepIngredient, position, Quaternion.identity);
 
         throwObject(prepObject);
