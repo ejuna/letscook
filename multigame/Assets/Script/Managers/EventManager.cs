@@ -96,4 +96,5 @@ public class EventManager
     {
         Managers.Scene.LoadScene(Define.Scene.GameClear);
     }
+    public void Clear() { }
 }
