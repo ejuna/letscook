@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
+using static UnityEditor.PlayerSettings;
 
 public class CountertopController : MonoBehaviour
 {
@@ -67,13 +68,21 @@ public class CountertopController : MonoBehaviour
                 Destroy(transform.GetChild(i).gameObject);
             }
             //음식 생성
+            GameObject go;
             if (tempAllFood.Count==1) {
-                Managers.Resource.Instantiate("요리/" + tempAllFood[0].name,transform);
+                 go=Managers.Resource.Instantiate("요리/" + tempAllFood[0].name);
             }
             else//실패 음식
             {
-                Managers.Resource.Instantiate("요리/Clinker", transform);
+                go=Managers.Resource.Instantiate("요리/Clinker");
             }
+            Vector3 position = transform.position + new Vector3(0f, 1f, 0f);
+            go.transform.position = position;
+            go.tag = "Pickup";
+            go.AddComponent<Rigidbody>();
+            go.AddComponent<BoxCollider>();
+            go.GetComponent<BoxCollider>().size = new Vector3(1f, 1.2f, 1f);
+            go.GetComponent<BoxCollider>().center = new Vector3(0, go.GetComponent<BoxCollider>().size.y/2,0);
         }
     }
 
@@ -98,7 +107,7 @@ public class CountertopController : MonoBehaviour
         }
         if (other.gameObject.tag == "Pickup")
         {
-            ingres.Add(other.gameObject.name);
+            ingres.Add(other.gameObject.GetComponent<Ingredient>().ingredientName);
 
             other.transform.SetParent(transform, false);
             other.transform.localPosition = Vector3.zero;
