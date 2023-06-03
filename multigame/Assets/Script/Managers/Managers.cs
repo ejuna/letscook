@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Managers : MonoBehaviour
+public class Managers : MonoBehaviourPun, IPunObservable
 {
     static Managers s_instance;
     public static Managers Instance { get { init(); return s_instance; } }
@@ -81,6 +81,8 @@ public class Managers : MonoBehaviour
             stream.SendNext(Date.time);
             stream.SendNext(Fame.fame);
             stream.SendNext(Money.money);
+
+            Debug.Log("전송");
         }
         else
         {
@@ -90,6 +92,8 @@ public class Managers : MonoBehaviour
             Date.time = (int)stream.ReceiveNext();
             Fame.fame = (int)stream.ReceiveNext();
             Money.money = (int)stream.ReceiveNext();
+
+            Debug.Log("수신");
 
         }
     }

@@ -26,18 +26,21 @@ public class MainController : MonoBehaviour
     Animator animator;
 
 
-    //============이준하 수정=============//
+    
     private PhotonView pv;
-    //====================================//
+   
 
 
     void Awake()
     {
         animator = GetComponent<Animator>();
 
-        //============이준하 수정=============//
+        
         pv = GetComponent<PhotonView>();
-        //====================================//
+
+        //1인칭 카메라 비활성화
+        transform.Find("SubCamera").GetComponent<Camera>().enabled = false;
+        
 
 
     }
@@ -48,9 +51,9 @@ public class MainController : MonoBehaviour
     }
     void Update()
     {
-        //============이준하 수정=============//
+        
         if (pv.IsMine)
-        //====================================//
+        
         {
             if (!isFreeze)
             {
@@ -104,6 +107,18 @@ public class MainController : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.Escape))
             {
                 exit();
+            }
+            // 1인칭 카메라 설정
+            if (Input.GetKeyDown(KeyCode.LeftShift))
+            {
+                if(transform.Find("SubCamera").GetComponent<Camera>().enabled == true)
+                {
+                    transform.Find("SubCamera").GetComponent<Camera>().enabled = false;
+                }
+                else
+                {
+                    transform.Find("SubCamera").GetComponent<Camera>().enabled = true;
+                }
             }
         }
     }

@@ -13,6 +13,8 @@ public class PhotonManager : MonoBehaviourPunCallbacks
     private string gameVersion = "1"; // 게임 버전
     private string userId; //유저 닉네임
 
+    public Button RoadGame;  //로비접속버튼
+
     public TMP_InputField userIdText; //유저 입력 닉네임
     public TMP_InputField roomNameText; //방 이름
     public TMP_InputField roomPassword; //방 비밀번호
@@ -50,6 +52,12 @@ public class PhotonManager : MonoBehaviourPunCallbacks
         userIdText.text = userId;
         PhotonNetwork.NickName = userId;
         Screen.SetResolution(1920, 1080, false);
+    }
+
+    //로드게임버튼 클릭
+    public void RoadGameButtonClick()
+    {
+        GameObject.Find("Title").gameObject.SetActive(false);
     }
 
     //포톤 마스터 서버에 접속
@@ -394,7 +402,7 @@ public class PhotonManager : MonoBehaviourPunCallbacks
         }
 
         //방에 4명이면 게임시작 버튼 활성화
-        if (PhotonNetwork.PlayerList.Length == 2)
+        if (PhotonNetwork.PlayerList.Length == 1)
         {
             GameObject.Find("GameStartButton").gameObject.GetComponent<Button>().interactable = true;
         }
