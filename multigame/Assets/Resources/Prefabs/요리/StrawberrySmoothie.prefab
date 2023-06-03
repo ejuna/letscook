@@ -94,7 +94,7 @@ GameObject:
   - component: {fileID: 3865293006429862566}
   - component: {fileID: -5187433721867662516}
   m_Layer: 0
-  m_Name: m_recipe_strawberrySmoothie_01
+  m_Name: StrawberrySmoothie
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

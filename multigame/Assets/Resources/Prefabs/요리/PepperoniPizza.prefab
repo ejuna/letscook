@@ -260,7 +260,7 @@ GameObject:
   - component: {fileID: 2471155253839928771}
   - component: {fileID: 778481129434570063}
   m_Layer: 0
-  m_Name: "\uD398\uD37C\uB85C\uB2C8\uD53C\uC790"
+  m_Name: PepperoniPizza
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

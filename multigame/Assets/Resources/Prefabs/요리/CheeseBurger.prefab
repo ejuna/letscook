@@ -177,7 +177,7 @@ GameObject:
   - component: {fileID: 2384125319205432141}
   - component: {fileID: 530503115135107123}
   m_Layer: 0
-  m_Name: "\uCE58\uC988\uD584\uBC84\uAC70"
+  m_Name: CheeseBurger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -31,15 +31,20 @@ public class CountertopController : MonoBehaviour
 
             List<FoodData> tempAllFood = Managers.Orders.allFoods.ToList();
             List<FoodData> produceFood = new List<FoodData>();
-
+            //해당 재료로 만들수 있는 요리찾기
+            //들어온 재료와 음식중 해당 재료를 가진 음식 찾기
+            //들어온 재료 반복문
             ingres.ForEach(food =>
             {
                 produceFood.Clear();
+                //기존요리들 전부 검색
                 for (int i = 0; i< tempAllFood.Count;i++)
                 {
-                    bool isSame=false;
+                    bool isSame=false;//무한루프 방지
+                    //들어온 재료 보다 재료많은 요리 거르기
                     if(tempAllFood[i].Ingredients.Count<= ingres.Count)
                     {
+                        //기존음식의 재료중 같은 거 있는지 찾기
                         tempAllFood[i].Ingredients.ForEach(IngredientData =>
                         {
                             //Debug.Log(IngredientData.name);
@@ -47,34 +52,28 @@ public class CountertopController : MonoBehaviour
                             {
                                 isSame = true;
                             }
-                            if (loopNum++ > 10000)
-                                throw new Exception("Infinite Loop");
+                            if (loopNum++ > 10000) throw new Exception("Infinite Loop"); //무한루프방지
                         });
                     }
-                    if (isSame) produceFood.Add(tempAllFood[i]);
+                    if (isSame) produceFood.Add(tempAllFood[i]);//같은거를 모은 리스트에 추가
                     
                 }
                 tempAllFood.Clear();
                 tempAllFood = produceFood.ToList();
             });
-
+            //재료 삭제하기
             for(int i = 1 ; i< transform.childCount; i++)
             {
                 Destroy(transform.GetChild(i).gameObject);
             }
-
+            //음식 생성
             if (tempAllFood.Count==1) {
-                Managers.Resource.Instantiate("요리/" + tempAllFood[0].name);
+                Managers.Resource.Instantiate("요리/" + tempAllFood[0].name,transform);
             }
-            else
+            else//실패 음식
             {
-                Managers.Resource.Instantiate("요리/Clinker");
+                Managers.Resource.Instantiate("요리/Clinker", transform);
             }
-            //Managers.Orders 체크래시피 참이면 실행 
-            //자식을 불러서 usetfood를 생성
-            //userfood라는 클래스가 생성이 돼고 그 클래스들을 넘겨준다.
-
-            //있으면 위에 있는 물건들을 전부 제거하고 조리법에 따라 물건을 던진다.
         }
     }
 

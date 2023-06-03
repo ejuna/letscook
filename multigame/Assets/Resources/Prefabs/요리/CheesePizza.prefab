@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5194399249586696934}
   - component: {fileID: -8516129921153781464}
   m_Layer: 0
-  m_Name: "\uCE58\uC988\uD53C\uC790"
+  m_Name: CheesePizza
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
