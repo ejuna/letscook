@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -29,17 +30,18 @@ public class ProcessController1 : MonoBehaviour
     IEnumerator CookAndThrowObject(GameObject interactingObject)
     {
         // 재료를 요리하는 동작 수행
-        Rigidbody interactingRigidbody = interactingObject.GetComponent<Rigidbody>();
-        interactingRigidbody.isKinematic = true;
-        interactingObject.transform.SetParent(pos);
-        interactingObject.transform.localPosition = new Vector3(0, 1f, 0);
-        interactingObject.GetComponent<Collider>().isTrigger = true;
+        Ingredient ingredient = interactingObject.GetComponent<Ingredient>();
+        IngredientData ingredientData = ingredient.ingredientData;
+        GameObject prepIngredient = ingredientData.PrepIngredient;
         mainController.drop();
+        Destroy(interactingObject);
 
         yield return new WaitForSeconds(2f); // 2초 대기
 
-        // 재료를 던지는 동작 수행
-        throwObject(interactingObject);
+        Vector3 position = pos.position + new Vector3(0f, 3f, 0f);
+        GameObject prepObject = Instantiate(prepIngredient, position, Quaternion.identity);
+
+        throwObject(prepObject);
         mainController.unfreeze();
     }
 

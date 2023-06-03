@@ -16,3 +16,4 @@ MonoBehaviour:
   price: 5
   ingredientType: 2
   img: {fileID: 2800000, guid: 54ebdc751f634cd43896369b3d8cdfbf, type: 3}
+  prepIngredient: {fileID: 2405608072554806658, guid: 7b2c830a14135444e8e5d1de1187ddce, type: 3}

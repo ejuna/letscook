@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.18028352, g: 0.22571376, b: 0.30692244, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2936,7 +2936,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 34c7097ebe44ce74aba48108c1880d3b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  canvas: {fileID: 1763762720}
 --- !u!1001 &729963656
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7893,6 +7892,26 @@ PrefabInstance:
       propertyPath: pos.Array.data[7]
       value: 
       objectReference: {fileID: 1141053992}
+    - target: {fileID: 1141053994, guid: cdd3a65306f75994d813f71d4e2b3db1, type: 3}
+      propertyPath: ingredientObject.Array.data[0]
+      value: 
+      objectReference: {fileID: 6128091015349967257, guid: 3fe3e59d817f9f54a959c8a3766722e9, type: 3}
+    - target: {fileID: 1141053994, guid: cdd3a65306f75994d813f71d4e2b3db1, type: 3}
+      propertyPath: ingredientObject.Array.data[1]
+      value: 
+      objectReference: {fileID: 5065167134025449229, guid: 5580ab3e49dbe844582e4ecb584da228, type: 3}
+    - target: {fileID: 1141053994, guid: cdd3a65306f75994d813f71d4e2b3db1, type: 3}
+      propertyPath: ingredientObject.Array.data[2]
+      value: 
+      objectReference: {fileID: 5112099507746756871, guid: 28808c6e35acace4e85be2426306487f, type: 3}
+    - target: {fileID: 1141053994, guid: cdd3a65306f75994d813f71d4e2b3db1, type: 3}
+      propertyPath: ingredientObject.Array.data[3]
+      value: 
+      objectReference: {fileID: 8187653366843030268, guid: a6859692b097a604f9db6e37dd741236, type: 3}
+    - target: {fileID: 1141053994, guid: cdd3a65306f75994d813f71d4e2b3db1, type: 3}
+      propertyPath: ingredientObject.Array.data[7]
+      value: 
+      objectReference: {fileID: 1485289289900193290, guid: f301640ad044d4a40acee34224217bc8, type: 3}
     - target: {fileID: 8358984539659788182, guid: cdd3a65306f75994d813f71d4e2b3db1, type: 3}
       propertyPath: m_RootOrder
       value: 7
@@ -8020,6 +8039,10 @@ PrefabInstance:
       propertyPath: uiContainer
       value: 
       objectReference: {fileID: 192192351}
+    - target: {fileID: 1553144417, guid: 93d0356371557f842980ea2a33a8b926, type: 3}
+      propertyPath: ingredientObject.Array.data[3]
+      value: 
+      objectReference: {fileID: 5695111476393390907, guid: 6dc032173c9e4e24ca98b7bcdcf1fc0d, type: 3}
     - target: {fileID: 3731649727528151353, guid: 93d0356371557f842980ea2a33a8b926, type: 3}
       propertyPath: m_Name
       value: VegetableContainer
