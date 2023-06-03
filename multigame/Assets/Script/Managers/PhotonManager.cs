@@ -394,7 +394,7 @@ public class PhotonManager : MonoBehaviourPunCallbacks
         }
 
         //방에 4명이면 게임시작 버튼 활성화
-        if (PhotonNetwork.PlayerList.Length == 2)
+        if (PhotonNetwork.PlayerList.Length == 1)
         {
             GameObject.Find("GameStartButton").gameObject.GetComponent<Button>().interactable = true;
         }
