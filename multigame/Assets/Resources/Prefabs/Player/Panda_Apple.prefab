@@ -3043,7 +3043,7 @@ MonoBehaviour:
   ObservedComponents:
   - {fileID: 3596467715360859738}
   - {fileID: 5695625064760126270}
-  sceneViewId: 0
+  sceneViewId: 3
   InstantiationId: 0
   isRuntimeInstantiated: 0
 --- !u!114 &3596467715360859738
@@ -3465,7 +3465,6 @@ GameObject:
   m_Component:
   - component: {fileID: 6735918326737913895}
   - component: {fileID: 6586531120184315911}
-  - component: {fileID: 2523579186008189265}
   m_Layer: 0
   m_Name: SubCamera
   m_TagString: Untagged
@@ -3531,14 +3530,6 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
---- !u!81 &2523579186008189265
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8986751760591139641}
-  m_Enabled: 1
 --- !u!1 &9103259502090128682
 GameObject:
   m_ObjectHideFlags: 0
