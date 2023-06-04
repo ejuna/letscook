@@ -87,9 +87,9 @@ public class MainController : MonoBehaviourPunCallbacks
                         ioc.isTrigger = true;
                         interactingObject.transform.localPosition = Vector3.zero;
 
-                        PhotonView objPv = interactingObject.GetComponent<PhotonView>();
+                        /*PhotonView objPv = interactingObject.GetComponent<PhotonView>();
                         objPv.RPC("UpdateInteractingObjectPosition", RpcTarget.Others, interactingObject.transform.position) ;
-                        Debug.Log("글로벌위치 : " +interactingObject.transform.position);
+                        Debug.Log("글로벌위치 : " +interactingObject.transform.position);*/
 
                         isPicking = true; // 들고 있는지 아닌지 체크
                         animator.SetBool("isPicking", true); // 애니메이션에서 위의 isPicking과 다름

@@ -5,7 +5,7 @@ using static Define;
 using Photon.Pun;
 
 
-public class Ingredient : MonoBehaviourPunCallbacks
+public class Ingredient : MonoBehaviour
 {
   public IngredientData ingredientData;
 
@@ -29,14 +29,6 @@ public class Ingredient : MonoBehaviourPunCallbacks
     PrepIngredient = ingredientData.PrepIngredient;
   }
 
-    /*void Update()
-    {
-        if (false == photonView.IsMine)
-        {
-            transform.position = remotePos;
-            return;
-        }
-    }*/
 
 
     public void ingredientInfo()
@@ -47,14 +39,7 @@ public class Ingredient : MonoBehaviourPunCallbacks
   }
 
 
-    [PunRPC]
-    void UpdateInteractingObjectPosition(Vector3 position)
-    {
-        Debug.Log(position);
-        transform.position = remotePos;
-
-        Debug.Log("끝");
-    }
+    
 
     
 
