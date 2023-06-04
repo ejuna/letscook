@@ -89,7 +89,7 @@ public class Managers : MonoBehaviourPun, IPunObservable
             // Network player, receive data
             Life.life = (int)stream.ReceiveNext();
             Date.day = (int)stream.ReceiveNext();
-            Date.time = (int)stream.ReceiveNext();
+            Date.time = (float)stream.ReceiveNext();
             Fame.fame = (int)stream.ReceiveNext();
             Money.money = (int)stream.ReceiveNext();
 

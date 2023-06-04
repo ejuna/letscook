@@ -1,4 +1,4 @@
-  using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -86,6 +86,9 @@ public class MainController : MonoBehaviour
                         Collider ioc = interactingObject.GetComponent<Collider>();
                         ioc.isTrigger = true;
                         interactingObject.transform.localPosition = Vector3.zero;
+
+                        interactingObject.GetComponent<PhotonView>().RPC("UpdateInteractingObjectPosition", RpcTarget.Others, interactingObject,GameObject);
+                       
                         isPicking = true; // 들고 있는지 아닌지 체크
                         animator.SetBool("isPicking", true); // 애니메이션에서 위의 isPicking과 다름
                     }
@@ -193,5 +196,12 @@ public class MainController : MonoBehaviour
     public bool getIsPicking()
     {
         return isPicking;
+    }
+
+    [PunRPC]
+    private void RPC_SetParent(GameObject obj,GameObject player)
+    {
+        
+        obj.transform.SetParent(player.transform);
     }
 }
