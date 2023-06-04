@@ -88,7 +88,7 @@ public class MainController : MonoBehaviourPunCallbacks
                         interactingObject.transform.localPosition = Vector3.zero;
 
                         PhotonView objPv = interactingObject.GetComponent<PhotonView>();
-                        //pv.RPC("UpdateInteractingObjectPosition", RpcTarget.Others, interactingObject.transform.localPosition,objPv.ViewID) ;
+                        pv.RPC("UpdateInteractingObjectPosition", RpcTarget.Others, interactingObject.transform.position,objPv.ViewID) ;
                         Debug.Log("부모 설정 실행시켜");
 
                         isPicking = true; // 들고 있는지 아닌지 체크
@@ -211,8 +211,8 @@ public class MainController : MonoBehaviourPunCallbacks
         {
             Debug.Log("찾았음");
             GameObject targetObject = targetView.gameObject;
-            targetView.RequestOwnership();
-            targetObject.transform.localPosition = position;
+            
+            targetObject.transform.position = position;
             Debug.Log(targetObject.name);
         }
 
