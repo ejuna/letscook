@@ -9,7 +9,7 @@ public class EventManager
     private float randTimeTrigger;
     //랜덤으로 생성된 단체손님 수
     int randGroupNum = 0;
-
+    public GameObject uiContainer;
     bool isTodayGourmand;
     bool isTodayGroupGeuset;
     bool isClera;
@@ -26,6 +26,10 @@ public class EventManager
 
         isTodayGourmand = true;
         isTodayGroupGeuset = true;
+
+        //게임 종료 UI연결
+        uiContainer = GameObject.FindGameObjectWithTag("GameEnd");
+        uiContainer.SetActive(false);
 
         //============이준하 수정=============//
         GameObject obj = GameObject.Find("PhotonManager");
@@ -94,7 +98,7 @@ public class EventManager
 
     public void gameClear()
     {
-        Managers.Scene.LoadScene(Define.Scene.GameClear);
+        uiContainer.SetActive(true);
     }
     public void Clear() { }
 }

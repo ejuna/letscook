@@ -10,6 +10,8 @@ TagManager:
   - Container
   - Bullet
   - Prep
+  - FxTemporaire
+  - GameEnd
   layers:
   - Default
   - TransparentFX
