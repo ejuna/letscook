@@ -10,13 +10,9 @@ public class MoneyManager
     {
         money += amount;
     }
-    public bool moneyDecrease(int amount)
+    public void moneyDecrease(int amount)
     {
-        if(money < amount){
-          return false;
-        }
         money -= amount;
-        return true;
     }
     public void Clear() { }
 }
