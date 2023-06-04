@@ -35,8 +35,8 @@ public class Managers : MonoBehaviourPun, IPunObservable
     {
         init();
         Orders.init();
-        Event.init();
-        Life.Init();
+        //Event.init();
+        //Life.Init();
   }
 
     // Update is called once per frame
