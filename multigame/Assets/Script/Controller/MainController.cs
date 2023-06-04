@@ -203,16 +203,17 @@ public class MainController : MonoBehaviourPunCallbacks
     [PunRPC]
     private void UpdateInteractingObjectPosition(Vector3 position,int id)
     {
-
+        Debug.Log("찾아보자");
         PhotonView targetView = PhotonView.Find(id);
-
+        Debug.Log("찾는거실행했음");
         if (targetView != null)
         {
+            Debug.Log("찾았음");
             GameObject targetObject = targetView.gameObject;
             targetObject.transform.localPosition = position;
             
         }
 
-        Debug.Log("실행했음");
+        Debug.Log("끝");
     }
 }
