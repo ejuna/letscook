@@ -56,7 +56,7 @@ public class EventManager
         //목표일짜 및 목표 금액 달성시 게임 클리어
         if (Managers.Date.day == targetDate || Managers.Money.money >= targetMoney|| Managers.Life.life <= 0)
         {
-            gameClear();
+            //gameClear();
         }
     }
 

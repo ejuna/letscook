@@ -50,6 +50,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ingredientData: {fileID: 11400000, guid: 9c69fae5e9e271e40aed7aef2df7865e, type: 2}
+  remotePos: {x: 0, y: 0, z: 0}
 --- !u!54 &-5402802171346161458
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -95,9 +96,10 @@ MonoBehaviour:
   Group: 0
   prefixField: -1
   Synchronization: 3
-  OwnershipTransfer: 0
+  OwnershipTransfer: 1
   observableSearch: 2
-  ObservedComponents: []
+  ObservedComponents:
+  - {fileID: 2064332903488524418}
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
@@ -116,7 +118,7 @@ MonoBehaviour:
   m_SynchronizePosition: 1
   m_SynchronizeRotation: 1
   m_SynchronizeScale: 0
-  m_UseLocal: 1
+  m_UseLocal: 0
 --- !u!1 &7642396525826869816
 GameObject:
   m_ObjectHideFlags: 0

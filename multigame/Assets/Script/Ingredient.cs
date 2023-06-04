@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using static Define;
+using Photon.Pun;
+
 
 public class Ingredient : MonoBehaviour
 {
@@ -16,6 +18,9 @@ public class Ingredient : MonoBehaviour
     [SerializeField]
     public GameObject PrepIngredient { get; set; }
 
+    public Vector3 remotePos;
+    
+
     public void Start()
   {
     ingredientName = ingredientData.IngredientName;
@@ -25,11 +30,17 @@ public class Ingredient : MonoBehaviour
   }
 
 
-  public void ingredientInfo()
+
+    public void ingredientInfo()
   {
     Debug.Log("재료 이름 :: " + ingredientData.name);
     Debug.Log("재료 가격 :: " + ingredientData.Price);
     Debug.Log("재료 종류 :: " + ingredientData.IngredientType);
   }
+
+
+    
+
+    
 
 }

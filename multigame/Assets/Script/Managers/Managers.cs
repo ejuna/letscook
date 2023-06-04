@@ -35,8 +35,8 @@ public class Managers : MonoBehaviourPun, IPunObservable
     {
         init();
         Orders.init();
-        Event.init();
-        Life.Init();
+        //Event.init();
+        //Life.Init();
   }
 
     // Update is called once per frame
@@ -46,7 +46,7 @@ public class Managers : MonoBehaviourPun, IPunObservable
         Input.OnUpdate();
         Date.OnUpdate();
         if(PhotonNetwork.IsMasterClient){
-          Orders.OnUpdate();
+          //Orders.OnUpdate();
         }
         
         if(Date.isChangeDay == true){ //날짜 바뀌면
@@ -82,18 +82,18 @@ public class Managers : MonoBehaviourPun, IPunObservable
             stream.SendNext(Fame.fame);
             stream.SendNext(Money.money);
 
-            Debug.Log("전송");
+            
         }
         else
         {
             // Network player, receive data
             Life.life = (int)stream.ReceiveNext();
             Date.day = (int)stream.ReceiveNext();
-            Date.time = (int)stream.ReceiveNext();
+            Date.time = (float)stream.ReceiveNext();
             Fame.fame = (int)stream.ReceiveNext();
             Money.money = (int)stream.ReceiveNext();
 
-            Debug.Log("수신");
+            
 
         }
     }
