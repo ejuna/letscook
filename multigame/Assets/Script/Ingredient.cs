@@ -29,14 +29,14 @@ public class Ingredient : MonoBehaviourPunCallbacks
     PrepIngredient = ingredientData.PrepIngredient;
   }
 
-    void Update()
+    /*void Update()
     {
         if (false == photonView.IsMine)
         {
             transform.position = remotePos;
             return;
         }
-    }
+    }*/
 
 
     public void ingredientInfo()
@@ -50,7 +50,7 @@ public class Ingredient : MonoBehaviourPunCallbacks
     [PunRPC]
     void UpdateInteractingObjectPosition(Vector3 position)
     {
-        Debug.Log("실행");
+        Debug.Log(position);
         transform.position = remotePos;
 
         Debug.Log("끝");
