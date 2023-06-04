@@ -133,6 +133,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ingredientData: {fileID: 11400000, guid: a52a402dea082574a849cb80d7ba784b, type: 2}
+  remotePos: {x: 0, y: 0, z: 0}
 --- !u!54 &6756218709708219675
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -200,4 +201,4 @@ MonoBehaviour:
   m_SynchronizePosition: 1
   m_SynchronizeRotation: 1
   m_SynchronizeScale: 0
-  m_UseLocal: 1
+  m_UseLocal: 0

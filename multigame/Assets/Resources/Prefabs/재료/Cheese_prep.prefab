@@ -50,6 +50,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ingredientData: {fileID: 11400000, guid: 41b1e38a64c1cb74eab0816f336d48ab, type: 2}
+  remotePos: {x: 0, y: 0, z: 0}
 --- !u!54 &8704676177466466403
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -117,7 +118,7 @@ MonoBehaviour:
   m_SynchronizePosition: 1
   m_SynchronizeRotation: 1
   m_SynchronizeScale: 0
-  m_UseLocal: 1
+  m_UseLocal: 0
 --- !u!1 &6605273354894733557
 GameObject:
   m_ObjectHideFlags: 0
