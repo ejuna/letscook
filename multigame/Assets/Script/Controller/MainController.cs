@@ -8,7 +8,7 @@ using Photon.Pun;
 using Photon.Realtime;
 //====================================//
 
-public class MainController : MonoBehaviour
+public class MainController : MonoBehaviourPunCallbacks
 {
     public float speed;
     public Transform Player;
@@ -76,9 +76,9 @@ public class MainController : MonoBehaviour
                 if (!isPicking)
                 {
                     interactingObject = findInteractableObject();
-                    interactingObject.GetComponent<PhotonView>().RequestOwnership();
                     if (interactingObject != null && interactingObject.CompareTag("Pickup"))
                     {
+                        interactingObject.GetComponent<PhotonView>().RequestOwnership();
                         interactingRigidbody = interactingObject.GetComponent<Rigidbody>();
                         interactingRigidbody.isKinematic = true;
 
