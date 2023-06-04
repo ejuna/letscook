@@ -87,7 +87,8 @@ public class MainController : MonoBehaviourPunCallbacks
                         ioc.isTrigger = true;
                         interactingObject.transform.localPosition = Vector3.zero;
 
-                        interactingObject.GetComponent<PhotonView>().RPC("UpdateInteractingObjectPosition", RpcTarget.Others, interactingObject.transform.localPosition,interactingObject) ;
+                        PhotonView objPv = interactingObject.GetComponent<PhotonView>();
+                        objPv.RPC("UpdateInteractingObjectPosition", RpcTarget.Others, interactingObject.transform.localPosition,objPv.ViewID) ;
                         Debug.Log("부모 설정 실행시켜");
 
                         isPicking = true; // 들고 있는지 아닌지 체크
@@ -200,11 +201,17 @@ public class MainController : MonoBehaviourPunCallbacks
     }
 
     [PunRPC]
-    private void UpdateInteractingObjectPosition(Vector3 position,GameObject tar)
+    private void UpdateInteractingObjectPosition(Vector3 position,int id)
     {
 
-        tar.transform.localPosition = position;
+        PhotonView targetView = PhotonView.Find(id);
 
+        if (targetView != null)
+        {
+            GameObject targetObject = targetView.gameObject;
+            targetObject.transform.localPosition = position;
+            
+        }
 
         Debug.Log("실행했음");
     }
