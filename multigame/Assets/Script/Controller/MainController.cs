@@ -76,6 +76,7 @@ public class MainController : MonoBehaviour
                 if (!isPicking)
                 {
                     interactingObject = findInteractableObject();
+                    interactingObject.GetComponent<PhotonView>().RequestOwnership();
                     if (interactingObject != null && interactingObject.CompareTag("Pickup"))
                     {
                         interactingRigidbody = interactingObject.GetComponent<Rigidbody>();
