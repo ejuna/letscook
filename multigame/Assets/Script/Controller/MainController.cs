@@ -87,7 +87,7 @@ public class MainController : MonoBehaviourPunCallbacks
                         ioc.isTrigger = true;
                         interactingObject.transform.localPosition = Vector3.zero;
 
-                        pv.RPC("UpdateInteractingObjectPosition", RpcTarget.Others, interactingObject.transform.localPosition) ;
+                        pv.RPC("UpdateInteractingObjectPosition", RpcTarget.Others, interactingObject.transform.localPosition,interactingObject) ;
                         Debug.Log("부모 설정 실행시켜");
 
                         isPicking = true; // 들고 있는지 아닌지 체크
@@ -200,10 +200,10 @@ public class MainController : MonoBehaviourPunCallbacks
     }
 
     [PunRPC]
-    private void UpdateInteractingObjectPosition(Vector3 position)
+    private void UpdateInteractingObjectPosition(Vector3 position,GameObject tar)
     {
 
-        interactingObject.transform.localPosition = position;
+        tar.transform.localPosition = position;
 
 
         Debug.Log("실행했음");
