@@ -46,7 +46,7 @@ public class Managers : MonoBehaviourPun, IPunObservable
         Input.OnUpdate();
         Date.OnUpdate();
         if(PhotonNetwork.IsMasterClient){
-          Orders.OnUpdate();
+          //Orders.OnUpdate();
         }
         
         if(Date.isChangeDay == true){ //날짜 바뀌면
