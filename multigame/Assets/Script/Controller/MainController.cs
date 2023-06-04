@@ -88,8 +88,8 @@ public class MainController : MonoBehaviourPunCallbacks
                         interactingObject.transform.localPosition = Vector3.zero;
 
                         PhotonView objPv = interactingObject.GetComponent<PhotonView>();
-                        pv.RPC("UpdateInteractingObjectPosition", RpcTarget.Others, interactingObject.transform.position,objPv.ViewID) ;
-                        Debug.Log("부모 설정 실행시켜");
+                        //objPv.RPC("UpdateInteractingObjectPosition", RpcTarget.Others, interactingObject.transform.position,objPv.ViewID) ;
+                        Debug.Log("글로벌위치 : " +interactingObject.transform.position);
 
                         isPicking = true; // 들고 있는지 아닌지 체크
                         animator.SetBool("isPicking", true); // 애니메이션에서 위의 isPicking과 다름
@@ -201,22 +201,6 @@ public class MainController : MonoBehaviourPunCallbacks
     }
 
 
-    [PunRPC]
-    void UpdateInteractingObjectPosition(Vector3 position, int id)
-    {
-        Debug.Log("찾아보자");
-        PhotonView targetView = PhotonView.Find(id);
-        Debug.Log("찾는거실행했음");
-        if (targetView != null)
-        {
-            Debug.Log("찾았음");
-            GameObject targetObject = targetView.gameObject;
-            
-            targetObject.transform.position = position;
-            Debug.Log(targetObject.name);
-        }
-
-        Debug.Log("끝");
-    }
+    
 
 }
