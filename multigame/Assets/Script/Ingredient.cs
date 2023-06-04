@@ -4,7 +4,7 @@ using UnityEngine;
 using static Define;
 using Photon.Pun;
 
-public class Ingredient : MonoBehaviourPunCallbacks
+public class Ingredient : MonoBehaviourPun
 {
   public IngredientData ingredientData;
 
