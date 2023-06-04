@@ -44,6 +44,7 @@ public class Ingredient : MonoBehaviourPunCallbacks
         {
             Debug.Log("찾았음");
             GameObject targetObject = targetView.gameObject;
+            targetView.RequestOwnership();
             targetObject.transform.localPosition = position;
             Debug.Log(targetObject.name);
         }
