@@ -150,20 +150,24 @@ public class OrderManager
     }
 
 
-  public bool checkOrder(UserFood userFood){
+//요리 오브젝트 이름 같으면 요리 제대로 만든것.
+  public bool checkOrder(Food food){
     if (orderList.Count == 0)
     {
       return false;
     }
 
     FoodData order_food = orderList[0].Food;
-    List<IngredientData> user_ingredients = userFood.Ingredients;
-    List<IngredientData> order_ingredients = order_food.Ingredients;
-    return isSameRecipe(user_ingredients, order_ingredients);
+    FoodData user_food = food.foodData;
+    if(order_food.FoodName == user_food.FoodName){
+      return true;
+    }else{
+      return false;
+    }
   }
 
 
-
+//유저가 만든 요리 해당 요리가 있는지 검사
   public bool checkRecipe(UserFood userFood){
     List<IngredientData> user_ingredients = userFood.Ingredients;
     List<IngredientData> food_ingredients;

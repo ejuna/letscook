@@ -12,6 +12,7 @@ TagManager:
   - Prep
   - FxTemporaire
   - GameEnd
+  - submit
   layers:
   - Default
   - TransparentFX

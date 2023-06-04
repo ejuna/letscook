@@ -6,11 +6,11 @@ public class FameManager
 {
   public int fame;
 
-  public void moneyIncrease(int amount)
+  public void fameIncrease(int amount)
   {
     fame += amount;
   }
-  public void moneyDecrease(int amount)
+  public void fameDecrease(int amount)
   {
     fame -= amount;
   }
