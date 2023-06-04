@@ -5,7 +5,8 @@ using UnityEngine;
 public class Food : MonoBehaviour
 {
   public FoodData foodData;
-  private int price { get; set; }
+  private int price;
+  public int Price { get { return price; } }
 
 
   private void Start()
