@@ -82,7 +82,7 @@ public class Managers : MonoBehaviourPun, IPunObservable
             stream.SendNext(Fame.fame);
             stream.SendNext(Money.money);
 
-            Debug.Log("전송");
+            
         }
         else
         {
@@ -93,7 +93,7 @@ public class Managers : MonoBehaviourPun, IPunObservable
             Fame.fame = (int)stream.ReceiveNext();
             Money.money = (int)stream.ReceiveNext();
 
-            Debug.Log("수신");
+            
 
         }
     }

@@ -88,7 +88,8 @@ public class MainController : MonoBehaviour
                         interactingObject.transform.localPosition = Vector3.zero;
 
                         interactingObject.GetComponent<PhotonView>().RPC("UpdateInteractingObjectPosition", RpcTarget.Others, interactingObject,GameObject);
-                       
+                        Debug.Log("부모 설정 실행시켜");
+
                         isPicking = true; // 들고 있는지 아닌지 체크
                         animator.SetBool("isPicking", true); // 애니메이션에서 위의 isPicking과 다름
                     }
@@ -203,5 +204,7 @@ public class MainController : MonoBehaviour
     {
         
         obj.transform.SetParent(player.transform);
+
+        Debug.Log("부모 받아서 설정");
     }
 }
