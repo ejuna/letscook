@@ -34,23 +34,7 @@ public class Ingredient : MonoBehaviourPunCallbacks
   }
 
 
-    [PunRPC]
-    void UpdateInteractingObjectPosition(Vector3 position, int id)
-    {
-        Debug.Log("찾아보자");
-        PhotonView targetView = PhotonView.Find(id);
-        Debug.Log("찾는거실행했음");
-        if (targetView != null)
-        {
-            Debug.Log("찾았음");
-            GameObject targetObject = targetView.gameObject;
-            targetView.RequestOwnership();
-            targetObject.transform.localPosition = position;
-            Debug.Log(targetObject.name);
-        }
-
-        Debug.Log("끝");
-    }
+    
 
 
 }
