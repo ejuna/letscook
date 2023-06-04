@@ -2,8 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using static Define;
+using Photon.Pun;
 
-public class Ingredient : MonoBehaviour
+public class Ingredient : MonoBehaviourPunCallbacks
 {
   public IngredientData ingredientData;
 
@@ -31,5 +32,24 @@ public class Ingredient : MonoBehaviour
     Debug.Log("재료 가격 :: " + ingredientData.Price);
     Debug.Log("재료 종류 :: " + ingredientData.IngredientType);
   }
+
+
+    [PunRPC]
+    void UpdateInteractingObjectPosition(Vector3 position, int id)
+    {
+        Debug.Log("찾아보자");
+        PhotonView targetView = PhotonView.Find(id);
+        Debug.Log("찾는거실행했음");
+        if (targetView != null)
+        {
+            Debug.Log("찾았음");
+            GameObject targetObject = targetView.gameObject;
+            targetObject.transform.localPosition = position;
+            Debug.Log(targetObject.name);
+        }
+
+        Debug.Log("끝");
+    }
+
 
 }
