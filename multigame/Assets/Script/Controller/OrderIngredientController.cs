@@ -89,7 +89,7 @@ public class OrderIngredientController : MonoBehaviourPun, IPunObservable
 
   public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
   {
-
+    Debug.Log("ㄹ포톤뷰");
     if (stream.IsWriting)
     {
       // We own this player: send the others our data
@@ -104,7 +104,11 @@ public class OrderIngredientController : MonoBehaviourPun, IPunObservable
       selectIngredientIndex = (int)stream.ReceiveNext();
       orderCount = (int)stream.ReceiveNext();
       isOrder = (int)stream.ReceiveNext();
+
+      Debug.Log(type + "," + selectIngredientIndex + "," + orderCount + "," + isOrder);
+
       if(isOrder == 1){
+        Debug.Log("ddd");
         ingredientContainer = container[type].GetComponent<IngredientContainer>();
         ingredientContainer.countIncrease(selectIngredientIndex, orderCount);
         isOrder = 0;
