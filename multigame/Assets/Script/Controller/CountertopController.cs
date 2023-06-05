@@ -5,7 +5,6 @@ using System.Collections.Generic;
 using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
-//using static UnityEditor.PlayerSettings;
 
 public class CountertopController : MonoBehaviourPun, IPunObservable
 {
@@ -17,7 +16,7 @@ public class CountertopController : MonoBehaviourPun, IPunObservable
     void Start()
     {
         PV = photonView;
-        if (PV.IsMine) PV.RPC(nameof(makeFood), RpcTarget.All);
+        
         ingres = new List<string>();
         //st = "";
         Managers.Input.KeyAction -= OnKeyboard;
@@ -31,11 +30,11 @@ public class CountertopController : MonoBehaviourPun, IPunObservable
     }
     void OnKeyboard()
     {
-        
-        if (Input.GetKeyDown(KeyCode.V) && isPlayerEnter)
+        if (Input.GetKeyDown(KeyCode.LeftAlt) && isPlayerEnter)
         {
-            makeFood();
+            if (PV.IsMine) PV.RPC(nameof(makeFood), RpcTarget.All);
         }
+
     }
     [PunRPC]
     void makeFood()
@@ -120,6 +119,16 @@ if (st.Length != 0)
         go.GetComponent<BoxCollider>().size = new Vector3(1f, 1.2f, 1f);
         go.GetComponent<BoxCollider>().center = new Vector3(0, go.GetComponent<BoxCollider>().size.y / 2, 0);
     }
+    [PunRPC]
+    void onTheboard(string str)
+    {
+        GameObject other = GameObject.Find(str);
+        other.transform.SetParent(transform, false);
+        other.transform.localPosition = Vector3.zero;
+        other.transform.rotation = new Quaternion(0, 1, 0, 0);
+        setEquip(other.gameObject, true);
+        ingres.Add(other.gameObject.GetComponent<Ingredient>().ingredientName);
+    }
     public void setEquip(GameObject gameObject, bool isEquip)
     {
         Collider[] gameObjectColliders = gameObject.GetComponents<Collider>();
@@ -154,19 +163,10 @@ if (st.Length != 0)
         {
             isPlayerEnter = true;
         }
-        if (other.gameObject.GetComponent<Ingredient>() != null && other.gameObject.tag == "Pickup"&&  (other.gameObject.transform.parent == null || other.gameObject.transform.parent.name != "GameObject"))
+        if (other.gameObject.GetComponent<Ingredient>() != null && other.gameObject.tag == "Pickup" &&  (other.gameObject.transform.parent == null || other.gameObject.transform.parent.name != "GameObject"))
         {
-
-            ingres.Add(other.gameObject.GetComponent<Ingredient>().ingredientName);
-
-            //st = st + other.gameObject.GetComponent<Ingredient>().ingredientName + ",";
-
-
-            other.transform.SetParent(transform, false);
-            other.transform.localPosition = Vector3.zero;
-            other.transform.rotation = new Quaternion(0, 1, 0, 0);
-
-            setEquip(other.gameObject, true);
+            if (PV.IsMine) PV.RPC(nameof(onTheboard), RpcTarget.All,other.name);
+            //st = st + other.gameObject.GetComponent<Ingredient>().ingredientName + ","
         }
     }
     void OnTriggerExit(Collider other)
