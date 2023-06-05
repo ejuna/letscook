@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   foodName: BananaSmoothie
   foodTier: 1
+  foodPrice: 24
   ingredients:
   - {fileID: 11400000, guid: 3ca1cc06c46ef4e47b3664b595842c45, type: 2}
   - {fileID: 11400000, guid: 069438584f382e943bdec180ccb21de5, type: 2}

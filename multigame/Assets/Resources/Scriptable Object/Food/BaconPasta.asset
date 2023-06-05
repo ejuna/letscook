@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   foodName: BaconPasta
   foodTier: 3
+  foodPrice: 36
   ingredients:
   - {fileID: 11400000, guid: d5afefdf463a1994f95048ea37bd1891, type: 2}
   - {fileID: 11400000, guid: 23885d20765bbbb4cb22920442f82791, type: 2}

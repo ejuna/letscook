@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   foodName: BaconEggSausages
   foodTier: 2
+  foodPrice: 72
   ingredients:
   - {fileID: 11400000, guid: d5afefdf463a1994f95048ea37bd1891, type: 2}
   - {fileID: 11400000, guid: a52a402dea082574a849cb80d7ba784b, type: 2}

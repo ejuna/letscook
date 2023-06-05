@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   foodName: CheeseBurgerSet
   foodTier: 4
+  foodPrice: 66
   ingredients:
   - {fileID: 11400000, guid: 99d326d6810612f4fb494ca1b8be73eb, type: 2}
   - {fileID: 11400000, guid: 41b1e38a64c1cb74eab0816f336d48ab, type: 2}

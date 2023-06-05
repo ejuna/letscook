@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   foodName: ShrimpPasta
   foodTier: 3
+  foodPrice: 54
   ingredients:
   - {fileID: 11400000, guid: 61272d33caf8a114299ee8753072c90a, type: 2}
   - {fileID: 11400000, guid: 23885d20765bbbb4cb22920442f82791, type: 2}

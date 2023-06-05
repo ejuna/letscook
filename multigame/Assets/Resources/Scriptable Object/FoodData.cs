@@ -14,6 +14,10 @@ public class FoodData : ScriptableObject
   public int FoodTier{ get { return foodTier; } }
 
   [SerializeField]
+  private int foodPrice;
+  public int FoodPrice { get { return foodPrice; } }
+
+    [SerializeField]
   private List<IngredientData> ingredients;
   public List<IngredientData> Ingredients{ get { return ingredients; } }
 

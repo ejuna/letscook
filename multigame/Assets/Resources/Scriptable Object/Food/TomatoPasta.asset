@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   foodName: TomatoPasta
   foodTier: 3
+  foodPrice: 42
   ingredients:
   - {fileID: 11400000, guid: 9eb8fce1ff60eaa449b54bdd440e5c96, type: 2}
   - {fileID: 11400000, guid: 23885d20765bbbb4cb22920442f82791, type: 2}
