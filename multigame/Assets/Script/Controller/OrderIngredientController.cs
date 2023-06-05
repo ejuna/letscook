@@ -38,8 +38,7 @@ public class OrderIngredientController : MonoBehaviourPun, IPunObservable
     if (isOrder == 1)
     {
       Debug.Log("ddd");
-      ingredientContainer = container[type].GetComponent<IngredientContainer>();
-      ingredientContainer.countIncrease(selectIngredientIndex, orderCount);
+      
       isOrder = 0;
     }
 

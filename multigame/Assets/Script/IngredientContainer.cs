@@ -54,8 +54,11 @@ public class IngredientContainer : MonoBehaviourPun, IPunObservable
     public void countIncrease(int index, int num)
     {
         counts[index] += num;
+        Debug.Log(counts[index]);
         textArea[index].text = counts[index].ToString();
+        Debug.Log(counts[index]);
         photonView.RPC("UpdateCount", RpcTarget.OthersBuffered, index, counts[index]);
+        Debug.Log(counts[index]);
     }
 
     [PunRPC]
@@ -65,14 +68,18 @@ public class IngredientContainer : MonoBehaviourPun, IPunObservable
         textArea[index].text = value.ToString();
     }
 
-    public bool countDecrease(int index,int num){
-      if(counts[index] < num){
-        Debug.Log("갯수부족");
-        return false;
-      }
-      counts[index] -= num;
-      textArea[index].text = counts[index].ToString();
-      return true;
+    public bool countDecrease(int index, int num)
+    {
+        if (counts[index] < num)
+        {
+            Debug.Log("갯수부족");
+            return false;
+        }
+
+        counts[index] -= num;
+        textArea[index].text = counts[index].ToString();
+        photonView.RPC("UpdateCount", RpcTarget.OthersBuffered, index, counts[index]);
+        return true;
     }
 
 
