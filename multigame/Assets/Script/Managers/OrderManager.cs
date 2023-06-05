@@ -32,7 +32,7 @@ public class OrderManager
     tempOrder = orderList.Count;
 
     //30초마다 주문 생성
-    if (timer >20f)
+    if (timer >30f)
     {
       timer = 0;
       //하루 시간 초과시 오더 생성안함
@@ -259,7 +259,7 @@ public class OrderManager
 
   public bool isOrders()
     {
-        if (orderList.Count == 0)
+        if (tempOrder == 0)
         {
             return false;
         }
