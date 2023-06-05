@@ -34,14 +34,20 @@ public class IngredientContainer : MonoBehaviourPun, IPunObservable
     {
         if (stream.IsWriting)
         {
-            // We own this player: send the others our data
-            stream.SendNext(counts);
+            // 데이터를 전송하는 플레이어 (송신)
+            for (int i = 0; i < counts.Length; i++)
+            {
+                stream.SendNext(counts[i]);
+            }
         }
         else
         {
-            // Network player, receive data
-            counts = (int[])stream.ReceiveNext();
-
+            // 데이터를 수신하는 플레이어 (수신)
+            for (int i = 0; i < counts.Length; i++)
+            {
+                counts[i] = (int)stream.ReceiveNext();
+                textArea[i].text = counts[i].ToString();
+            }
         }
     }
 
