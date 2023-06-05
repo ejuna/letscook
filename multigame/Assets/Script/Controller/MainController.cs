@@ -39,8 +39,7 @@ public class MainController : MonoBehaviourPunCallbacks
         pv = GetComponent<PhotonView>();
 
         //1인칭 카메라 비활성화
-        transform.Find("SubCamera").GetComponent<Camera>().enabled = false;
-        
+        transform.Find("SubCamera").GetComponent<Camera>().enabled = false; 
 
 
     }

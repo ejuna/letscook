@@ -86,6 +86,7 @@ public class Managers : MonoBehaviourPun, IPunObservable
             stream.SendNext(Money.money);
             stream.SendNext(Money.tempMoney);
             stream.SendNext(Fame.tempFame);
+            stream.SendNext(Orders.orderCount);
 
         }
         else
@@ -98,6 +99,7 @@ public class Managers : MonoBehaviourPun, IPunObservable
             Money.money = (int)stream.ReceiveNext();
             Money.tempMoney = (int)stream.ReceiveNext();
             Fame.tempFame = (int)stream.ReceiveNext();
+            Orders.orderCount= (int)stream.ReceiveNext();
 
         }
     }
@@ -159,6 +161,7 @@ public class Managers : MonoBehaviourPun, IPunObservable
         }
     }
 
+    //정산 창에서 진행하기 버튼 클릭
     public void NextDayButtonClick()
     {
         GameObject.Find("Result").gameObject.SetActive(false);

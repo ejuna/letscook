@@ -11,11 +11,13 @@ public class OrderManager
   public int complete { get; set; }
   public int totalComplete{ get; set; }
 
-  private const float DEFALT_TIME = 60.0f;
+  private const float DEFALT_TIME = 30.0f;
 
   private static bool isInit = false;
   private float timer;
   private float worldTimer;
+
+  public int orderCount = 0;
 
   private int displayCount = 0;
 
@@ -27,9 +29,10 @@ public class OrderManager
   public void OnUpdate(){
     timer += Time.deltaTime;
     worldTimer+= Time.deltaTime;
+    orderCount = orderList.Count;
 
     //30초마다 주문 생성
-    if (timer >30f)
+    if (timer >20f)
     {
       timer = 0;
       //하루 시간 초과시 오더 생성안함
