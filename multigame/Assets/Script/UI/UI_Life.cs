@@ -21,6 +21,11 @@ public class UI_Life : MonoBehaviour
     {
         switch (Managers.Life.life)
         {
+            case 0:
+                hp1.SetActive(false);
+                hp2.SetActive(false);
+                hp3.SetActive(false);
+                break;
             case 1:
                 hp1.SetActive(true);
                 hp2.SetActive(false);
