@@ -105,8 +105,9 @@ public class CountertopController : MonoBehaviour
         {
             isPlayerEnter = true;
         }
-        if (other.gameObject.tag == "Pickup" && (other.gameObject.transform.parent == null || other.gameObject.transform.parent.name != "GameObject"))
+        if (other.gameObject.tag == "Pickup"&& other.gameObject.GetComponent<Ingredient>() != null && (other.gameObject.transform.parent == null || other.gameObject.transform.parent.name != "GameObject"))
         {
+
             ingres.Add(other.gameObject.GetComponent<Ingredient>().ingredientName);
 
             other.transform.SetParent(transform, false);
