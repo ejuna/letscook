@@ -10,11 +10,13 @@ using static UnityEditor.PlayerSettings;
 public class CountertopController : MonoBehaviourPun, IPunObservable
 {
     public List<string> ingres;
+    public string st;
     bool isPlayerEnter;
     // Start is called before the first frame update
     void Start()
     {
         ingres = new List<string>();
+        st = null;
         Managers.Input.KeyAction -= OnKeyboard;
         Managers.Input.KeyAction += OnKeyboard;
     }
@@ -29,6 +31,14 @@ public class CountertopController : MonoBehaviourPun, IPunObservable
         int loopNum = 0;
         if (Input.GetKeyDown(KeyCode.V) && isPlayerEnter)
         {
+            if(st != null)
+            {
+                String[] starr=st.Split(",");
+                for(int i = 0; i < starr.Length; i++)
+                {
+                    ingres.Add(starr[i]);
+                }
+            }
             if (ingres.Count == 0)
             {
                 return;
@@ -66,6 +76,7 @@ public class CountertopController : MonoBehaviourPun, IPunObservable
                 tempAllFood.Clear();
                 tempAllFood = produceFood.ToList();
             });
+            ingres.ForEach(text => { st = st + text + ","; });
             ingres.Clear();
             ingres = new List<string>();
             //재료 삭제하기
@@ -108,15 +119,16 @@ public class CountertopController : MonoBehaviourPun, IPunObservable
 
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
+        
         if (stream.IsWriting)
         {
             // We own this player: send the others our data
-            stream.SendNext(ingres);
+            stream.SendNext(st);
         }
         else
         {
             // Network player, receive data
-            this.ingres = (List<String>)stream.ReceiveNext();
+            this.st = (String)stream.ReceiveNext();
 
         }
     }
