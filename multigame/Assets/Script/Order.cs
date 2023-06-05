@@ -27,9 +27,7 @@ public class Order
 
     prefab = setPrefab();
     recipe = prefab.GetComponent<OrderRecipe>();
-//이건 프리팹에서 불러온 스크립트. 
     recipe = recipe.GetRecipe(this,prefab,id);
-//여기선 OrderUI를 설정하고 있고, 나는 OrderUI 스크립트를 바꿔야지,,
   }
 
 
