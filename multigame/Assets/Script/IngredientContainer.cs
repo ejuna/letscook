@@ -51,9 +51,18 @@ public class IngredientContainer : MonoBehaviourPun, IPunObservable
         }
     }
 
-    public void countIncrease(int index,int num){
+    public void countIncrease(int index, int num)
+    {
         counts[index] += num;
         textArea[index].text = counts[index].ToString();
+        photonView.RPC("UpdateCount", RpcTarget.OthersBuffered, index, counts[index]);
+    }
+
+    [PunRPC]
+    private void UpdateCount(int index, int value)
+    {
+        counts[index] = value;
+        textArea[index].text = value.ToString();
     }
 
     public bool countDecrease(int index,int num){
