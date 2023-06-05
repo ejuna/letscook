@@ -83,11 +83,7 @@ public class Managers : MonoBehaviourPun, IPunObservable
             stream.SendNext(Date.time);
             stream.SendNext(Fame.fame);
             stream.SendNext(Money.money);
-            if (PhotonNetwork.IsMasterClient)
-            {
-              stream.SendNext(Orders.orderList);
-            }
-
+            
     }
         else
         {
@@ -97,10 +93,7 @@ public class Managers : MonoBehaviourPun, IPunObservable
             Date.time = (float)stream.ReceiveNext();
             Fame.fame = (int)stream.ReceiveNext();
             Money.money = (int)stream.ReceiveNext();
-            if (!PhotonNetwork.IsMasterClient)
-            {
-              Orders.orderList = (List<Order>)stream.ReceiveNext();
-            }
+            
         }
     }
     public static void Clear()
