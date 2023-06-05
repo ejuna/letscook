@@ -1,35 +1,49 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
 
 public class UI_Life : MonoBehaviour
 {
-    // Start is called before the first frame update
+    public GameObject hp1;
+    public GameObject hp2;
+    public GameObject hp3;
     void Start()
-    {
-        init();
-        Managers.Life.minusLifeAction -= minusLife;
-        Managers.Life.minusLifeAction += minusLife;
-        Managers.Life.resetLifeAction -= resetLife;
-        Managers.Life.resetLifeAction += resetLife;
+   {
+        hp1 = GameObject.Find("Hp1");
+        hp2 = GameObject.Find("Hp2");
+        hp3 = GameObject.Find("Hp3");
     }
-    void init()
-    {
-        for(int i = 0; i< Constants.MAX_LIFE; i++)
-        {
-            GameObject life = Managers.Resource.Instantiate("life");
-            life.transform.SetParent(transform);
-        }
-    }
+
 
     // Update is called once per frame
     void Update()
     {
+        switch (Managers.Life.life)
+        {
+            case 1:
+                hp1.SetActive(true);
+                hp2.SetActive(false);
+                hp3.SetActive(false);
+                break;
+            case 2:
+                hp1.SetActive(true);
+                hp2.SetActive(true);
+                hp3.SetActive(false);
+                break;
+            case 3:
+                hp1.SetActive(true);
+                hp2.SetActive(true);
+                hp3.SetActive(true);
+                break;
+        }
         
+
+
     }
     public void minusLife()
     {
-        Managers.Resource.Destroy(transform.GetChild(transform.childCount).gameObject);
+        transform.GetChild(0).gameObject.SetActive(false);
     }
     public void resetLife()
     {
@@ -37,8 +51,7 @@ public class UI_Life : MonoBehaviour
         {
             for (int i = Managers.Life.life; i < Constants.MAX_LIFE; i++)
             {
-                GameObject life = Managers.Resource.Instantiate("life");
-                life.transform.SetParent(transform);
+                transform.GetChild(0).gameObject.SetActive(true);
             }
         }
     }

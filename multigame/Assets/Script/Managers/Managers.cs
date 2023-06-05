@@ -35,8 +35,8 @@ public class Managers : MonoBehaviourPun, IPunObservable
     {
         init();
         Orders.init();
-        //Event.init();
-        //Life.Init();
+        Event.init();
+        Life.Init();
   }
 
     // Update is called once per frame
@@ -46,7 +46,7 @@ public class Managers : MonoBehaviourPun, IPunObservable
         Input.OnUpdate();
         Date.OnUpdate();
         if(PhotonNetwork.IsMasterClient){
-          //Orders.OnUpdate();
+          Orders.OnUpdate();
         }
         
         if(Date.isChangeDay == true){ //날짜 바뀌면
