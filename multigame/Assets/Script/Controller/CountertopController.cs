@@ -68,6 +68,7 @@ public class CountertopController : MonoBehaviour
                 tempAllFood = produceFood.ToList();
             });
             ingres.Clear();
+            ingres = new List<string>();
             //재료 삭제하기
             for (int i = 1 ; i< transform.childCount; i++)
             {
