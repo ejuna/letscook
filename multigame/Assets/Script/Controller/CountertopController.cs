@@ -26,10 +26,14 @@ public class CountertopController : MonoBehaviour
     }
     void OnKeyboard()
     {
+
         int loopNum = 0;
         if (Input.GetKeyDown(KeyCode.V) && isPlayerEnter)
         {
-
+            if (ingres.Count == 0)
+            {
+                return;
+            }
             List<FoodData> tempAllFood = Managers.Orders.allFoods.ToList();
             List<FoodData> produceFood = new List<FoodData>();
             //해당 재료로 만들수 있는 요리찾기
