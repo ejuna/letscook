@@ -69,7 +69,7 @@ public class CountertopController : MonoBehaviour
             }
             //음식 생성
             GameObject go;
-            Vector3 newPosition = transform.position + new Vector3(0f, 2f, 1f);
+            Vector3 newPosition = transform.position + new Vector3(0f, 2f, 2f);
             if (tempAllFood.Count==1) {
                 go = PhotonNetwork.Instantiate("Prefabs/요리/" + tempAllFood[0].name , newPosition,transform.rotation);
             }
@@ -77,8 +77,6 @@ public class CountertopController : MonoBehaviour
             {
                 go= PhotonNetwork.Instantiate("Prefabs/요리/Clinker", newPosition, transform.rotation);
             }
-            Vector3 position = transform.position + new Vector3(0f, 2f, 1f);
-            go.transform.position = position;
             go.tag = "Pickup";
             go.AddComponent<Rigidbody>();
             go.GetComponent<Rigidbody>().freezeRotation = true;
