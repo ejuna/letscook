@@ -4,8 +4,9 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using static Define;
+using Photon.Pun;
 
-public class OrderIngredientController : MonoBehaviour
+public class OrderIngredientController : MonoBehaviourPun, IPunObservable
 {
   public GameObject[] uiList = new GameObject[4];
   public GameObject[] container = new GameObject[4];
@@ -18,7 +19,9 @@ public class OrderIngredientController : MonoBehaviour
   private int type;
   private int selectIngredientIndex;
   private int cost;
-  
+  private int orderCount;
+
+  private int isOrder = 0;
 
   void Start()
   {
@@ -56,7 +59,7 @@ public class OrderIngredientController : MonoBehaviour
     TextMeshProUGUI priceText = inputUI.transform.Find("price").GetComponent<TextMeshProUGUI>();
 
     //개수 입력받은거
-    int orderCount =int.Parse(orderNum.text);
+    orderCount =int.Parse(orderNum.text);
 
     //재료 가격 가져오기
     Ingredient orderIngredient = ingredientContainer.ingredientObject[selectIngredientIndex].GetComponent<Ingredient>();
@@ -78,8 +81,34 @@ public class OrderIngredientController : MonoBehaviour
       return;
     }
 
-    int order = int.Parse(orderNum.text);
-    ingredientContainer.countIncrease(selectIngredientIndex, order);
+    ingredientContainer.countIncrease(selectIngredientIndex, orderCount);
+    isOrder = 1;
     inputUI.SetActive(false);
+  }
+
+
+  public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+  {
+
+    if (stream.IsWriting)
+    {
+      // We own this player: send the others our data
+      stream.SendNext(type);
+      stream.SendNext(selectIngredientIndex);
+      stream.SendNext(orderCount);
+      stream.SendNext(isOrder);
+    }
+    else
+    {
+      type = (int)stream.ReceiveNext();
+      selectIngredientIndex = (int)stream.ReceiveNext();
+      orderCount = (int)stream.ReceiveNext();
+      isOrder = (int)stream.ReceiveNext();
+      if(isOrder == 1){
+        ingredientContainer = container[type].GetComponent<IngredientContainer>();
+        ingredientContainer.countIncrease(selectIngredientIndex, orderCount);
+        isOrder = 0;
+      }
+    }
   }
 }
