@@ -25,8 +25,9 @@ public class IngredientContainer : MonoBehaviourPun, IPunObservable
         isActive = false;
         uiContainer.SetActive(false);
         mainController = FindObjectOfType<MainController>();
-        for(int i=0;i<counts.Length;i++){
-          textArea[i].text = counts[i].ToString();
+        for (int i = 0; i < counts.Length; i++)
+        {
+            textArea[i].text = counts[i].ToString();
         }
     }
 
@@ -34,30 +35,52 @@ public class IngredientContainer : MonoBehaviourPun, IPunObservable
     {
         if (stream.IsWriting)
         {
-            // We own this player: send the others our data
-            stream.SendNext(counts);
+            // 데이터를 전송하는 플레이어 (송신)
+            for (int i = 0; i < counts.Length; i++)
+            {
+                stream.SendNext(counts[i]);
+            }
         }
         else
         {
-            // Network player, receive data
-            counts = (int[])stream.ReceiveNext();
-
+            // 데이터를 수신하는 플레이어 (수신)
+            for (int i = 0; i < counts.Length; i++)
+            {
+                counts[i] = (int)stream.ReceiveNext();
+                textArea[i].text = counts[i].ToString();
+            }
         }
     }
 
-    public void countIncrease(int index,int num){
+    public void countIncrease(int index, int num)
+    {
         counts[index] += num;
+        Debug.Log(counts[index]);
         textArea[index].text = counts[index].ToString();
+        Debug.Log(counts[index]);
+        photonView.RPC("UpdateCount", RpcTarget.OthersBuffered, index, counts[index]);
+        Debug.Log(counts[index]);
     }
 
-    public bool countDecrease(int index,int num){
-      if(counts[index] < num){
-        Debug.Log("갯수부족");
-        return false;
-      }
-      counts[index] -= num;
-      textArea[index].text = counts[index].ToString();
-      return true;
+    [PunRPC]
+    private void UpdateCount(int index, int value)
+    {
+        counts[index] = value;
+        textArea[index].text = value.ToString();
+    }
+
+    public bool countDecrease(int index, int num)
+    {
+        if (counts[index] < num)
+        {
+            Debug.Log("갯수부족");
+            return false;
+        }
+
+        counts[index] -= num;
+        textArea[index].text = counts[index].ToString();
+        photonView.RPC("UpdateCount", RpcTarget.OthersBuffered, index, counts[index]);
+        return true;
     }
 
 
@@ -85,8 +108,9 @@ public class IngredientContainer : MonoBehaviourPun, IPunObservable
     }
     public void getIngredient(int index) // 재료오브젝트 생성
     {
-        if(!countDecrease(index,1)){
-          return;
+        if (!countDecrease(index, 1))
+        {
+            return;
         }
         Vector3 newPosition = pos[index].position + new Vector3(0f, 2f, 0f);
         //Instantiate(ingredientObject[index], newPosition, pos[index].rotation);
