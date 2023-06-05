@@ -40,7 +40,6 @@ public class ProcessController1 : MonoBehaviour
         Vector3 position = pos.position + new Vector3(1f, 3f, 0f);
         GameObject fxObject = PhotonNetwork.Instantiate("Effect/" + effect.name, position, Quaternion.identity);
         //fxObject.transform.parent = effect.transform;
-        PhotonNetwork.Destroy(fxObject, 4);
 
         mainController.drop();
         PhotonNetwork.Destroy(interactingObject);
