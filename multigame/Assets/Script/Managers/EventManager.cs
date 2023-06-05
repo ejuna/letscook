@@ -12,7 +12,6 @@ public class EventManager
     public GameObject uiContainer;
     bool isTodayGourmand;
     bool isTodayGroupGeuset;
-    bool isClera;
     bool isGameOver;
     public int targetDate { get; set; }//무한이면 -1
     public int targetMoney { get; set; }//무한이면 -1
@@ -26,6 +25,7 @@ public class EventManager
 
         isTodayGourmand = true;
         isTodayGroupGeuset = true;
+        isGameOver = true;
 
         //게임 종료 UI연결
         uiContainer = GameObject.FindGameObjectWithTag("GameEnd");
@@ -54,9 +54,10 @@ public class EventManager
               isTodayGroupGeuset = false;
         }
         //목표일짜 및 목표 금액 달성시 게임 클리어
-        if (Managers.Date.day == targetDate || Managers.Money.money >= targetMoney|| Managers.Life.life <= 0)
+        if (isGameOver && (Managers.Date.day == targetDate || Managers.Money.money >= targetMoney|| Managers.Life.life <= 0 ))
         {
             gameClear();
+            isGameOver = false;
         }
     }
 

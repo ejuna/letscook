@@ -34,9 +34,7 @@ public class Managers : MonoBehaviourPun, IPunObservable
   void Start()
     {
         init();
-        Orders.init();
-        Event.init();
-        Life.Init();
+
   }
 
     // Update is called once per frame
@@ -69,6 +67,10 @@ public class Managers : MonoBehaviourPun, IPunObservable
             }
             DontDestroyOnLoad(go);
             s_instance = go.GetComponent<Managers>();
+
+            Orders.init();
+            Event.init();
+            Life.Init();
         }
   }
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
