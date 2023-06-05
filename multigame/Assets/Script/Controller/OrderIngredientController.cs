@@ -33,6 +33,18 @@ public class OrderIngredientController : MonoBehaviourPun, IPunObservable
     }
   }
 
+  void Update(){
+
+    if (isOrder == 1)
+    {
+      Debug.Log("ddd");
+      ingredientContainer = container[type].GetComponent<IngredientContainer>();
+      ingredientContainer.countIncrease(selectIngredientIndex, orderCount);
+      isOrder = 0;
+    }
+
+  }
+
   public void onClickTypeButton(int index){
     if(type != -1){
       uiList[type].SetActive(false);
@@ -89,7 +101,7 @@ public class OrderIngredientController : MonoBehaviourPun, IPunObservable
 
   public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
   {
-
+    Debug.Log("ㄹ포톤뷰");
     if (stream.IsWriting)
     {
       // We own this player: send the others our data
@@ -104,11 +116,8 @@ public class OrderIngredientController : MonoBehaviourPun, IPunObservable
       selectIngredientIndex = (int)stream.ReceiveNext();
       orderCount = (int)stream.ReceiveNext();
       isOrder = (int)stream.ReceiveNext();
-      if(isOrder == 1){
-        ingredientContainer = container[type].GetComponent<IngredientContainer>();
-        ingredientContainer.countIncrease(selectIngredientIndex, orderCount);
-        isOrder = 0;
-      }
+
+      Debug.Log(type + "," + selectIngredientIndex + "," + orderCount + "," + isOrder);
     }
   }
 }
