@@ -16,7 +16,7 @@ public class CountertopController : MonoBehaviourPun, IPunObservable
     void Start()
     {
         ingres = new List<string>();
-        st = null;
+        st = "";
         Managers.Input.KeyAction -= OnKeyboard;
         Managers.Input.KeyAction += OnKeyboard;
     }
@@ -31,14 +31,16 @@ public class CountertopController : MonoBehaviourPun, IPunObservable
         int loopNum = 0;
         if (Input.GetKeyDown(KeyCode.V) && isPlayerEnter)
         {
-            if(st != null)
+            if (st.Length == 0) return;
+            else
             {
-                String[] starr=st.Split(",");
-                for(int i = 0; i < starr.Length; i++)
+                String[] starr = st.Split(",");
+                for (int i = 0; i < starr.Length; i++)
                 {
                     ingres.Add(starr[i]);
                 }
             }
+            st = null;
             if (ingres.Count == 0)
             {
                 return;
@@ -76,7 +78,13 @@ public class CountertopController : MonoBehaviourPun, IPunObservable
                 tempAllFood.Clear();
                 tempAllFood = produceFood.ToList();
             });
-            ingres.ForEach(text => { st = st + text + ","; });
+            string str = "";
+            for (int i = 0; i < ingres.Count; i++)
+            {
+                str = str + ingres[i] + ",";
+            }
+            st = str;
+
             ingres.Clear();
             ingres = new List<string>();
             //재료 삭제하기
