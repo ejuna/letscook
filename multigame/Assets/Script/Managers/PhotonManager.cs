@@ -152,6 +152,20 @@ public class PhotonManager : MonoBehaviourPunCallbacks
     {
         Debug.Log($"플레이어 {otherPlayer.NickName} 가 방에서 퇴장.");
 
+        if (inLobbyRoom)
+        {
+            PlayerUpdate();
+        }
+        else
+        {
+            if (PhotonNetwork.IsMasterClient)
+            {
+                //해당 캐릭터 찾아서 소유권 요청후 삭제
+                GameObject.Find(otherPlayer.NickName).gameObject.GetComponent<PhotonView>().RequestOwnership();
+                PhotonNetwork.Destroy(GameObject.Find(otherPlayer.NickName));
+            }
+                
+        }
         //룸 플레이어 업데이트
         PlayerUpdate();
     }
@@ -381,7 +395,8 @@ public class PhotonManager : MonoBehaviourPunCallbacks
         //방장일 경우에만 게임 씬으로 이동
         if (PhotonNetwork.IsMasterClient)
         {
-            
+            PhotonNetwork.CurrentRoom.IsOpen = false;
+            PhotonNetwork.CurrentRoom.IsVisible = false;
             PhotonNetwork.LoadLevel("Game");
             inLobbyRoom = false;
 
@@ -459,18 +474,22 @@ public class PhotonManager : MonoBehaviourPunCallbacks
         if (PhotonNetwork.PlayerList[0].NickName == PhotonNetwork.NickName)
         {
             PhotonNetwork.Instantiate("Prefabs/Player/Badger_Jasper", new Vector3(5, 1, -5), Quaternion.identity, 0);
+            GameObject.Find("Badger_Jasper").gameObject.name = PhotonNetwork.NickName;
         }
         else if (PhotonNetwork.PlayerList[1].NickName == PhotonNetwork.NickName)
         {
             PhotonNetwork.Instantiate("Prefabs/Player/Frog_Shanks", new Vector3(-6, 1, -5), Quaternion.identity, 0);
+            GameObject.Find("Frog_Shanks").gameObject.name = PhotonNetwork.NickName;
         }
         else if (PhotonNetwork.PlayerList[2].NickName == PhotonNetwork.NickName)
         {
             PhotonNetwork.Instantiate("Prefabs/Player/Panda_Apple", new Vector3(-4, 1, -5), Quaternion.identity, 0);
+            GameObject.Find("Panda_Apple").gameObject.name = PhotonNetwork.NickName;
         }
         else if (PhotonNetwork.PlayerList[3].NickName == PhotonNetwork.NickName)
         {
             PhotonNetwork.Instantiate("Prefabs/Player/Rabbit_Sydney", new Vector3(-2, 1, -5), Quaternion.identity, 0);
+            GameObject.Find("Rabbit_Sydney").gameObject.name = PhotonNetwork.NickName;
         }
     }
 
