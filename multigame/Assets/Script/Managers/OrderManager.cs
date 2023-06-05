@@ -264,8 +264,14 @@ public class OrderManager
     }
 
 
-  public void Clear(){
+    public void Clear()
+    {
+       
+    }
 
-  }
+    public void TimeClear(){
+        timer = 0f;
+        worldTimer = 0f;
+    }
 
 }

@@ -29,6 +29,8 @@ public class PhotonManager : MonoBehaviourPunCallbacks
     public int targetMoney;
     public int targetDay;
 
+    public bool inLobbyRoom;
+
     private void Awake()
     {
         //씬이 바뀌어도 포톤매니저 오브젝트 삭제 방지
@@ -95,6 +97,9 @@ public class PhotonManager : MonoBehaviourPunCallbacks
         //룸화면 활성화
         GameObject.Find("View").transform.Find("RoomView").gameObject.SetActive(true);
 
+        //로비룸 입장 true 설정
+        inLobbyRoom = true;
+
         //룸 플레이어 업데이트
         PlayerUpdate();
 
@@ -129,6 +134,7 @@ public class PhotonManager : MonoBehaviourPunCallbacks
     //방 퇴장
     public override void OnLeftRoom()
     {
+        inLobbyRoom = false;
         Debug.Log("방 퇴장");
     }
 
@@ -385,40 +391,44 @@ public class PhotonManager : MonoBehaviourPunCallbacks
     //플레이어 리스트 업데이트
     public void PlayerUpdate()
     {
-        //초기화 
-        for(int i=0; i<4; i++)
+        if (inLobbyRoom)
         {
-            roomPlayer[i].transform.GetChild(1).gameObject.GetComponent<TextMeshProUGUI>().text = " ";
-            roomPlayer[i].transform.GetChild(0).gameObject.SetActive(false);
-        }
-
-        //설정
-        for(int i=0; i<PhotonNetwork.PlayerList.Length; i++)
-        {
-            if (i == 0)
+            //초기화 
+            for (int i = 0; i < 4; i++)
             {
-                //유저 닉네임 표시 (1번 플레이어는 서빙역할)
-                roomPlayer[i].transform.GetChild(1).gameObject.GetComponent<TextMeshProUGUI>().text = PhotonNetwork.PlayerList[i].NickName + " (서빙)";
+                roomPlayer[i].transform.GetChild(1).gameObject.GetComponent<TextMeshProUGUI>().text = " ";
+                roomPlayer[i].transform.GetChild(0).gameObject.SetActive(false);
+            }
+
+            //설정
+            for (int i = 0; i < PhotonNetwork.PlayerList.Length; i++)
+            {
+                if (i == 0)
+                {
+                    //유저 닉네임 표시 (1번 플레이어는 서빙역할)
+                    roomPlayer[i].transform.GetChild(1).gameObject.GetComponent<TextMeshProUGUI>().text = PhotonNetwork.PlayerList[i].NickName + " (서빙)";
+                }
+                else
+                {
+                    //유저 닉네임 표시
+                    roomPlayer[i].transform.GetChild(1).gameObject.GetComponent<TextMeshProUGUI>().text = PhotonNetwork.PlayerList[i].NickName;
+                }
+
+                //유저 이미지 표시
+                roomPlayer[i].transform.GetChild(0).gameObject.SetActive(true);
+            }
+
+            //방에 4명이면 게임시작 버튼 활성화
+            if (PhotonNetwork.PlayerList.Length != 0)
+            {
+                GameObject.Find("GameStartButton").gameObject.GetComponent<Button>().interactable = true;
             }
             else
             {
-                //유저 닉네임 표시
-                roomPlayer[i].transform.GetChild(1).gameObject.GetComponent<TextMeshProUGUI>().text = PhotonNetwork.PlayerList[i].NickName;
+                GameObject.Find("GameStartButton").gameObject.GetComponent<Button>().interactable = false;
             }
-            
-            //유저 이미지 표시
-            roomPlayer[i].transform.GetChild(0).gameObject.SetActive(true);
         }
-
-        //방에 4명이면 게임시작 버튼 활성화
-        if (PhotonNetwork.PlayerList.Length != 0)
-        {
-            GameObject.Find("GameStartButton").gameObject.GetComponent<Button>().interactable = true;
-        }
-        else
-        {
-            GameObject.Find("GameStartButton").gameObject.GetComponent<Button>().interactable = false;
-        }
+        
 
     }
 

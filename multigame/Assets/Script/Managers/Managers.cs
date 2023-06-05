@@ -165,5 +165,6 @@ public class Managers : MonoBehaviourPun, IPunObservable
         Money.tempMoney = Money.money;
         Fame.tempFame = Fame.fame;
         Date.dateUpdate();
+        Orders.TimeClear();
     }
 }
