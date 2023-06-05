@@ -30,6 +30,7 @@ public class PhotonManager : MonoBehaviourPunCallbacks
     public int targetDay;
 
     public bool inLobbyRoom;
+    public bool inGameRoom;
 
     private void Awake()
     {
@@ -134,7 +135,16 @@ public class PhotonManager : MonoBehaviourPunCallbacks
     //방 퇴장
     public override void OnLeftRoom()
     {
-        inLobbyRoom = false;
+        if (inGameRoom)
+        {
+            PhotonNetwork.Destroy(GameObject.Find(PhotonNetwork.NickName));
+            
+        }
+        else
+        {
+            inLobbyRoom = false;
+        }
+        
         Debug.Log("방 퇴장");
     }
 
@@ -152,22 +162,14 @@ public class PhotonManager : MonoBehaviourPunCallbacks
     {
         Debug.Log($"플레이어 {otherPlayer.NickName} 가 방에서 퇴장.");
 
+
+        //룸 플레이어 업데이트
         if (inLobbyRoom)
         {
             PlayerUpdate();
         }
-        else
-        {
-            if (PhotonNetwork.IsMasterClient)
-            {
-                //해당 캐릭터 찾아서 소유권 요청후 삭제
-                GameObject.Find(otherPlayer.NickName).gameObject.GetComponent<PhotonView>().RequestOwnership();
-                PhotonNetwork.Destroy(GameObject.Find(otherPlayer.NickName));
-            }
-                
-        }
-        //룸 플레이어 업데이트
-        PlayerUpdate();
+       
+        
     }
 
 
@@ -398,7 +400,6 @@ public class PhotonManager : MonoBehaviourPunCallbacks
             PhotonNetwork.CurrentRoom.IsOpen = false;
             PhotonNetwork.CurrentRoom.IsVisible = false;
             PhotonNetwork.LoadLevel("Game");
-            inLobbyRoom = false;
 
         }
     }
@@ -461,6 +462,8 @@ public class PhotonManager : MonoBehaviourPunCallbacks
         //level=1 -> 게임 씬임
         if (level == 1)
         {
+            inLobbyRoom = false;
+            inGameRoom = true;
             InstantiatePlayer();
         }
        
