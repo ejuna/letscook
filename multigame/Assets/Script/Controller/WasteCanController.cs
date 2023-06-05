@@ -1,3 +1,4 @@
+using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -29,7 +30,8 @@ public class WasteCanController : MonoBehaviour
         }
         if (other.gameObject.tag == "Pickup" && (other.gameObject.transform.parent == null || other.gameObject.transform.parent.name != "GameObject"))
         {
-            Destroy(other.gameObject);
+
+            PhotonNetwork.Destroy(other.gameObject);
         }
     }
     void OnTriggerExit(Collider other)
