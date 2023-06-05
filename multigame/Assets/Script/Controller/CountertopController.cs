@@ -16,7 +16,7 @@ public class CountertopController : MonoBehaviourPun, IPunObservable
     void Start()
     {
         ingres = new List<string>();
-        st = null;
+        st = "";
         Managers.Input.KeyAction -= OnKeyboard;
         Managers.Input.KeyAction += OnKeyboard;
     }
@@ -31,7 +31,7 @@ public class CountertopController : MonoBehaviourPun, IPunObservable
         int loopNum = 0;
         if (Input.GetKeyDown(KeyCode.V) && isPlayerEnter)
         {
-            if(st != null)
+            if(st.Length!=0)
             {
                 String[] starr=st.Split(",");
                 for(int i = 0; i < starr.Length; i++)
@@ -39,6 +39,7 @@ public class CountertopController : MonoBehaviourPun, IPunObservable
                     ingres.Add(starr[i]);
                 }
             }
+            st = null;
             if (ingres.Count == 0)
             {
                 return;
