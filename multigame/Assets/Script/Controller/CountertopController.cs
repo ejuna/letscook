@@ -7,7 +7,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using static UnityEditor.PlayerSettings;
 
-public class CountertopController : MonoBehaviour
+public class CountertopController : MonoBehaviourPun, IPunObservable
 {
     public List<string> ingres;
     bool isPlayerEnter;
@@ -106,6 +106,20 @@ public class CountertopController : MonoBehaviour
         gameObjectRigidbody.isKinematic = isEquip;
     }
 
+    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    {
+        if (stream.IsWriting)
+        {
+            // We own this player: send the others our data
+            stream.SendNext(ingres);
+        }
+        else
+        {
+            // Network player, receive data
+            this.ingres = (List<String>)stream.ReceiveNext();
+
+        }
+    }
 
     void OnTriggerEnter(Collider other)
     {
