@@ -7,9 +7,9 @@ using Unity.VisualScripting;
 using UnityEngine;
 using static UnityEditor.PlayerSettings;
 
-public class CountertopController : MonoBehaviour
+public class CountertopController : MonoBehaviourPun, IPunObservable
 {
-    List<string> ingres;
+    public List<string> ingres;
     bool isPlayerEnter;
     // Start is called before the first frame update
     void Start()
@@ -26,7 +26,6 @@ public class CountertopController : MonoBehaviour
     }
     void OnKeyboard()
     {
-
         int loopNum = 0;
         if (Input.GetKeyDown(KeyCode.V) && isPlayerEnter)
         {
@@ -107,6 +106,20 @@ public class CountertopController : MonoBehaviour
         gameObjectRigidbody.isKinematic = isEquip;
     }
 
+    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    {
+        if (stream.IsWriting)
+        {
+            // We own this player: send the others our data
+            stream.SendNext(ingres);
+        }
+        else
+        {
+            // Network player, receive data
+            this.ingres = (List<String>)stream.ReceiveNext();
+
+        }
+    }
 
     void OnTriggerEnter(Collider other)
     {
