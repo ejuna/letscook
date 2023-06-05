@@ -15,22 +15,25 @@ public class OrderManager
 
   private static bool isInit = false;
   private float timer;
+  private float worldTimer;
 
   private int displayCount = 0;
 
   public OrderManager(){
     timer = 0f;
+    worldTimer = 0f;
   }
 
   public void OnUpdate(){
     timer += Time.deltaTime;
+    worldTimer+= Time.deltaTime;
 
     //30초마다 주문 생성
-    if ((int)timer %30==0)
+    if (timer >30f)
     {
-      
+      timer = 0;
       //하루 시간 초과시 오더 생성안함
-      if(timer< Constants.Day_MAX_time)
+      if(worldTimer< Constants.Day_MAX_time)
        {
             createOrder();
        }
