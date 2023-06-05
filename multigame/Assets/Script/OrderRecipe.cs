@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using Photon.Pun;
 
 public class OrderRecipe : MonoBehaviour
 {
@@ -53,7 +54,7 @@ public class OrderRecipe : MonoBehaviour
 
   public OrderRecipe GetRecipe(Order order, GameObject orderPrefab, int id)
   {
-    orderUI = Instantiate(orderPrefab);
+    orderUI = PhotonNetwork.Instantiate("Prefab/OrderRecipe/"+orderPrefab.name,transform.position,transform.rotation);
     OrderRecipe recipe = orderUI.GetComponent<OrderRecipe>();
     recipe.setRecipe(order, orderUI, id);
     return recipe;
