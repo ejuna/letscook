@@ -34,12 +34,12 @@ public class CountertopController : MonoBehaviourPun, IPunObservable
             if (st.Length != 0)
             {
                 String[] starr = st.Split(",");
-                for (int i = 0; i < starr.Length; i++)
+                for (int i = 0; i < starr.Length-1; i++)
                 {
+                    Debug.Log(i);
                     ingres.Add(starr[i]);
                 }
             }
-            st = null;
             if (ingres.Count == 0)
             {
                 return;
@@ -77,18 +77,14 @@ public class CountertopController : MonoBehaviourPun, IPunObservable
                 tempAllFood.Clear();
                 tempAllFood = produceFood.ToList();
             });
-            string str = "";
-            for (int i = 0; i < ingres.Count; i++)
-            {
-                str = str + ingres[i] + ",";
-            }
-            st = str;
 
+            st = "";
             ingres.Clear();
             ingres = new List<string>();
             //재료 삭제하기
             for (int i = 1 ; i< transform.childCount; i++)
             {
+                Debug.Log(transform.GetChild(i).gameObject.name);
                 PhotonNetwork.Destroy(transform.GetChild(i).gameObject);
             }
             //음식 생성
@@ -149,7 +145,10 @@ public class CountertopController : MonoBehaviourPun, IPunObservable
         if (other.gameObject.GetComponent<Ingredient>() != null && other.gameObject.tag == "Pickup"&&  (other.gameObject.transform.parent == null || other.gameObject.transform.parent.name != "GameObject"))
         {
 
-            ingres.Add(other.gameObject.GetComponent<Ingredient>().ingredientName);
+            //ingres.Add(other.gameObject.GetComponent<Ingredient>().ingredientName);
+
+            st = st + other.gameObject.GetComponent<Ingredient>().ingredientName + ",";
+
 
             other.transform.SetParent(transform, false);
             other.transform.localPosition = Vector3.zero;
