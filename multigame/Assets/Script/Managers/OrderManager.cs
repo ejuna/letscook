@@ -17,7 +17,7 @@ public class OrderManager
   private float timer;
   private float worldTimer;
 
-  public int orderCount = 0;
+  public int tempOrder = 1;
 
   private int displayCount = 0;
 
@@ -29,7 +29,7 @@ public class OrderManager
   public void OnUpdate(){
     timer += Time.deltaTime;
     worldTimer+= Time.deltaTime;
-    orderCount = orderList.Count;
+    tempOrder = orderList.Count;
 
     //30초마다 주문 생성
     if (timer >20f)

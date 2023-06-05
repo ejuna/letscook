@@ -86,7 +86,7 @@ public class Managers : MonoBehaviourPun, IPunObservable
             stream.SendNext(Money.money);
             stream.SendNext(Money.tempMoney);
             stream.SendNext(Fame.tempFame);
-            stream.SendNext(Orders.orderCount);
+            stream.SendNext(Orders.tempOrder);
 
         }
         else
@@ -99,7 +99,7 @@ public class Managers : MonoBehaviourPun, IPunObservable
             Money.money = (int)stream.ReceiveNext();
             Money.tempMoney = (int)stream.ReceiveNext();
             Fame.tempFame = (int)stream.ReceiveNext();
-            Orders.orderCount= (int)stream.ReceiveNext();
+            Orders.tempOrder = (int)stream.ReceiveNext();
 
         }
     }
