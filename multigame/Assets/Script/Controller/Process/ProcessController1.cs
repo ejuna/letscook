@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using UnityEngine;
 using UnityEngine.UIElements;
+using Photon.Pun;
 
 public class ProcessController1 : MonoBehaviour
 {
@@ -45,7 +46,7 @@ public class ProcessController1 : MonoBehaviour
         Destroy(interactingObject);
         yield return new WaitForSeconds(4f); // 5초 대기
 
-        GameObject prepObject = PhotonNetwork.Instantiate(prepIngredient, position, Quaternion.identity);
+        GameObject prepObject = PhotonNetwork.Instantiate(prepIngredient.name, position, Quaternion.identity);
 
         throwObject(prepObject);
         mainController.unfreeze();
