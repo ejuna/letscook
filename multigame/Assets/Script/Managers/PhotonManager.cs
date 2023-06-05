@@ -383,6 +383,7 @@ public class PhotonManager : MonoBehaviourPunCallbacks
         {
             
             PhotonNetwork.LoadLevel("Game");
+            inLobbyRoom = false;
 
         }
     }
