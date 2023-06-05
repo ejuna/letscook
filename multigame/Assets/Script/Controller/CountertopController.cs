@@ -75,7 +75,7 @@ public class CountertopController : MonoBehaviourPun, IPunObservable
             }
             //음식 생성
             GameObject go;
-            Vector3 newPosition = transform.position + new Vector3(0f, 2f, 2f);
+            Vector3 newPosition = transform.position + new Vector3(2f, 2f, 0f);
             
             if (tempAllFood.Count==1) {
                 Debug.Log("완성");
