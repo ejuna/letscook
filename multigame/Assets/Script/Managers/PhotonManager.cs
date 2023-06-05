@@ -135,6 +135,7 @@ public class PhotonManager : MonoBehaviourPunCallbacks
     //방 퇴장
     public override void OnLeftRoom()
     {
+        //게임 도중에 퇴장했다면 자기 캐릭터 삭제
         if (inGameRoom)
         {
             PhotonNetwork.Destroy(GameObject.Find(PhotonNetwork.NickName));
