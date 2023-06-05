@@ -5,18 +5,19 @@ using System.Collections.Generic;
 using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
-using static UnityEditor.PlayerSettings;
+//using static UnityEditor.PlayerSettings;
 
 public class CountertopController : MonoBehaviourPun, IPunObservable
 {
     public List<string> ingres;
-    public string st;
+    //public string st;
     bool isPlayerEnter;
+    public PhotonView PV;
     // Start is called before the first frame update
     void Start()
     {
         ingres = new List<string>();
-        st = "";
+        //st = "";
         Managers.Input.KeyAction -= OnKeyboard;
         Managers.Input.KeyAction += OnKeyboard;
     }
@@ -31,6 +32,7 @@ public class CountertopController : MonoBehaviourPun, IPunObservable
         int loopNum = 0;
         if (Input.GetKeyDown(KeyCode.V) && isPlayerEnter)
         {
+            /*
             if (st.Length != 0)
             {
                 String[] starr = st.Split(",");
@@ -40,10 +42,12 @@ public class CountertopController : MonoBehaviourPun, IPunObservable
                     ingres.Add(starr[i]);
                 }
             }
+            */
             if (ingres.Count == 0)
             {
                 return;
             }
+            
             List<FoodData> tempAllFood = Managers.Orders.allFoods.ToList();
             List<FoodData> produceFood = new List<FoodData>();
             //해당 재료로 만들수 있는 요리찾기
@@ -78,7 +82,7 @@ public class CountertopController : MonoBehaviourPun, IPunObservable
                 tempAllFood = produceFood.ToList();
             });
 
-            st = "";
+            //st = "";
             ingres.Clear();
             ingres = new List<string>();
             //재료 삭제하기
@@ -126,12 +130,12 @@ public class CountertopController : MonoBehaviourPun, IPunObservable
         if (stream.IsWriting)
         {
             // We own this player: send the others our data
-            stream.SendNext(st);
+            //stream.SendNext(st);
         }
         else
         {
             // Network player, receive data
-            this.st = (string)stream.ReceiveNext();
+            //this.st = (string)stream.ReceiveNext();
 
         }
     }
@@ -145,9 +149,9 @@ public class CountertopController : MonoBehaviourPun, IPunObservable
         if (other.gameObject.GetComponent<Ingredient>() != null && other.gameObject.tag == "Pickup"&&  (other.gameObject.transform.parent == null || other.gameObject.transform.parent.name != "GameObject"))
         {
 
-            //ingres.Add(other.gameObject.GetComponent<Ingredient>().ingredientName);
+            ingres.Add(other.gameObject.GetComponent<Ingredient>().ingredientName);
 
-            st = st + other.gameObject.GetComponent<Ingredient>().ingredientName + ",";
+            //st = st + other.gameObject.GetComponent<Ingredient>().ingredientName + ",";
 
 
             other.transform.SetParent(transform, false);

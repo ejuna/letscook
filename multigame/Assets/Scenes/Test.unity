@@ -278,6 +278,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ingredientData: {fileID: 11400000, guid: d5afefdf463a1994f95048ea37bd1891, type: 2}
+  remotePos: {x: 0, y: 0, z: 0}
 --- !u!4 &265852699 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 123482365615681919, guid: bf93e4f85312c47809f52b78bde0ff28, type: 3}
@@ -521,6 +522,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a741d6f5209b5849bdcf98f1d100e0a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ingres: []
+  PV: {fileID: 0}
 --- !u!1 &811038009
 GameObject:
   m_ObjectHideFlags: 0
@@ -760,6 +763,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7170941710122992853, guid: 597c5499195d6554c92d9f9009b488d2, type: 3}
+      propertyPath: sceneViewId
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 7430341559861103323, guid: 597c5499195d6554c92d9f9009b488d2, type: 3}
       propertyPath: m_Name
       value: Badger_Jasper
@@ -881,6 +888,10 @@ PrefabInstance:
     - target: {fileID: 4940650200524590521, guid: 18419e5e88bb1054faa1e0b23383e6e7, type: 3}
       propertyPath: m_Name
       value: Milk
+      objectReference: {fileID: 0}
+    - target: {fileID: 6479932307135576884, guid: 18419e5e88bb1054faa1e0b23383e6e7, type: 3}
+      propertyPath: sceneViewId
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 8271967883847663530, guid: 18419e5e88bb1054faa1e0b23383e6e7, type: 3}
       propertyPath: m_RootOrder
