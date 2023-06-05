@@ -11,7 +11,7 @@ public class OrderManager
   public int complete { get; set; }
   public int totalComplete{ get; set; }
 
-  private const float DEFALT_TIME = 20.0f;
+  private const float DEFALT_TIME = 60.0f;
 
   private static bool isInit = false;
   private float timer;

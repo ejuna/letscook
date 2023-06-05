@@ -16,5 +16,6 @@ public class UI_Fame : MonoBehaviour
     void Update()
     {
         tmp.text = "Fame : " + Managers.Fame.fame;
+
     }
 }

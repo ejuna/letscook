@@ -28,6 +28,7 @@ public class OrderRecipe : MonoBehaviour
       }
       else
       {
+        Managers.Life.lifeDecrease();
         Managers.Orders.deleteOrder(id);
       }
     }
