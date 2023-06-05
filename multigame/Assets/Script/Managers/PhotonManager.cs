@@ -453,4 +453,14 @@ public class PhotonManager : MonoBehaviourPunCallbacks
             PhotonNetwork.Instantiate("Prefabs/Player/Rabbit_Sydney", new Vector3(5, 1, -5), Quaternion.identity, 0);
         }
     }
+
+    public void GoToLobbyButtonClick()
+    {
+        if (PhotonNetwork.IsMasterClient)
+        {
+
+            PhotonNetwork.LoadLevel("Lobby");
+
+        }
+    }
 }
