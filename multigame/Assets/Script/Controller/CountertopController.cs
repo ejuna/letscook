@@ -59,18 +59,22 @@ public class CountertopController : MonoBehaviour
                     if (isSame) produceFood.Add(tempAllFood[i]);//같은거를 모은 리스트에 추가
                     
                 }
+
                 tempAllFood.Clear();
                 tempAllFood = produceFood.ToList();
             });
+            ingres.Clear();
             //재료 삭제하기
-            for(int i = 1 ; i< transform.childCount; i++)
+            for (int i = 1 ; i< transform.childCount; i++)
             {
                 PhotonNetwork.Destroy(transform.GetChild(i).gameObject);
             }
             //음식 생성
             GameObject go;
             Vector3 newPosition = transform.position + new Vector3(0f, 2f, 2f);
+            
             if (tempAllFood.Count==1) {
+                Debug.Log("완성");
                 go = PhotonNetwork.Instantiate("Prefabs/요리/" + tempAllFood[0].name , newPosition,transform.rotation);
             }
             else//실패 음식
