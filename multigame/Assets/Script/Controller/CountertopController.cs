@@ -131,7 +131,7 @@ public class CountertopController : MonoBehaviourPun, IPunObservable
         else
         {
             // Network player, receive data
-            this.st = (String)stream.ReceiveNext();
+            this.st = (string)stream.ReceiveNext();
 
         }
     }
