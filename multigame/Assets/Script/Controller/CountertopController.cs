@@ -7,13 +7,9 @@ using Unity.VisualScripting;
 using UnityEngine;
 using static UnityEditor.PlayerSettings;
 
-public class CountertopController : MonoBehaviour
+public class CountertopController : MonoBehaviourPun, IPunObservable
 {
-    public PhotonView PV;
-
-    [SerializeField]
-    List<string> ingres { get => ingres; set => PV.RPC(nameof(SetIngresRPC),RpcTarget.AllBufferedViaServer,value); }
-    [PunRPC] void SetIngresRPC(List<string> list) => ingres = list;
+    public List<string> ingres;
     bool isPlayerEnter;
     // Start is called before the first frame update
     void Start()
@@ -110,7 +106,20 @@ public class CountertopController : MonoBehaviour
         gameObjectRigidbody.isKinematic = isEquip;
     }
 
+    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    {
+        if (stream.IsWriting)
+        {
+            // We own this player: send the others our data
+            stream.SendNext(ingres);
+        }
+        else
+        {
+            // Network player, receive data
+            this.ingres = (List<String>)stream.ReceiveNext();
 
+        }
+    }
 
     void OnTriggerEnter(Collider other)
     {
