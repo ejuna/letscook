@@ -25,10 +25,16 @@ public class OrderManager
   public void OnUpdate(){
     timer += Time.deltaTime;
 
-    if (timer >= 30f)
+    //30초마다 주문 생성
+    if ((int)timer %30==0)
     {
-      timer = 0f;
-      createOrder();
+      
+      //하루 시간 초과시 오더 생성안함
+      if(timer< Constants.Day_MAX_time)
+       {
+            createOrder();
+       }
+      
     }
 
     if(displayCount < 5){
