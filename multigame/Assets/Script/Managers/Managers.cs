@@ -2,6 +2,7 @@ using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class Managers : MonoBehaviourPun, IPunObservable
 {
@@ -83,8 +84,10 @@ public class Managers : MonoBehaviourPun, IPunObservable
             stream.SendNext(Date.time);
             stream.SendNext(Fame.fame);
             stream.SendNext(Money.money);
-            
-    }
+            stream.SendNext(Money.tempMoney);
+            stream.SendNext(Fame.tempFame);
+
+        }
         else
         {
             // Network player, receive data
@@ -93,7 +96,9 @@ public class Managers : MonoBehaviourPun, IPunObservable
             Date.time = (float)stream.ReceiveNext();
             Fame.fame = (int)stream.ReceiveNext();
             Money.money = (int)stream.ReceiveNext();
-            
+            Money.tempMoney = (int)stream.ReceiveNext();
+            Fame.tempFame = (int)stream.ReceiveNext();
+
         }
     }
     public static void Clear()
@@ -105,5 +110,60 @@ public class Managers : MonoBehaviourPun, IPunObservable
         Ingredient.Clear();
         Money.Clear();
         Orders.Clear();
+    }
+
+    //일일 정산 창 활성화
+    public static void Result()
+    {
+        GameObject.Find("Canvas").transform.Find("Result").gameObject.SetActive(true);
+        GameObject.Find("Money-Text").gameObject.GetComponent<TextMeshProUGUI>().text = "+ " + (Money.money - Money.tempMoney);
+        GameObject.Find("Fame-Text").gameObject.GetComponent<TextMeshProUGUI>().text = "+ " + (Fame.fame - Fame.tempFame);
+
+        int point = (Money.money - Money.tempMoney) + ((Fame.fame - Fame.tempFame) * 10);
+
+        GameObject.Find("Result").transform.Find("Star1").gameObject.SetActive(false);
+        GameObject.Find("Result").transform.Find("Star2").gameObject.SetActive(false);
+        GameObject.Find("Result").transform.Find("Star3").gameObject.SetActive(false);
+        GameObject.Find("Result").transform.Find("Star4").gameObject.SetActive(false);
+        GameObject.Find("Result").transform.Find("Star5").gameObject.SetActive(false);
+
+        if (point <= 200)
+        {
+            GameObject.Find("Result").transform.Find("Star1").gameObject.SetActive(true);
+        }
+        else if (point <= 400)
+        {
+            GameObject.Find("Result").transform.Find("Star1").gameObject.SetActive(true);
+            GameObject.Find("Result").transform.Find("Star2").gameObject.SetActive(true);
+        }
+        else if (point <= 600)
+        {
+            GameObject.Find("Result").transform.Find("Star1").gameObject.SetActive(true);
+            GameObject.Find("Result").transform.Find("Star2").gameObject.SetActive(true);
+            GameObject.Find("Result").transform.Find("Star3").gameObject.SetActive(true);
+        }
+        else if (point <= 800)
+        {
+            GameObject.Find("Result").transform.Find("Star1").gameObject.SetActive(true);
+            GameObject.Find("Result").transform.Find("Star2").gameObject.SetActive(true);
+            GameObject.Find("Result").transform.Find("Star3").gameObject.SetActive(true);
+            GameObject.Find("Result").transform.Find("Star4").gameObject.SetActive(true);
+        }
+        else
+        {
+            GameObject.Find("Result").transform.Find("Star1").gameObject.SetActive(true);
+            GameObject.Find("Result").transform.Find("Star2").gameObject.SetActive(true);
+            GameObject.Find("Result").transform.Find("Star3").gameObject.SetActive(true);
+            GameObject.Find("Result").transform.Find("Star4").gameObject.SetActive(true);
+            GameObject.Find("Result").transform.Find("Star5").gameObject.SetActive(true);
+        }
+    }
+
+    public void NextDayButtonClick()
+    {
+        GameObject.Find("Result").gameObject.SetActive(false);
+        Money.tempMoney = Money.money;
+        Fame.tempFame = Fame.fame;
+        Date.dateUpdate();
     }
 }
