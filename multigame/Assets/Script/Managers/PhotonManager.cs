@@ -438,19 +438,19 @@ public class PhotonManager : MonoBehaviourPunCallbacks
         //플레이어 넘버에 따라 다른 캐릭터 생성
         if (PhotonNetwork.PlayerList[0].NickName == PhotonNetwork.NickName)
         {
-            PhotonNetwork.Instantiate("Prefabs/Player/Badger_Jasper", new Vector3(-5, 1, -5), Quaternion.identity, 0);
+            PhotonNetwork.Instantiate("Prefabs/Player/Badger_Jasper", new Vector3(5, 1, -5), Quaternion.identity, 0);
         }
         else if (PhotonNetwork.PlayerList[1].NickName == PhotonNetwork.NickName)
         {
-            PhotonNetwork.Instantiate("Prefabs/Player/Frog_Shanks", new Vector3(-2, 1, -5), Quaternion.identity, 0);
+            PhotonNetwork.Instantiate("Prefabs/Player/Frog_Shanks", new Vector3(-6, 1, -5), Quaternion.identity, 0);
         }
         else if (PhotonNetwork.PlayerList[2].NickName == PhotonNetwork.NickName)
         {
-            PhotonNetwork.Instantiate("Prefabs/Player/Panda_Apple", new Vector3(2, 1, -5), Quaternion.identity, 0);
+            PhotonNetwork.Instantiate("Prefabs/Player/Panda_Apple", new Vector3(-4, 1, -5), Quaternion.identity, 0);
         }
         else if (PhotonNetwork.PlayerList[3].NickName == PhotonNetwork.NickName)
         {
-            PhotonNetwork.Instantiate("Prefabs/Player/Rabbit_Sydney", new Vector3(5, 1, -5), Quaternion.identity, 0);
+            PhotonNetwork.Instantiate("Prefabs/Player/Rabbit_Sydney", new Vector3(-2, 1, -5), Quaternion.identity, 0);
         }
     }
 
