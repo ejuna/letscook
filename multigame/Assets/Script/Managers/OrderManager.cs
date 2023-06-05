@@ -11,24 +11,36 @@ public class OrderManager
   public int complete { get; set; }
   public int totalComplete{ get; set; }
 
-  private const float DEFALT_TIME = 60.0f;
+  private const float DEFALT_TIME = 30.0f;
 
   private static bool isInit = false;
   private float timer;
+  private float worldTimer;
+
+  public int tempOrder = 1;
 
   private int displayCount = 0;
 
   public OrderManager(){
     timer = 0f;
+    worldTimer = 0f;
   }
 
   public void OnUpdate(){
     timer += Time.deltaTime;
+    worldTimer+= Time.deltaTime;
+    tempOrder = orderList.Count;
 
-    if (timer >= 30f)
+    //30초마다 주문 생성
+    if (timer >20f)
     {
-      timer = 0f;
-      createOrder();
+      timer = 0;
+      //하루 시간 초과시 오더 생성안함
+      if(worldTimer< Constants.Day_MAX_time)
+       {
+            createOrder();
+       }
+      
     }
 
     if(displayCount < 5){
@@ -247,7 +259,7 @@ public class OrderManager
 
   public bool isOrders()
     {
-        if (orderList.Count == 0)
+        if (tempOrder == 0)
         {
             return false;
         }
@@ -255,8 +267,14 @@ public class OrderManager
     }
 
 
-  public void Clear(){
+    public void Clear()
+    {
+       
+    }
 
-  }
+    public void TimeClear(){
+        timer = 0f;
+        worldTimer = 0f;
+    }
 
 }

@@ -39,8 +39,7 @@ public class MainController : MonoBehaviourPunCallbacks
         pv = GetComponent<PhotonView>();
 
         //1인칭 카메라 비활성화
-        transform.Find("SubCamera").GetComponent<Camera>().enabled = false;
-        
+        transform.Find("SubCamera").GetComponent<Camera>().enabled = false; 
 
 
     }
@@ -124,6 +123,14 @@ public class MainController : MonoBehaviourPunCallbacks
                 else
                 {
                     transform.Find("SubCamera").GetComponent<Camera>().enabled = true;
+                }
+            }
+            //마스터 클라이언트가 게임에서 나가서 서빙할 사람이 필요할 경우 J키 입력시 서빙자리로 이동함
+            if (Input.GetKeyDown(KeyCode.J))
+            {
+                if (PhotonNetwork.IsMasterClient)
+                {
+                    transform.position = new Vector3(5, 1, -5);
                 }
             }
         }

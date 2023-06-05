@@ -5777,7 +5777,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a86f533fd9917dd4da8601e9eb542c96, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  LogLevel: 2
+  LogLevel: 1
 --- !u!4 &765592028
 Transform:
   m_ObjectHideFlags: 0
@@ -6718,7 +6718,7 @@ MonoBehaviour:
   reliableMode: 0
   encrypt: 0
   transmitEnabled: 1
-  samplingRate: 24000
+  samplingRate: 48000
   frameDuration: 20000
   bitrate: 32653
   sourceType: 0
@@ -6755,8 +6755,8 @@ MonoBehaviour:
   KeepAliveInBackground: 60000
   ApplyDontDestroyOnLoad: 1
   runInBackground: 1
-  statsResetInterval: 1000
-  speakerPrefab: {fileID: 0}
+  statsResetInterval: 50
+  speakerPrefab: {fileID: 919114552232459563, guid: 19b5f9f4a528cb74394b6fd046589d46, type: 3}
   primaryRecorder: {fileID: 929772154}
   usePrimaryRecorder: 0
   Settings:
@@ -12411,6 +12411,8 @@ MonoBehaviour:
   - {fileID: 1521823182}
   targetMoney: 0
   targetDay: 0
+  inLobbyRoom: 0
+  inGameRoom: 0
 --- !u!4 &1673954440
 Transform:
   m_ObjectHideFlags: 0

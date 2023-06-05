@@ -2522,8 +2522,8 @@ AudioSource:
   SpatializePostEffects: 0
   Priority: 128
   DopplerLevel: 1
-  MinDistance: 10
-  MaxDistance: 30
+  MinDistance: 0.1
+  MaxDistance: 0.101
   Pan2D: 0
   rolloffMode: 0
   BypassEffects: 0
@@ -2972,6 +2972,7 @@ GameObject:
   - component: {fileID: 8545224259211698949}
   - component: {fileID: 3596467715360859738}
   - component: {fileID: 5695625064760126270}
+  - component: {fileID: 6575015782389326518}
   m_Layer: 0
   m_Name: Panda_Apple
   m_TagString: Player
@@ -3079,7 +3080,7 @@ MonoBehaviour:
   Group: 0
   prefixField: -1
   Synchronization: 3
-  OwnershipTransfer: 0
+  OwnershipTransfer: 1
   observableSearch: 0
   ObservedComponents:
   - {fileID: 3596467715360859738}
@@ -3127,6 +3128,18 @@ MonoBehaviour:
   m_SynchronizeLayers:
   - SynchronizeType: 0
     LayerIndex: 0
+--- !u!114 &6575015782389326518
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8431264642119003851}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 126494ae2a10a34499272ed97a6c9f5d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8432953319914847302
 GameObject:
   m_ObjectHideFlags: 0

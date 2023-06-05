@@ -5,8 +5,10 @@ using UnityEngine;
 public class FameManager
 {
     public int fame = 0;
+    public int tempFame = 0;
 
-  public void fameIncrease(int amount)
+    
+    public void fameIncrease(int amount)
   {
     fame += amount;
   }

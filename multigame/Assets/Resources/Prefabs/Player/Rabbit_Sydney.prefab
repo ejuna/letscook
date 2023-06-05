@@ -317,6 +317,7 @@ GameObject:
   - component: {fileID: 5166856693331493545}
   - component: {fileID: 3238730839746429018}
   - component: {fileID: 8000371788559321666}
+  - component: {fileID: 8387916910549370522}
   m_Layer: 0
   m_Name: Rabbit_Sydney
   m_TagString: Player
@@ -424,7 +425,7 @@ MonoBehaviour:
   Group: 0
   prefixField: -1
   Synchronization: 3
-  OwnershipTransfer: 0
+  OwnershipTransfer: 1
   observableSearch: 0
   ObservedComponents:
   - {fileID: 3238730839746429018}
@@ -472,6 +473,18 @@ MonoBehaviour:
   m_SynchronizeLayers:
   - SynchronizeType: 0
     LayerIndex: 0
+--- !u!114 &8387916910549370522
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 822700748478404356}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 126494ae2a10a34499272ed97a6c9f5d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &884520043554137811
 GameObject:
   m_ObjectHideFlags: 0
@@ -2485,8 +2498,8 @@ AudioSource:
   SpatializePostEffects: 0
   Priority: 128
   DopplerLevel: 1
-  MinDistance: 10
-  MaxDistance: 30
+  MinDistance: 0.1
+  MaxDistance: 0.101
   Pan2D: 0
   rolloffMode: 0
   BypassEffects: 0

@@ -29,6 +29,9 @@ public class PhotonManager : MonoBehaviourPunCallbacks
     public int targetMoney;
     public int targetDay;
 
+    public bool inLobbyRoom;
+    public bool inGameRoom;
+
     private void Awake()
     {
         //씬이 바뀌어도 포톤매니저 오브젝트 삭제 방지
@@ -95,6 +98,9 @@ public class PhotonManager : MonoBehaviourPunCallbacks
         //룸화면 활성화
         GameObject.Find("View").transform.Find("RoomView").gameObject.SetActive(true);
 
+        //로비룸 입장 true 설정
+        inLobbyRoom = true;
+
         //룸 플레이어 업데이트
         PlayerUpdate();
 
@@ -129,6 +135,17 @@ public class PhotonManager : MonoBehaviourPunCallbacks
     //방 퇴장
     public override void OnLeftRoom()
     {
+        //게임 도중에 퇴장했다면 자기 캐릭터 삭제
+        if (inGameRoom)
+        {
+            PhotonNetwork.Destroy(GameObject.Find(PhotonNetwork.NickName));
+            
+        }
+        else
+        {
+            inLobbyRoom = false;
+        }
+        
         Debug.Log("방 퇴장");
     }
 
@@ -146,8 +163,14 @@ public class PhotonManager : MonoBehaviourPunCallbacks
     {
         Debug.Log($"플레이어 {otherPlayer.NickName} 가 방에서 퇴장.");
 
+
         //룸 플레이어 업데이트
-        PlayerUpdate();
+        if (inLobbyRoom)
+        {
+            PlayerUpdate();
+        }
+       
+        
     }
 
 
@@ -375,7 +398,8 @@ public class PhotonManager : MonoBehaviourPunCallbacks
         //방장일 경우에만 게임 씬으로 이동
         if (PhotonNetwork.IsMasterClient)
         {
-            
+            PhotonNetwork.CurrentRoom.IsOpen = false;
+            PhotonNetwork.CurrentRoom.IsVisible = false;
             PhotonNetwork.LoadLevel("Game");
 
         }
@@ -385,40 +409,44 @@ public class PhotonManager : MonoBehaviourPunCallbacks
     //플레이어 리스트 업데이트
     public void PlayerUpdate()
     {
-        //초기화 
-        for(int i=0; i<4; i++)
+        if (inLobbyRoom)
         {
-            roomPlayer[i].transform.GetChild(1).gameObject.GetComponent<TextMeshProUGUI>().text = " ";
-            roomPlayer[i].transform.GetChild(0).gameObject.SetActive(false);
-        }
-
-        //설정
-        for(int i=0; i<PhotonNetwork.PlayerList.Length; i++)
-        {
-            if (i == 0)
+            //초기화 
+            for (int i = 0; i < 4; i++)
             {
-                //유저 닉네임 표시 (1번 플레이어는 서빙역할)
-                roomPlayer[i].transform.GetChild(1).gameObject.GetComponent<TextMeshProUGUI>().text = PhotonNetwork.PlayerList[i].NickName + " (서빙)";
+                roomPlayer[i].transform.GetChild(1).gameObject.GetComponent<TextMeshProUGUI>().text = " ";
+                roomPlayer[i].transform.GetChild(0).gameObject.SetActive(false);
+            }
+
+            //설정
+            for (int i = 0; i < PhotonNetwork.PlayerList.Length; i++)
+            {
+                if (i == 0)
+                {
+                    //유저 닉네임 표시 (1번 플레이어는 서빙역할)
+                    roomPlayer[i].transform.GetChild(1).gameObject.GetComponent<TextMeshProUGUI>().text = PhotonNetwork.PlayerList[i].NickName + " (서빙)";
+                }
+                else
+                {
+                    //유저 닉네임 표시
+                    roomPlayer[i].transform.GetChild(1).gameObject.GetComponent<TextMeshProUGUI>().text = PhotonNetwork.PlayerList[i].NickName;
+                }
+
+                //유저 이미지 표시
+                roomPlayer[i].transform.GetChild(0).gameObject.SetActive(true);
+            }
+
+            //방에 4명이면 게임시작 버튼 활성화
+            if (PhotonNetwork.PlayerList.Length != 0)
+            {
+                GameObject.Find("GameStartButton").gameObject.GetComponent<Button>().interactable = true;
             }
             else
             {
-                //유저 닉네임 표시
-                roomPlayer[i].transform.GetChild(1).gameObject.GetComponent<TextMeshProUGUI>().text = PhotonNetwork.PlayerList[i].NickName;
+                GameObject.Find("GameStartButton").gameObject.GetComponent<Button>().interactable = false;
             }
-            
-            //유저 이미지 표시
-            roomPlayer[i].transform.GetChild(0).gameObject.SetActive(true);
         }
-
-        //방에 4명이면 게임시작 버튼 활성화
-        if (PhotonNetwork.PlayerList.Length != 0)
-        {
-            GameObject.Find("GameStartButton").gameObject.GetComponent<Button>().interactable = true;
-        }
-        else
-        {
-            GameObject.Find("GameStartButton").gameObject.GetComponent<Button>().interactable = false;
-        }
+        
 
     }
 
@@ -435,6 +463,8 @@ public class PhotonManager : MonoBehaviourPunCallbacks
         //level=1 -> 게임 씬임
         if (level == 1)
         {
+            inLobbyRoom = false;
+            inGameRoom = true;
             InstantiatePlayer();
         }
        
@@ -448,18 +478,22 @@ public class PhotonManager : MonoBehaviourPunCallbacks
         if (PhotonNetwork.PlayerList[0].NickName == PhotonNetwork.NickName)
         {
             PhotonNetwork.Instantiate("Prefabs/Player/Badger_Jasper", new Vector3(5, 1, -5), Quaternion.identity, 0);
+            GameObject.Find("Badger_Jasper(Clone)").gameObject.name = PhotonNetwork.NickName;
         }
         else if (PhotonNetwork.PlayerList[1].NickName == PhotonNetwork.NickName)
         {
             PhotonNetwork.Instantiate("Prefabs/Player/Frog_Shanks", new Vector3(-6, 1, -5), Quaternion.identity, 0);
+            GameObject.Find("Frog_Shanks(Clone)").gameObject.name = PhotonNetwork.NickName;
         }
         else if (PhotonNetwork.PlayerList[2].NickName == PhotonNetwork.NickName)
         {
             PhotonNetwork.Instantiate("Prefabs/Player/Panda_Apple", new Vector3(-4, 1, -5), Quaternion.identity, 0);
+            GameObject.Find("Panda_Apple(Clone)").gameObject.name = PhotonNetwork.NickName;
         }
         else if (PhotonNetwork.PlayerList[3].NickName == PhotonNetwork.NickName)
         {
             PhotonNetwork.Instantiate("Prefabs/Player/Rabbit_Sydney", new Vector3(-2, 1, -5), Quaternion.identity, 0);
+            GameObject.Find("Rabbit_Sydney(Clone)").gameObject.name = PhotonNetwork.NickName;
         }
     }
 

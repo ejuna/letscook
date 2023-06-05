@@ -20,9 +20,9 @@ public class DateManager
         time+=Time.deltaTime;
         if (time >= Constants.Day_MAX_time&&Managers.Orders.isOrders()==false)
         {
-            dateUpdate();
-            Managers.Life.Init();
-            isChangeDay = true;
+            //하루의 최대시간이 지나고 오더가 없을 때
+            Managers.Result();
+            
         }
 
         //아니면 그냥 진행 하여 하루정산 창을 출현 하고 그 화면 뒤에서 초기화 실행
@@ -32,6 +32,8 @@ public class DateManager
     {
         day++;
         time = 0;
+        Managers.Life.Init();
+        isChangeDay = true;
         Managers.Orders.DateUpdate();
     }
     public void Clear() 
