@@ -33,6 +33,18 @@ public class OrderIngredientController : MonoBehaviourPun, IPunObservable
     }
   }
 
+  void Update(){
+
+    if (isOrder == 1)
+    {
+      Debug.Log("ddd");
+      ingredientContainer = container[type].GetComponent<IngredientContainer>();
+      ingredientContainer.countIncrease(selectIngredientIndex, orderCount);
+      isOrder = 0;
+    }
+
+  }
+
   public void onClickTypeButton(int index){
     if(type != -1){
       uiList[type].SetActive(false);
@@ -106,13 +118,6 @@ public class OrderIngredientController : MonoBehaviourPun, IPunObservable
       isOrder = (int)stream.ReceiveNext();
 
       Debug.Log(type + "," + selectIngredientIndex + "," + orderCount + "," + isOrder);
-
-      if(isOrder == 1){
-        Debug.Log("ddd");
-        ingredientContainer = container[type].GetComponent<IngredientContainer>();
-        ingredientContainer.countIncrease(selectIngredientIndex, orderCount);
-        isOrder = 0;
-      }
     }
   }
 }
