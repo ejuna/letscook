@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class OrderManager
 {
-  private List<Order> orderList;
+  public List<Order> orderList;
   public List<FoodData> allFoods=new List<FoodData>();//게임 프리팹 넣기?
   public List<FoodData> todayFoods=new List<FoodData>();
 
