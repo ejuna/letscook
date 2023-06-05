@@ -69,17 +69,19 @@ public class CountertopController : MonoBehaviour
             }
             //음식 생성
             GameObject go;
+            Vector3 newPosition = transform.position + new Vector3(0f, 1f, 0f);
             if (tempAllFood.Count==1) {
-                 go=Managers.Resource.Instantiate("요리/" + tempAllFood[0].name);
+                go = PhotonNetwork.Instantiate("Prefabs/요리/" + tempAllFood[0].name , newPosition,transform.rotation);
             }
             else//실패 음식
             {
-                go=Managers.Resource.Instantiate("요리/Clinker");
+                go= PhotonNetwork.Instantiate("Prefabs/요리/Clinker", newPosition, transform.rotation);
             }
             Vector3 position = transform.position + new Vector3(0f, 1f, 0f);
             go.transform.position = position;
             go.tag = "Pickup";
             go.AddComponent<Rigidbody>();
+            go.GetComponent<Rigidbody>().freezeRotation = true;
             go.AddComponent<BoxCollider>();
             go.GetComponent<BoxCollider>().size = new Vector3(1f, 1.2f, 1f);
             go.GetComponent<BoxCollider>().center = new Vector3(0, go.GetComponent<BoxCollider>().size.y/2,0);
@@ -105,7 +107,7 @@ public class CountertopController : MonoBehaviour
         {
             isPlayerEnter = true;
         }
-        if (other.gameObject.tag == "Pickup"&& other.gameObject.GetComponent<Ingredient>() != null && (other.gameObject.transform.parent == null || other.gameObject.transform.parent.name != "GameObject"))
+        if (other.gameObject.GetComponent<Ingredient>() != null && other.gameObject.tag == "Pickup"&&  (other.gameObject.transform.parent == null || other.gameObject.transform.parent.name != "GameObject"))
         {
 
             ingres.Add(other.gameObject.GetComponent<Ingredient>().ingredientName);
