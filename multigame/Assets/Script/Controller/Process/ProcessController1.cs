@@ -38,12 +38,12 @@ public class ProcessController1 : MonoBehaviour
         GameObject prepIngredient = ingredientData.PrepIngredient;
 
         Vector3 position = pos.position + new Vector3(1f, 3f, 0f);
-        GameObject fxObject = Instantiate(effect, position, Quaternion.identity);
-        fxObject.transform.SetParent(effect.transform);
+        GameObject fxObject = PhotonNetwork.Instantiate("Effect/" + effect.name, position, Quaternion.identity);
+        fxObject.transform.parent = effect.transform;
         Destroy(fxObject, 4);
 
         mainController.drop();
-        Destroy(interactingObject);
+        PhotonNetwork.Destroy(interactingObject);
         yield return new WaitForSeconds(4f); // 5초 대기
 
         GameObject prepObject = PhotonNetwork.Instantiate("Prefabs/재료/" + prepIngredient.name, position, Quaternion.identity);
