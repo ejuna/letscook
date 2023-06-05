@@ -45,7 +45,7 @@ public class ProcessController1 : MonoBehaviour
         Destroy(interactingObject);
         yield return new WaitForSeconds(4f); // 5초 대기
 
-        GameObject prepObject = Instantiate(prepIngredient, position, Quaternion.identity);
+        GameObject prepObject = PhotonNetwork.Instantiate(prepIngredient, position, Quaternion.identity);
 
         throwObject(prepObject);
         mainController.unfreeze();
