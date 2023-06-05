@@ -65,7 +65,7 @@ public class CountertopController : MonoBehaviour
             //재료 삭제하기
             for(int i = 1 ; i< transform.childCount; i++)
             {
-                Destroy(transform.GetChild(i).gameObject);
+                PhotonNetwork.Destroy(transform.GetChild(i).gameObject);
             }
             //음식 생성
             GameObject go;
