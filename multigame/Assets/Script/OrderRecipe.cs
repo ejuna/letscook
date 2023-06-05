@@ -54,7 +54,7 @@ public class OrderRecipe : MonoBehaviour
 
   public OrderRecipe GetRecipe(Order order, GameObject orderPrefab, int id)
   {
-    orderUI = PhotonNetwork.Instantiate("Prefab/OrderRecipe/"+orderPrefab.name,transform.position,transform.rotation);
+    orderUI = PhotonNetwork.Instantiate("Prefabs/OrderRecipe/"+orderPrefab.name,transform.position,transform.rotation);
     OrderRecipe recipe = orderUI.GetComponent<OrderRecipe>();
     recipe.setRecipe(order, orderUI, id);
     return recipe;
