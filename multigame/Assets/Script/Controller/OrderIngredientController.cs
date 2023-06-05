@@ -39,6 +39,7 @@ public class OrderIngredientController : MonoBehaviour
     ingredientContainer = container[type].GetComponent<IngredientContainer>();
   }
 
+
   public void selectOrder(int index){
     selectIngredientIndex = index;
     inputUI.SetActive(true);
@@ -67,6 +68,7 @@ public class OrderIngredientController : MonoBehaviour
   }
 
   public void orderIngredient(){
+
     //돈 감소 -> 동기화 필요
     if (!Managers.Money.moneyDecrease(cost))
     {
@@ -77,7 +79,7 @@ public class OrderIngredientController : MonoBehaviour
     }
 
     int order = int.Parse(orderNum.text);
-    ingredientContainer.counts[selectIngredientIndex] += order;
+    ingredientContainer.countIncrease(selectIngredientIndex, order);
     inputUI.SetActive(false);
   }
 }
