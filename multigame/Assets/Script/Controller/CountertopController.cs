@@ -9,7 +9,7 @@ using static UnityEditor.PlayerSettings;
 
 public class CountertopController : MonoBehaviour
 {
-    List<string> ingres;
+    public List<string> ingres;
     bool isPlayerEnter;
     // Start is called before the first frame update
     void Start()
@@ -26,7 +26,6 @@ public class CountertopController : MonoBehaviour
     }
     void OnKeyboard()
     {
-
         int loopNum = 0;
         if (Input.GetKeyDown(KeyCode.V) && isPlayerEnter)
         {
