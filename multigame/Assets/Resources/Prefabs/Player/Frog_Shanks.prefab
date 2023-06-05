@@ -2601,6 +2601,7 @@ GameObject:
   - component: {fileID: 5614877497704862510}
   - component: {fileID: 138641923858009650}
   - component: {fileID: 8332686337805388394}
+  - component: {fileID: 7602423965323300240}
   m_Layer: 0
   m_Name: Frog_Shanks
   m_TagString: Player
@@ -2756,6 +2757,18 @@ MonoBehaviour:
   m_SynchronizeLayers:
   - SynchronizeType: 0
     LayerIndex: 0
+--- !u!114 &7602423965323300240
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6255087981699436767}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 126494ae2a10a34499272ed97a6c9f5d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6387688680085155956
 GameObject:
   m_ObjectHideFlags: 0
