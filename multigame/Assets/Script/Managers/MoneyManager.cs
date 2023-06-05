@@ -5,7 +5,7 @@ using UnityEngine;
 public class MoneyManager
 {
     public int money = 10000;
-    public int tempMoney = 0;
+    public int tempMoney = 10000;
 
    
 

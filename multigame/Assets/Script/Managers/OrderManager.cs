@@ -25,7 +25,7 @@ public class OrderManager
   public void OnUpdate(){
     timer += Time.deltaTime;
 
-    if (timer >= 50f)
+    if (timer >= 30f)
     {
       timer = 0f;
       createOrder();
