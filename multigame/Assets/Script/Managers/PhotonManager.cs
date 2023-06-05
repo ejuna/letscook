@@ -395,8 +395,17 @@ public class PhotonManager : MonoBehaviourPunCallbacks
         //설정
         for(int i=0; i<PhotonNetwork.PlayerList.Length; i++)
         {
-            //유저 닉네임 표시
-            roomPlayer[i].transform.GetChild(1).gameObject.GetComponent<TextMeshProUGUI>().text = PhotonNetwork.PlayerList[i].NickName;
+            if (i == 0)
+            {
+                //유저 닉네임 표시 (1번 플레이어는 서빙역할)
+                roomPlayer[i].transform.GetChild(1).gameObject.GetComponent<TextMeshProUGUI>().text = PhotonNetwork.PlayerList[i].NickName + " (서빙)";
+            }
+            else
+            {
+                //유저 닉네임 표시
+                roomPlayer[i].transform.GetChild(1).gameObject.GetComponent<TextMeshProUGUI>().text = PhotonNetwork.PlayerList[i].NickName;
+            }
+            
             //유저 이미지 표시
             roomPlayer[i].transform.GetChild(0).gameObject.SetActive(true);
         }

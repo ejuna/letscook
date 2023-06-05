@@ -71,7 +71,7 @@ public class ProcessController2 : MonoBehaviour
         Rigidbody rigidbody = go.GetComponent<Rigidbody>();
 
         //던질 각도,및 힘 선언 및 조절
-        Vector3 thorwAngle = new Vector3(3f, 2f, 0f);
+        Vector3 thorwAngle = new Vector3(-3f, 2f, 0f);
         float thorwForce = 2f;
         //
         rigidbody.AddForce(thorwAngle * thorwForce, ForceMode.Impulse);
