@@ -1691,6 +1691,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2147408647}
     m_Modifications:
+    - target: {fileID: 4492354711746013528, guid: 744a259726e450e45ae802534eb95807, type: 3}
+      propertyPath: m_Constraints
+      value: 126
+      objectReference: {fileID: 0}
     - target: {fileID: 4492354711746013529, guid: 744a259726e450e45ae802534eb95807, type: 3}
       propertyPath: m_RootOrder
       value: 13
@@ -1734,6 +1738,14 @@ PrefabInstance:
     - target: {fileID: 4492354711746013529, guid: 744a259726e450e45ae802534eb95807, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4492354711746013534, guid: 744a259726e450e45ae802534eb95807, type: 3}
+      propertyPath: m_Size.x
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4492354711746013534, guid: 744a259726e450e45ae802534eb95807, type: 3}
+      propertyPath: m_Size.z
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 4492354711746013535, guid: 744a259726e450e45ae802534eb95807, type: 3}
       propertyPath: m_Name
@@ -3045,6 +3057,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2147408647}
     m_Modifications:
+    - target: {fileID: 4492354711746013528, guid: 744a259726e450e45ae802534eb95807, type: 3}
+      propertyPath: m_Constraints
+      value: 126
+      objectReference: {fileID: 0}
     - target: {fileID: 4492354711746013529, guid: 744a259726e450e45ae802534eb95807, type: 3}
       propertyPath: m_RootOrder
       value: 12
@@ -3088,6 +3104,14 @@ PrefabInstance:
     - target: {fileID: 4492354711746013529, guid: 744a259726e450e45ae802534eb95807, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4492354711746013534, guid: 744a259726e450e45ae802534eb95807, type: 3}
+      propertyPath: m_Size.x
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4492354711746013534, guid: 744a259726e450e45ae802534eb95807, type: 3}
+      propertyPath: m_Size.z
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 4492354711746013535, guid: 744a259726e450e45ae802534eb95807, type: 3}
       propertyPath: m_Name
@@ -12367,8 +12391,7 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 653798906}
+  m_Children: []
   m_Father: {fileID: 701468894}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
