@@ -474,22 +474,22 @@ public class PhotonManager : MonoBehaviourPunCallbacks
         if (PhotonNetwork.PlayerList[0].NickName == PhotonNetwork.NickName)
         {
             PhotonNetwork.Instantiate("Prefabs/Player/Badger_Jasper", new Vector3(5, 1, -5), Quaternion.identity, 0);
-            GameObject.Find("Badger_Jasper").gameObject.name = PhotonNetwork.NickName;
+            GameObject.Find("Badger_Jasper(Clone)").gameObject.name = PhotonNetwork.NickName;
         }
         else if (PhotonNetwork.PlayerList[1].NickName == PhotonNetwork.NickName)
         {
             PhotonNetwork.Instantiate("Prefabs/Player/Frog_Shanks", new Vector3(-6, 1, -5), Quaternion.identity, 0);
-            GameObject.Find("Frog_Shanks").gameObject.name = PhotonNetwork.NickName;
+            GameObject.Find("Frog_Shanks(Clone)").gameObject.name = PhotonNetwork.NickName;
         }
         else if (PhotonNetwork.PlayerList[2].NickName == PhotonNetwork.NickName)
         {
             PhotonNetwork.Instantiate("Prefabs/Player/Panda_Apple", new Vector3(-4, 1, -5), Quaternion.identity, 0);
-            GameObject.Find("Panda_Apple").gameObject.name = PhotonNetwork.NickName;
+            GameObject.Find("Panda_Apple(Clone)").gameObject.name = PhotonNetwork.NickName;
         }
         else if (PhotonNetwork.PlayerList[3].NickName == PhotonNetwork.NickName)
         {
             PhotonNetwork.Instantiate("Prefabs/Player/Rabbit_Sydney", new Vector3(-2, 1, -5), Quaternion.identity, 0);
-            GameObject.Find("Rabbit_Sydney").gameObject.name = PhotonNetwork.NickName;
+            GameObject.Find("Rabbit_Sydney(Clone)").gameObject.name = PhotonNetwork.NickName;
         }
     }
 
