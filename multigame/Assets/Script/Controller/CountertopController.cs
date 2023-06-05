@@ -31,8 +31,7 @@ public class CountertopController : MonoBehaviourPun, IPunObservable
         int loopNum = 0;
         if (Input.GetKeyDown(KeyCode.V) && isPlayerEnter)
         {
-            if (st.Length == 0) return;
-            else
+            if (st.Length != 0)
             {
                 String[] starr = st.Split(",");
                 for (int i = 0; i < starr.Length; i++)
