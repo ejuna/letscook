@@ -6,7 +6,7 @@ using TMPro;
 using static Define;
 using Photon.Pun;
 
-public class IngredientContainer : MonoBehaviour
+public class IngredientContainer : MonoBehaviourPun, IPunObservable
 {
     public IngredientType ingredientType;
     public Ingredient[] ingredients;
@@ -27,6 +27,32 @@ public class IngredientContainer : MonoBehaviour
         mainController = FindObjectOfType<MainController>();
         for(int i=0;i<counts.Length;i++){
           textArea[i].text = counts[i].ToString();
+        }
+    }
+
+    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    {
+        if (stream.IsWriting)
+        {
+            // We own this player: send the others our data
+            stream.SendNext(counts.Length);
+
+            for (int i = 0; i < counts.Length; i++)
+            {
+                stream.SendNext(counts[i]);
+            }
+        }
+        else
+        {
+            // Network player, receive data
+            int length = (int)stream.ReceiveNext();
+
+            counts = new int[length];
+
+            for (int i = 0; i < length; i++)
+            {
+                counts[i] = (int)stream.ReceiveNext();
+            }
         }
     }
 
