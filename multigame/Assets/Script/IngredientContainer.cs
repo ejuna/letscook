@@ -35,27 +35,13 @@ public class IngredientContainer : MonoBehaviourPun, IPunObservable
         if (stream.IsWriting)
         {
             // We own this player: send the others our data
-            stream.SendNext(counts.Length);
-
-            for (int i = 0; i < counts.Length; i++)
-            {
-                stream.SendNext(counts[i]);
-            }
+            stream.SendNext(counts);
         }
         else
         {
             // Network player, receive data
-            int length = (int)stream.ReceiveNext();
+            counts = (int[])stream.ReceiveNext();
 
-            if (counts == null || counts.Length != length)
-            {
-                counts = new int[length];
-            }
-
-            for (int i = 0; i < length; i++)
-            {
-                counts[i] = (int)stream.ReceiveNext();
-            }
         }
     }
 
