@@ -55,7 +55,7 @@ public class OrderManager
       orderList = new List<Order>();
       getAllFoodList();
       complete = 0;
-      createTodaysOrder(30, 100);
+      createTodaysOrder(1, 0);
       Debug.Log("초기화 완료");
       isInit = true;
     }
