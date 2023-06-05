@@ -118,8 +118,8 @@ public class Managers : MonoBehaviourPun, IPunObservable
     public static void Result()
     {
         GameObject.Find("Canvas").transform.Find("Result").gameObject.SetActive(true);
-        GameObject.Find("Money-Text").gameObject.GetComponent<TextMeshProUGUI>().text = "+ " + (Money.money - Money.tempMoney);
-        GameObject.Find("Fame-Text").gameObject.GetComponent<TextMeshProUGUI>().text = "+ " + (Fame.fame - Fame.tempFame);
+        GameObject.Find("Money-Text").gameObject.GetComponent<TextMeshProUGUI>().text = "Money  " + (Money.money - Money.tempMoney);
+        GameObject.Find("Fame-Text").gameObject.GetComponent<TextMeshProUGUI>().text = "Fame  " + (Fame.fame - Fame.tempFame);
 
         int point = (Money.money - Money.tempMoney) + ((Fame.fame - Fame.tempFame) * 10);
 
