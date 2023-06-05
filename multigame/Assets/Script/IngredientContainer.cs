@@ -47,7 +47,10 @@ public class IngredientContainer : MonoBehaviourPun, IPunObservable
             // Network player, receive data
             int length = (int)stream.ReceiveNext();
 
-            counts = new int[length];
+            if (counts == null || counts.Length != length)
+            {
+                counts = new int[length];
+            }
 
             for (int i = 0; i < length; i++)
             {
