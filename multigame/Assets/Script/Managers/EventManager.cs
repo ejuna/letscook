@@ -60,15 +60,15 @@ public class EventManager
         {
             Debug.Log("Gourmand");
             WarningAction("미식가 이벤트");
-              gourmandEvent();
-              isTodayGourmand = false;
+            gourmandEvent();
+            isTodayGourmand = false;
         }
         //시간 조건을 확인하고 랜덤한 시간에 단체손님 발생
         if (Managers.Date.time >= randTimeTrigger && isTodayGroupGeuset) {
             Debug.Log("GroupGeuset");
             WarningAction("단체손님 이벤트");
             groupGuestEvent();
-              isTodayGroupGeuset = false;
+            isTodayGroupGeuset = false;
         }
         //목표일짜 및 목표 금액 달성시 게임 클리어
         if (isGameOver && (Managers.Date.day == targetDate || Managers.Money.money >= targetMoney|| Managers.Life.life <= 0 ))
