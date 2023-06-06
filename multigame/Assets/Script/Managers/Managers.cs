@@ -66,7 +66,6 @@ public class Managers : MonoBehaviourPun, IPunObservable
                 go.AddComponent<Managers>();
                 go.AddComponent<PhotonView>();
             }
-            DontDestroyOnLoad(go);
             s_instance = go.GetComponent<Managers>();
 
             Orders.init();
