@@ -14535,7 +14535,6 @@ GameObject:
   - component: {fileID: 1501327238}
   - component: {fileID: 1501327237}
   - component: {fileID: 1501327239}
-  - component: {fileID: 1501327240}
   m_Layer: 0
   m_Name: '@Managers'
   m_TagString: Untagged
@@ -14555,6 +14554,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2cc7b20310006345b618d4f2af42d55, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PV: {fileID: 1501327239}
 --- !u!4 &1501327238
 Transform:
   m_ObjectHideFlags: 0
@@ -14593,21 +14593,6 @@ MonoBehaviour:
   sceneViewId: 1
   InstantiationId: 0
   isRuntimeInstantiated: 0
---- !u!114 &1501327240
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1501327236}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 28ccbf6360e6671408e05a856bf7b2e0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  uiContainer: {fileID: 0}
-  warning: {fileID: 0}
-  PV: {fileID: 1501327239}
 --- !u!1 &1507469977
 GameObject:
   m_ObjectHideFlags: 0
