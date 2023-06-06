@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class OrderManager
 {
   public List<Order> orderList;
@@ -32,7 +33,7 @@ public class OrderManager
     tempOrder = orderList.Count;
 
     //30초마다 주문 생성
-    if (timer >30f)
+    if (timer >Random.Range(10,30))
     {
       timer = 0;
       //하루 시간 초과시 오더 생성안함
