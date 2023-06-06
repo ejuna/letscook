@@ -29,7 +29,6 @@ public class SubmitController : MonoBehaviour
         {
           //동기화필요
           Managers.Life.lifeDecrease();
-          return;
         }
         else if(Managers.Orders.checkOrder(food)){
           //동기화필요
