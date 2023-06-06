@@ -86,8 +86,9 @@ public class Managers : MonoBehaviourPun, IPunObservable
             stream.SendNext(Money.tempMoney);
             stream.SendNext(Fame.tempFame);
             stream.SendNext(Orders.tempOrder);
+            stream.SendNext(Event.eventInfo);
 
-        }
+    }
         else
         {
             // Network player, receive data
@@ -99,8 +100,9 @@ public class Managers : MonoBehaviourPun, IPunObservable
             Money.tempMoney = (int)stream.ReceiveNext();
             Fame.tempFame = (int)stream.ReceiveNext();
             Orders.tempOrder = (int)stream.ReceiveNext();
+            Event.eventInfo = (string)stream.ReceiveNext();
 
-        }
+    }
     }
     public static void Clear()
     {

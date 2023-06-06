@@ -26,8 +26,14 @@ public class EventManager
     public int targetDate { get; set; }//무한이면 -1
     public int targetMoney { get; set; }//무한이면 -1
 
+    private float timer;
+    public string eventInfo;
+
+
     public void init()
     {
+        eventInfo = "";
+        timer = 0.0f;
         randOrderCountTrigger = UnityEngine.Random.Range(0, 7);
         randTimeTrigger = UnityEngine.Random.Range(30, Constants.Day_MAX_time);
         //randOrderCountTrigger = -1;
@@ -58,17 +64,17 @@ public class EventManager
         //조건을 확인 하면서 미식가 이벤트 발생시킨다.
         if (Managers.Orders.complete >= randOrderCountTrigger && isTodayGourmand)
         {
-            Debug.Log("Gourmand");
-            WarningAction("미식가 이벤트");
+              Debug.Log("Gourmand");
+              Warning("미식가 이벤트 발생!");
               gourmandEvent();
               isTodayGourmand = false;
         }
         //시간 조건을 확인하고 랜덤한 시간에 단체손님 발생
         if (Managers.Date.time >= randTimeTrigger && isTodayGroupGeuset) {
             Debug.Log("GroupGeuset");
-            WarningAction("단체손님 이벤트");
+            Warning("단체손님 이벤트 발생!");
             groupGuestEvent();
-              isTodayGroupGeuset = false;
+             isTodayGroupGeuset = false;
         }
         //목표일짜 및 목표 금액 달성시 게임 클리어
         if (isGameOver && (Managers.Date.day == targetDate || Managers.Money.money >= targetMoney|| Managers.Life.life <= 0 ))
@@ -76,10 +82,21 @@ public class EventManager
             gameClear();
             isGameOver = false;
         }
-    }
+
+        if(eventInfo != ""){
+          timer += Time.deltaTime;
+          if(timer > 5.0f){
+            eventInfo = "";
+            warning.SetActive(false);
+            timer = 0.0f;
+          }
+        }
+  }
     public void Warning(String str)
     {
         warning.SetActive(true);
+        TextMeshProUGUI warningText = warning.GetComponentInChildren<TextMeshProUGUI>();
+        warningText.text = str;
     }
 
     public void gourmandEvent() 
