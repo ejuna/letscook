@@ -35,7 +35,7 @@ public class SubmitController : MonoBehaviour
           //동기화필요
             Managers.Money.moneyIncrease(food.Price);
             Managers.Fame.fameIncrease(1);
-            Vector3 position = pos.position + new Vector3(0f, 3f, 0f);
+            Vector3 position = pos.position + new Vector3(0f, 1f, 0f);
             GameObject fxObject = PhotonNetwork.Instantiate("Effect/" + effect.name, position, Quaternion.identity);
             audioSoure.Play();
         }
