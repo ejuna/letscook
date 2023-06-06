@@ -34,8 +34,8 @@ public class EventManager
         //randTimeTrigger = 1;
         WarningAction -= Warning;
         WarningAction += Warning;
-        isTodayGourmand = true;
-        isTodayGroupGeuset = true;
+        isTodayGourmand = false;
+        isTodayGroupGeuset = false;
         isGameOver = true;
 
         //게임 종료 UI연결

@@ -125,7 +125,7 @@ public class OrderManager
 
     foreach(FoodData foodData in allFoods){
       int tier = foodData.FoodTier;
-      if(tierScopeMin <= tier && tier <= tierScopeMax){
+      if(tierScopeMin <= tier && tier <= 4){
         todayFoods.Add(foodData);
       }
     }
