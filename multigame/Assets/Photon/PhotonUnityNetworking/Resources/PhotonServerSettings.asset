@@ -45,7 +45,9 @@ MonoBehaviour:
   - RPC_SetParent
   - UpdateInteractingObjectPosition
   - SetIngresRPC
-  - UpdateCount
+  - makeFood
+  - onTheboard
+  - clearIngres
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

@@ -14,12 +14,14 @@ public class ProcessController1 : MonoBehaviour
     GameObject player;
     bool isPlayerEnter;
     public GameObject effect;
+    AudioSource audioSoure;
 
     void Start()
     {
         isPlayerEnter = false;
         player = GameObject.FindGameObjectWithTag("Player");
         mainController = FindObjectOfType<MainController>();
+        audioSoure = GetComponent<AudioSource>();
     }
 
     void Update()
@@ -39,6 +41,7 @@ public class ProcessController1 : MonoBehaviour
 
         Vector3 position = pos.position + new Vector3(1f, 3f, 0f);
         GameObject fxObject = PhotonNetwork.Instantiate("Effect/" + effect.name, position, Quaternion.identity);
+        audioSoure.Play();
         //fxObject.transform.parent = effect.transform;
 
         mainController.drop();

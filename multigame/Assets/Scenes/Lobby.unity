@@ -6756,7 +6756,7 @@ MonoBehaviour:
   ApplyDontDestroyOnLoad: 1
   runInBackground: 1
   statsResetInterval: 50
-  speakerPrefab: {fileID: 919114552232459563, guid: 19b5f9f4a528cb74394b6fd046589d46, type: 3}
+  speakerPrefab: {fileID: 2003981278464760898, guid: ec03ed95d67a9b44abb7eefc3055a49b, type: 3}
   primaryRecorder: {fileID: 929772154}
   usePrimaryRecorder: 0
   Settings:
