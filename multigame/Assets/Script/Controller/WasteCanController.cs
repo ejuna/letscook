@@ -36,8 +36,12 @@ public class WasteCanController : MonoBehaviour
         }
         if (other.gameObject.tag == "Pickup" && (other.gameObject.transform.parent == null || other.gameObject.transform.parent.name != "GameObject"))
         {
-            PV.RPC(nameof(Destroy), RpcTarget.All, other.gameObject.GetComponent<PhotonView>().ViewID);
-            audioSoure.Play();
+            if (other.gameObject.GetComponent<PhotonView>().IsMine)
+            {
+                PV.RPC(nameof(Destroy), RpcTarget.All, other.gameObject.GetComponent<PhotonView>().ViewID);
+                audioSoure.Play();
+            }
+
         }
     }
     void OnTriggerExit(Collider other)
