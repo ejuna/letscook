@@ -16,7 +16,7 @@ public class UI_gameEndEvaluationText : MonoBehaviour
 
         if (Managers.Life.life <= 0)
         {
-            text = "주문에 실패하여, 패배하셨습니다.\n"
+            text = "Hp가 모두 소모되어 클리어에 실패했습니다.\n"
             + "목표 금액: " + Managers.Event.targetMoney + "  달성 금액: " + Managers.Money.money + "\n"
             + "목표 일수: " + Managers.Event.targetDate + "  달성 일수: " + Managers.Date.day;
         }
