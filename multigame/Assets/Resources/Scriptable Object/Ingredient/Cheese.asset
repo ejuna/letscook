@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: Cheese
   m_EditorClassIdentifier: 
   ingredientName: Cheese
-  price: 15
+  price: 450
   ingredientType: 3
   img: {fileID: 2800000, guid: 3787cd4f2d4d259419f711bf709a78af, type: 3}
   prepIngredient: {fileID: 4669359552052621892, guid: 6780d904d9af6b94baf6b9202e82d73c, type: 3}
+  isCook: 0

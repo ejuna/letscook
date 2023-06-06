@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: EggCook
   m_EditorClassIdentifier: 
   ingredientName: cookedEgg
-  price: 20
+  price: 600
   ingredientType: 1
   img: {fileID: 2800000, guid: b5f20828d4eaf26418c882eb2dfcdcee, type: 3}
   prepIngredient: {fileID: 8752610504619318702, guid: 0c2f05697b360de4cbadc934874240a2, type: 3}

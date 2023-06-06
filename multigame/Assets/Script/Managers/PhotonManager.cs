@@ -230,7 +230,7 @@ public class PhotonManager : MonoBehaviourPunCallbacks
         switch (temp)
         {
             case 0:
-                targetMoney = 10010;
+                targetMoney = 1000000;
                 break;
             case 1:
                 targetMoney = 5000000;
@@ -253,13 +253,13 @@ public class PhotonManager : MonoBehaviourPunCallbacks
         switch (temp)
         {
             case 0:
-                targetDay = 2;
+                targetDay = 10;
                 break;
             case 1:
-                targetDay = 45;
+                targetDay = 20;
                 break;
             case 2:
-                targetDay = 60;
+                targetDay = 30;
                 break;
             case 3:
                 targetDay = -1;

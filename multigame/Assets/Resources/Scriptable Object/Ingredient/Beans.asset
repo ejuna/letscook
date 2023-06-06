@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: Beans
   m_EditorClassIdentifier: 
   ingredientName: Beans
-  price: 5
+  price: 150
   ingredientType: 2
   img: {fileID: 2800000, guid: 712d35f3bda35ec4ba7e99961d9dbaec, type: 3}
   prepIngredient: {fileID: 61807602861896738, guid: ccf5724362db9e14bacf81f8827e4fd9, type: 3}
+  isCook: 0

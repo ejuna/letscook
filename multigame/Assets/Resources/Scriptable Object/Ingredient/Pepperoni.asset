@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: Pepperoni
   m_EditorClassIdentifier: 
   ingredientName: Pepperoni
-  price: 20
+  price: 600
   ingredientType: 1
   img: {fileID: 2800000, guid: 31fdd0fb0227bc44ba1b11f0ab31a466, type: 3}
   prepIngredient: {fileID: 8023977201582292045, guid: dfa1e9ce6a5163645b4b53cd82abf516, type: 3}
+  isCook: 0

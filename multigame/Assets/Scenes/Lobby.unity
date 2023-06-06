@@ -572,11 +572,11 @@ MonoBehaviour:
   m_Value: 0
   m_Options:
     m_Options:
+    - m_Text: "10\uC77C"
+      m_Image: {fileID: 0}
+    - m_Text: "20\uC77C"
+      m_Image: {fileID: 0}
     - m_Text: "30\uC77C"
-      m_Image: {fileID: 0}
-    - m_Text: "45\uC77C"
-      m_Image: {fileID: 0}
-    - m_Text: "60\uC77C"
       m_Image: {fileID: 0}
     - m_Text: "\uBB34\uD55C"
       m_Image: {fileID: 0}
@@ -7125,7 +7125,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "30\uC77C"
+  m_text: "10\uC77C"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 14ec168794b9c8a449ad11e4de7a590f, type: 2}
   m_sharedMaterial: {fileID: 6147147580115920364, guid: 14ec168794b9c8a449ad11e4de7a590f, type: 2}

@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: Meat
   m_EditorClassIdentifier: 
   ingredientName: Meat
-  price: 20
+  price: 600
   ingredientType: 1
   img: {fileID: 2800000, guid: ed81508fdfea8f9409f20d744fb5af92, type: 3}
   prepIngredient: {fileID: 3140807501152111605, guid: afdc5fa492ff4454bba013f8ff99f28c, type: 3}
+  isCook: 0

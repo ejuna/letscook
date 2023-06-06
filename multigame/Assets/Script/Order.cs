@@ -11,8 +11,7 @@ public class Order
   private FoodData food;
   public FoodData Food{ get { return food; } }
 
-  private float timeLimit;
-  public float TimeLimit { get{ return timeLimit; } }
+  public float timeLimit { get; set; }
 
   private GameObject prefab;
   private OrderRecipe recipe;
@@ -30,6 +29,32 @@ public class Order
     recipe = recipe.GetRecipe(this,prefab,id);
   }
 
+  public Order(FoodData food)
+  {
+    this.food = food;
+    switch (food.FoodTier)
+    {
+      case 1:
+        timeLimit = 50f;
+        break;
+      case 2:
+        timeLimit = 70f;
+        break;
+      case 3:
+        timeLimit = 90f;
+        break;
+      case 4:
+        timeLimit = 110f;
+        break;
+    }
+
+    this.id = count;
+    count++;
+
+    prefab = setPrefab();
+    recipe = prefab.GetComponent<OrderRecipe>();
+    recipe = recipe.GetRecipe(this, prefab, id);
+  }
 
   private GameObject setPrefab(){
     if(prefab == null){
