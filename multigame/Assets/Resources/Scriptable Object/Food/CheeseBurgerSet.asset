@@ -17,8 +17,8 @@ MonoBehaviour:
   foodPrice: 66
   ingredients:
   - {fileID: 11400000, guid: 99d326d6810612f4fb494ca1b8be73eb, type: 2}
-  - {fileID: 11400000, guid: 41b1e38a64c1cb74eab0816f336d48ab, type: 2}
-  - {fileID: 11400000, guid: 9eb8fce1ff60eaa449b54bdd440e5c96, type: 2}
-  - {fileID: 11400000, guid: 9c69fae5e9e271e40aed7aef2df7865e, type: 2}
-  - {fileID: 11400000, guid: 36b509ec2171103459d23557cddee600, type: 2}
+  - {fileID: 11400000, guid: 9842a9e4623b5cc40ba8ffe8ae73d847, type: 2}
+  - {fileID: 11400000, guid: 0e66a65f6d43a9841b325fd47250b233, type: 2}
+  - {fileID: 11400000, guid: 442591ded54b54447a59ebc48db0832b, type: 2}
+  - {fileID: 11400000, guid: 8a107948e72168943b280da1a6b108e3, type: 2}
   img: {fileID: 2800000, guid: f1bdf68a18933a348b7e8ca1ec5de1a0, type: 3}

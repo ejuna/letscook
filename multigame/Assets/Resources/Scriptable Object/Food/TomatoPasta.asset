@@ -16,7 +16,7 @@ MonoBehaviour:
   foodTier: 3
   foodPrice: 42
   ingredients:
-  - {fileID: 11400000, guid: 9eb8fce1ff60eaa449b54bdd440e5c96, type: 2}
+  - {fileID: 11400000, guid: 0e66a65f6d43a9841b325fd47250b233, type: 2}
   - {fileID: 11400000, guid: 23885d20765bbbb4cb22920442f82791, type: 2}
-  - {fileID: 11400000, guid: 4a47c4c3befc3b849b5053783f9acc06, type: 2}
+  - {fileID: 11400000, guid: cd018f6f04a0b6644a2e2ac71a57ce77, type: 2}
   img: {fileID: 2800000, guid: 5fe08ff563840a94e8cc34ee9f8f8efa, type: 3}

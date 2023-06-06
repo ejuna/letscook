@@ -49,7 +49,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c040701a5578bdd479542a54c30c8e0d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ingredientData: {fileID: 11400000, guid: 36b509ec2171103459d23557cddee600, type: 2}
+  ingredientData: {fileID: 11400000, guid: 8a107948e72168943b280da1a6b108e3, type: 2}
   remotePos: {x: 0, y: 0, z: 0}
 --- !u!54 &-5125585829633125580
 Rigidbody:
