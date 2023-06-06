@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class FameManager
 {
-    public int fame = 0;
-    public int tempFame = 0;
+    public int fame = 134;
+    public int tempFame = 134;
 
     
     public void fameIncrease(int amount)

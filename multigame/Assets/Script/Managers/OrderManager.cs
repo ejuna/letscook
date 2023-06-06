@@ -96,13 +96,13 @@ public class OrderManager
 
     //임의로 계산하기 
     //day로 기본 min max 계산
-    if (day > 20){
+    if (day > 5){
       tierScopeMin = 3;
     }else if(day > 10){
       tierScopeMin = 2;
     }
 
-    if(day>15){
+    if(day>5){
       tierScopeMax = 4;
     }else if(day>10){
       tierScopeMax = 3;

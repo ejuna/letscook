@@ -11,7 +11,7 @@ public class DateManager
 
     public void init()
     {
-        day = 1;
+        day = 9;
         time = 0;
         isChangeDay = false;
     }

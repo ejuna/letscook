@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class MoneyManager
 {
-    public int money = 10000;
-    public int tempMoney = 10000;
+    public int money = 754620;
+    public int tempMoney = 754620;
 
    
 
