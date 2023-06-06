@@ -20,7 +20,6 @@ public class CountertopController : MonoBehaviourPun
     {
         
         ingres = new List<string>();
-        //st = "";
         Managers.Input.KeyAction -= OnKeyboard;
         Managers.Input.KeyAction += OnKeyboard;
         audioSoure = GetComponent<AudioSource>();
@@ -83,7 +82,6 @@ public class CountertopController : MonoBehaviourPun
             tempAllFood = produceFood.ToList();
         });
 
-        //st = "";
         ingres.Clear();
         ingres = new List<string>();
         //재료 삭제하기
@@ -154,18 +152,13 @@ public class CountertopController : MonoBehaviourPun
         if (other.gameObject.tag=="Player"&& other.gameObject.GetComponent<PhotonView>().IsMine)
         {
             isPlayerEnter = true;
-
-            
-
         }
         if (other.gameObject.GetComponent<Ingredient>() != null && other.gameObject.tag == "Pickup" &&  (other.gameObject.transform.parent == null || other.gameObject.transform.parent.name != "GameObject"))
         {
-            //if (PV.IsMine) PV.RPC(nameof(onTheboard), RpcTarget.All ,other.gameObject.GetComponent<PhotonView>().ViewID,transform.gameObject.GetComponent<PhotonView>().ViewID);
             Debug.Log(other.gameObject.GetComponent<PhotonView>().ViewID);
             Debug.Log(transform.gameObject.GetComponent<PhotonView>().ViewID);
             onTheboard(other.gameObject.GetComponent<PhotonView>().ViewID, transform.gameObject.GetComponent<PhotonView>().ViewID);
             ingres.Add(other.gameObject.GetComponent<Ingredient>().ingredientName);
-            //st = st + other.gameObject.GetComponent<Ingredient>().ingredientName + ","
         }
     }
     void OnTriggerExit(Collider other)
