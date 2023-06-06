@@ -13,6 +13,7 @@ TagManager:
   - FxTemporaire
   - GameEnd
   - submit
+  - warning
   layers:
   - Default
   - TransparentFX
