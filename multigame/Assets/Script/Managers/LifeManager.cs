@@ -29,6 +29,8 @@ public class LifeManager
       return false;
     }
     life--;
+    Debug.Log("라이프1 감소");
+    Debug.Log("남은 라이프: "+life);
     return true;
   }
 }
