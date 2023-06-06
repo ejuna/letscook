@@ -12,6 +12,7 @@ public class CountertopController : MonoBehaviourPun
     //public string st;
     bool isPlayerEnter;
     public PhotonView PV;
+    AudioSource audioSoure;
     // Start is called before the first frame update
     void Start()
     {
@@ -21,6 +22,7 @@ public class CountertopController : MonoBehaviourPun
         //st = "";
         Managers.Input.KeyAction -= OnKeyboard;
         Managers.Input.KeyAction += OnKeyboard;
+        audioSoure = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -97,6 +99,7 @@ public class CountertopController : MonoBehaviourPun
         {
             Debug.Log("완성");
             go = PhotonNetwork.Instantiate("Prefabs/요리/" + tempAllFood[0].name, newPosition, transform.rotation);
+            audioSoure.Play();
         }
         else//실패 음식
         {
