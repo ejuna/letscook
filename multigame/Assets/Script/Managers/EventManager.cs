@@ -8,7 +8,7 @@ using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class EventManager: MonoBehaviour
+public class EventManager
 {
     public Action<string> WarningAction;
 
@@ -19,14 +19,13 @@ public class EventManager: MonoBehaviour
     int randGroupNum = 0;
     public GameObject uiContainer;
     public GameObject warning;
-    public PhotonView PV;
 
     bool isTodayGourmand;
     bool isTodayGroupGeuset;
     bool isGameOver;
     public int targetDate { get; set; }//무한이면 -1
     public int targetMoney { get; set; }//무한이면 -1
-    
+
     public void init()
     {
         randOrderCountTrigger = UnityEngine.Random.Range(0, 7);
@@ -59,11 +58,11 @@ public class EventManager: MonoBehaviour
         //조건을 확인 하면서 미식가 이벤트 발생시킨다.
         if (Managers.Orders.complete >= randOrderCountTrigger && isTodayGourmand)
         {
-            if (PV.IsMine) PV.RPC(nameof(gourmand), RpcTarget.All);
+            if (Managers.PhotonView.IsMine) Managers.PhotonView.RPC(nameof(gourmand), RpcTarget.All);
         }
         //시간 조건을 확인하고 랜덤한 시간에 단체손님 발생
         if (Managers.Date.time >= randTimeTrigger && isTodayGroupGeuset) {
-            if (PV.IsMine) PV.RPC(nameof(groupGuest), RpcTarget.All);
+            if (Managers.PhotonView.IsMine) Managers.PhotonView.RPC(nameof(groupGuest), RpcTarget.All);
         }
         //목표일짜 및 목표 금액 달성시 게임 클리어
         if (isGameOver && (Managers.Date.day == targetDate || Managers.Money.money >= targetMoney|| Managers.Life.life <= 0 ))
