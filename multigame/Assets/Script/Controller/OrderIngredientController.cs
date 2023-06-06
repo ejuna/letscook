@@ -108,7 +108,7 @@ public class OrderIngredientController : MonoBehaviourPun, IPunObservable
 
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
-        Debug.Log("ㄹ포톤뷰");
+        
         if (stream.IsWriting)
         {
             // We own this player: send the others our data
