@@ -83,9 +83,10 @@ public class EventManager
             isGameOver = false;
         }
 
-        if(eventInfo != ""){
+        if(!eventInfo.Equals("")){
           timer += Time.deltaTime;
           if(timer > 5.0f){
+            Debug.Log(timer);
             eventInfo = "";
             warning.SetActive(false);
             timer = 0.0f;
@@ -94,9 +95,10 @@ public class EventManager
   }
     public void Warning(String str)
     {
+        eventInfo = str;
         warning.SetActive(true);
         TextMeshProUGUI warningText = warning.GetComponentInChildren<TextMeshProUGUI>();
-        warningText.text = str;
+        warningText.text = eventInfo;
     }
 
     public void gourmandEvent() 
@@ -112,6 +114,7 @@ public class EventManager
         //주문생성에 필요한 변수등의 식을 생성(명성,)
         Managers.Orders.createGourmandOrder(fameLogicCount);
     }
+
     public void groupGuestEvent() 
     {
         //명성,현재주문수,
