@@ -261,6 +261,7 @@ GameObject:
   - component: {fileID: -6765826456109662889}
   - component: {fileID: -9010088154049594363}
   - component: {fileID: -2472138649727260519}
+  - component: {fileID: 8227560180494849412}
   m_Layer: 0
   m_Name: PlaneBurgerSet.asset
   m_TagString: Pickup
@@ -341,6 +342,19 @@ MonoBehaviour:
   m_SynchronizeRotation: 1
   m_SynchronizeScale: 0
   m_UseLocal: 0
+--- !u!65 &8227560180494849412
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3795110814614191979}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1.2, z: 1}
+  m_Center: {x: 0, y: 0.6, z: 0}
 --- !u!1 &8055562443319374471
 GameObject:
   m_ObjectHideFlags: 0

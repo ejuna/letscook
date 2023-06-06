@@ -178,6 +178,7 @@ GameObject:
   - component: {fileID: 7224543240456863136}
   - component: {fileID: -3536421037995359580}
   - component: {fileID: 1150566939824555560}
+  - component: {fileID: 8295371560014398766}
   m_Layer: 0
   m_Name: SeafoodPasta
   m_TagString: Pickup
@@ -255,6 +256,19 @@ MonoBehaviour:
   m_SynchronizeRotation: 1
   m_SynchronizeScale: 0
   m_UseLocal: 0
+--- !u!65 &8295371560014398766
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3192631691682887423}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1.2, z: 1}
+  m_Center: {x: 0, y: 0.6, z: 0}
 --- !u!1 &5430874818852594841
 GameObject:
   m_ObjectHideFlags: 0

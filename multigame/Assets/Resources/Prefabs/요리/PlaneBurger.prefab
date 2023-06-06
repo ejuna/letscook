@@ -95,6 +95,7 @@ GameObject:
   - component: {fileID: 7812557093587443309}
   - component: {fileID: 1093089899018017866}
   - component: {fileID: 3506510896312714690}
+  - component: {fileID: 8728402681238522694}
   m_Layer: 0
   m_Name: PlaneBurger
   m_TagString: Pickup
@@ -173,6 +174,19 @@ MonoBehaviour:
   m_SynchronizeRotation: 1
   m_SynchronizeScale: 0
   m_UseLocal: 0
+--- !u!65 &8728402681238522694
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1181567640747702403}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1.2, z: 1}
+  m_Center: {x: 0, y: 0.6, z: 0}
 --- !u!1 &2664723797618896036
 GameObject:
   m_ObjectHideFlags: 0

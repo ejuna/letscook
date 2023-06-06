@@ -261,6 +261,7 @@ GameObject:
   - component: {fileID: 778481129434570063}
   - component: {fileID: -8358442182782252629}
   - component: {fileID: 8486948720880157579}
+  - component: {fileID: -7913838795588204655}
   m_Layer: 0
   m_Name: PepperoniPizza
   m_TagString: Pickup
@@ -339,6 +340,19 @@ MonoBehaviour:
   m_SynchronizeRotation: 1
   m_SynchronizeScale: 0
   m_UseLocal: 0
+--- !u!65 &-7913838795588204655
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7298202816152630100}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1.2, z: 1}
+  m_Center: {x: 0, y: 0.6, z: 0}
 --- !u!1 &8606393196707238506
 GameObject:
   m_ObjectHideFlags: 0

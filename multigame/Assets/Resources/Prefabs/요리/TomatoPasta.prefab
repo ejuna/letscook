@@ -95,6 +95,7 @@ GameObject:
   - component: {fileID: 7551980490857674668}
   - component: {fileID: 5367982135027473571}
   - component: {fileID: 972715289116280301}
+  - component: {fileID: -5133070413886334156}
   m_Layer: 0
   m_Name: TomatoPasta
   m_TagString: Pickup
@@ -171,6 +172,19 @@ MonoBehaviour:
   m_SynchronizeRotation: 1
   m_SynchronizeScale: 0
   m_UseLocal: 0
+--- !u!65 &-5133070413886334156
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2999360875691281367}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1.2, z: 1}
+  m_Center: {x: 0, y: 0.6, z: 0}
 --- !u!1 &5785293457921644653
 GameObject:
   m_ObjectHideFlags: 0
