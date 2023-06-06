@@ -43,6 +43,7 @@ public class SubmitController : MonoBehaviour
             Managers.Fame.fameIncrease(fame);
             Vector3 position = pos.position + new Vector3(0f, 3f, 0f);
             GameObject fxObject = PhotonNetwork.Instantiate("Effect/" + effect.name, position, Quaternion.identity);
+            Managers.Orders.complete++;
             audioSoure.Play();
         }
         //맨 앞 주문서 삭제(요리제출로 간주하기때문에)
