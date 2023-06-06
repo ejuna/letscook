@@ -49,6 +49,7 @@ MonoBehaviour:
   - onTheboard
   - clearIngres
   - UpdateCount
+  - DestroyChild
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

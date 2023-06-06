@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
 using UnityEngine.UIElements;
-using static UnityEditor.PlayerSettings;
 
 public class SubmitController : MonoBehaviour
 {
