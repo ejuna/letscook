@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba273b57ec42fd146b34742391a4cfd3, type: 3}
+  m_Name: BeansCook
+  m_EditorClassIdentifier: 
+  ingredientName: cookedBeans
+  price: 5
+  ingredientType: 2
+  img: {fileID: 2800000, guid: 712d35f3bda35ec4ba7e99961d9dbaec, type: 3}
+  prepIngredient: {fileID: 61807602861896738, guid: ccf5724362db9e14bacf81f8827e4fd9, type: 3}
+  isCook: 1

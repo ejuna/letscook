@@ -7,13 +7,13 @@ using UnityEngine.XR;
 
 public class WasteCanController : MonoBehaviour
 {
-
+    AudioSource audioSoure;
     public bool isPlayerEnter;
 
     // Start is called before the first frame update
     void Start()
     {
-
+        audioSoure = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -30,8 +30,8 @@ public class WasteCanController : MonoBehaviour
         }
         if (other.gameObject.tag == "Pickup" && (other.gameObject.transform.parent == null || other.gameObject.transform.parent.name != "GameObject"))
         {
-
             PhotonNetwork.Destroy(other.gameObject);
+            audioSoure.Play();
         }
     }
     void OnTriggerExit(Collider other)

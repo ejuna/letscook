@@ -132,7 +132,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c040701a5578bdd479542a54c30c8e0d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ingredientData: {fileID: 11400000, guid: a26e5c4ca1c5e5b49b4b35ceb8d7b7b5, type: 2}
+  ingredientData: {fileID: 11400000, guid: 10bd1e1a4cf39e64e8793ec5da5217a2, type: 2}
   remotePos: {x: 0, y: 0, z: 0}
 --- !u!54 &8143175058231053664
 Rigidbody:
