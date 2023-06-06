@@ -25,8 +25,8 @@ public class MainController : MonoBehaviourPunCallbacks
     Vector3 moveVec;
     Animator animator;
 
+    AudioSource audioSoure;
 
-    
     private PhotonView pv;
    
 
@@ -47,6 +47,7 @@ public class MainController : MonoBehaviourPunCallbacks
     {
         moveVec = Vector3.zero;
         isFreeze = false;
+        audioSoure = GetComponent<AudioSource>();
     }
     void Update()
     {
@@ -92,6 +93,7 @@ public class MainController : MonoBehaviourPunCallbacks
 
                         isPicking = true; // 들고 있는지 아닌지 체크
                         animator.SetBool("isPicking", true); // 애니메이션에서 위의 isPicking과 다름
+                        audioSoure.Play();
                     }
                 }
                 else if (isPicking)
@@ -185,6 +187,7 @@ public class MainController : MonoBehaviourPunCallbacks
         interactingObject = null;
         isPicking = false;
         animator.SetBool("isPicking", false);
+        audioSoure.Play();
     }
 
     public void freeze()

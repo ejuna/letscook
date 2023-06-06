@@ -5,12 +5,14 @@ using Photon.Pun;
 
 public class SubmitController : MonoBehaviour
 {
+    AudioSource audioSoure;
 
-  bool isPlayerEnter;
+    bool isPlayerEnter;
   // Start is called before the first frame update
   void Start()
     {
-    isPlayerEnter = false;
+        isPlayerEnter = false;
+        audioSoure = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -31,6 +33,7 @@ public class SubmitController : MonoBehaviour
           //동기화필요
             Managers.Money.moneyIncrease(food.Price);
             Managers.Fame.fameIncrease(1);
+            audioSoure.Play();
         }
         //맨 앞 주문서 삭제(요리제출로 간주하기때문에)
          Managers.Orders.deleteOrder();
