@@ -9,7 +9,6 @@ using UnityEngine;
 public class CountertopController : MonoBehaviourPun
 {
     public List<string> ingres;
-    //public string st;
     bool isPlayerEnter;
     public PhotonView PV;
 
@@ -101,12 +100,6 @@ public class CountertopController : MonoBehaviourPun
         {
             go = PhotonNetwork.Instantiate("Prefabs/요리/Clinker", newPosition, transform.rotation);
         }
-        go.tag = "Pickup";
-        go.AddComponent<Rigidbody>();
-        go.GetComponent<Rigidbody>().freezeRotation = true;
-        go.AddComponent<BoxCollider>();
-        go.GetComponent<BoxCollider>().size = new Vector3(1f, 1.2f, 1f);
-        go.GetComponent<BoxCollider>().center = new Vector3(0, go.GetComponent<BoxCollider>().size.y / 2, 0);
     }
 
     [PunRPC]
@@ -133,7 +126,6 @@ public class CountertopController : MonoBehaviourPun
         other.transform.localPosition = Vector3.zero;
         other.transform.rotation = new Quaternion(0, 1, 0, 0);
         setEquip(other.gameObject, true);
- 
     }
     public void setEquip(GameObject gameObject, bool isEquip)
     {
