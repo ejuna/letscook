@@ -9,6 +9,7 @@ public class WasteCanController : MonoBehaviour
 {
     AudioSource audioSoure;
     public bool isPlayerEnter;
+    public PhotonView PV;
 
     // Start is called before the first frame update
     void Start()
@@ -21,7 +22,12 @@ public class WasteCanController : MonoBehaviour
     {
         
     }
-
+    [PunRPC]
+    private void Destroy(int viewId)
+    {
+            Debug.Log(PhotonView.Find(viewId).gameObject.name);
+            Destroy(PhotonView.Find(viewId).gameObject);
+    }
     void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "Player")
@@ -30,7 +36,7 @@ public class WasteCanController : MonoBehaviour
         }
         if (other.gameObject.tag == "Pickup" && (other.gameObject.transform.parent == null || other.gameObject.transform.parent.name != "GameObject"))
         {
-            PhotonNetwork.Destroy(other.gameObject);
+            PV.RPC(nameof(Destroy), RpcTarget.All, other.gameObject.GetComponent<PhotonView>().ViewID);
             audioSoure.Play();
         }
     }

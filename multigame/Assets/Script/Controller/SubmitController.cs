@@ -54,7 +54,6 @@ public class SubmitController : MonoBehaviour
       {
             submit(other.gameObject);
             PhotonNetwork.Destroy(other.gameObject);
-      
       }
     }
 
