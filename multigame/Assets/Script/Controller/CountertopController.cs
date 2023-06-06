@@ -12,7 +12,9 @@ public class CountertopController : MonoBehaviourPun
     //public string st;
     bool isPlayerEnter;
     public PhotonView PV;
+
     AudioSource audioSoure;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -34,8 +36,8 @@ public class CountertopController : MonoBehaviourPun
     {
         if (Input.GetKeyDown(KeyCode.LeftAlt) && isPlayerEnter)
         {
-             makeFood();
-             PV.RPC(nameof(clearIngres), RpcTarget.Others);
+            makeFood();
+            PV.RPC(nameof(clearIngres), RpcTarget.Others);
         }
 
     }
@@ -67,7 +69,7 @@ public class CountertopController : MonoBehaviourPun
                     tempAllFood[i].Ingredients.ForEach(IngredientData =>
                     {
                         //Debug.Log(IngredientData.name);
-                        if (IngredientData.name.Equals(food))
+                        if (IngredientData.IngredientName.Equals(food))
                         {
                             isSame = true;
                         }
@@ -86,11 +88,8 @@ public class CountertopController : MonoBehaviourPun
         ingres.Clear();
         ingres = new List<string>();
         //재료 삭제하기
-        for (int i = 1; i < transform.childCount; i++)
-        {
-            Debug.Log(transform.GetChild(i).gameObject.name);
-            PhotonNetwork.Destroy(transform.GetChild(i).gameObject);
-        }
+        PV.RPC(nameof(DestroyChild), RpcTarget.All);
+
         //음식 생성
         GameObject go;
         Vector3 newPosition = transform.position + new Vector3(2f, 2f, 0f);
@@ -112,12 +111,14 @@ public class CountertopController : MonoBehaviourPun
         go.GetComponent<BoxCollider>().size = new Vector3(1f, 1.2f, 1f);
         go.GetComponent<BoxCollider>().center = new Vector3(0, go.GetComponent<BoxCollider>().size.y / 2, 0);
     }
+
+    [PunRPC]
     private void DestroyChild()
     {
         for (int i = 1; i < transform.childCount; i++)
         {
             Debug.Log(transform.GetChild(i).gameObject.name);
-            if (PV.IsMine) PhotonNetwork.Destroy(transform.GetChild(i).gameObject);
+            Destroy(transform.GetChild(i).gameObject);
         }
     }
     [PunRPC]
@@ -154,6 +155,9 @@ public class CountertopController : MonoBehaviourPun
         if (other.gameObject.tag=="Player"&& other.gameObject.GetComponent<PhotonView>().IsMine)
         {
             isPlayerEnter = true;
+
+            
+
         }
         if (other.gameObject.GetComponent<Ingredient>() != null && other.gameObject.tag == "Pickup" &&  (other.gameObject.transform.parent == null || other.gameObject.transform.parent.name != "GameObject"))
         {
