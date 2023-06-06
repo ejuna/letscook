@@ -87,7 +87,8 @@ public class Managers : MonoBehaviourPun, IPunObservable
             stream.SendNext(Fame.tempFame);
             stream.SendNext(Orders.tempOrder);
             stream.SendNext(Event.eventInfo);
-
+            stream.SendNext(Event.isTodayGourmand);
+            stream.SendNext(Event.isTodayGroupGeuset);
     }
         else
         {
@@ -101,6 +102,8 @@ public class Managers : MonoBehaviourPun, IPunObservable
             Fame.tempFame = (int)stream.ReceiveNext();
             Orders.tempOrder = (int)stream.ReceiveNext();
             Event.eventInfo = (string)stream.ReceiveNext();
+            Event.isTodayGourmand = (bool)stream.ReceiveNext();
+            Event.isTodayGroupGeuset = (bool)stream.ReceiveNext();
 
     }
     }

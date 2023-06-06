@@ -20,8 +20,8 @@ public class EventManager
     public GameObject uiContainer;
     public GameObject warning;
 
-    bool isTodayGourmand;
-    bool isTodayGroupGeuset;
+    public bool isTodayGourmand;
+    public bool isTodayGroupGeuset;
     bool isGameOver;
     public int targetDate { get; set; }//무한이면 -1
     public int targetMoney { get; set; }//무한이면 -1
@@ -74,7 +74,7 @@ public class EventManager
             Debug.Log("GroupGeuset");
             eventInfo = "단체손님 이벤트 발생!";
             groupGuestEvent();
-             isTodayGroupGeuset = false;
+            isTodayGroupGeuset = false;
         }
         //목표일짜 및 목표 금액 달성시 게임 클리어
         if (isGameOver && (Managers.Date.day == targetDate || Managers.Money.money >= targetMoney|| Managers.Life.life <= 0 ))
@@ -86,11 +86,11 @@ public class EventManager
         if(!eventInfo.Equals("")){
           timer += Time.deltaTime;
           Warning(eventInfo);
-        if (timer > 5.0f){
-            Debug.Log(timer);
-            eventInfo = "";
-            warning.SetActive(false);
-            timer = 0.0f;
+          if (timer > 5.0f){
+              Debug.Log(timer);
+              eventInfo = "";
+              warning.SetActive(false);
+              timer = 0.0f;
           }
         }
   }
