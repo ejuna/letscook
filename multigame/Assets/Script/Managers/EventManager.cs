@@ -18,10 +18,10 @@ public class EventManager
 
     public void init()
     {
-        //randOrderCountTrigger = Random.Range(0, 15);
-        //randTimeTrigger = Random.Range(0, Constants.Day_MAX_time);
-        randOrderCountTrigger = -1;
-        randTimeTrigger = -1;
+        randOrderCountTrigger = Random.Range(0, 7);
+        randTimeTrigger = Random.Range(0, Constants.Day_MAX_time);
+        //randOrderCountTrigger = -1;
+        //randTimeTrigger = -1;
 
         isTodayGourmand = true;
         isTodayGroupGeuset = true;
@@ -45,12 +45,14 @@ public class EventManager
         //조건을 확인 하면서 미식가 이벤트 발생시킨다.
         if (Managers.Orders.complete == randOrderCountTrigger && isTodayGourmand)
         {
+            Debug.Log("Gourmand");
               gourmandEvent();
               isTodayGourmand = false;
         }
         //시간 조건을 확인하고 랜덤한 시간에 단체손님 발생
         if (Managers.Date.time == randTimeTrigger && isTodayGroupGeuset) {
-              groupGuestEvent();
+            Debug.Log("GroupGeuset");
+            groupGuestEvent();
               isTodayGroupGeuset = false;
         }
         //목표일짜 및 목표 금액 달성시 게임 클리어
@@ -87,11 +89,11 @@ public class EventManager
             fameLogicCount++;
         }
         fameLogicCount = fameLogicCount + complete;
-        while (fameLogicCount >= 10)
+        while (fameLogicCount >= 4)
         {
             fameLogicCount=fameLogicCount / 2;
         }
-        if (fameLogicCount < 4) fameLogicCount=fameLogicCount * 2;
+        if (fameLogicCount < 2) fameLogicCount=fameLogicCount + 2;
 
 
         Managers.Orders.createGroupGuestOrder(fameLogicCount);
