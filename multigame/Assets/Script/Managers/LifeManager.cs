@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
 
 public class LifeManager
 {
@@ -24,13 +25,18 @@ public class LifeManager
     return true;
   }
 
-  public bool lifeDecrease(){
-    if(life == 0){
-      return false;
+  public void lifeDecrease(){
+        if (PhotonNetwork.IsMasterClient)
+        {
+            if (life != 0)
+            {
+                life--;
+                Debug.Log("라이프1 감소");
+                Debug.Log("남은 라이프: " + life);
+               
+            }
+            ;
+        }
+        
     }
-    life--;
-    Debug.Log("라이프1 감소");
-    Debug.Log("남은 라이프: "+life);
-    return true;
-  }
 }
