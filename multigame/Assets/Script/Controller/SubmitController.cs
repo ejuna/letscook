@@ -33,7 +33,14 @@ public class SubmitController : MonoBehaviour
         else if(Managers.Orders.checkOrder(food)){
           //동기화필요
             Managers.Money.moneyIncrease(food.Price);
-            Managers.Fame.fameIncrease(1);
+            int fame = 1;
+            switch(food.foodData.FoodTier){
+              case 1: fame = 1; break;
+              case 2: fame = 3; break;
+              case 3: fame = 5; break;
+              case 4: fame = 7; break;
+            }
+            Managers.Fame.fameIncrease(fame);
             Vector3 position = pos.position + new Vector3(0f, 3f, 0f);
             GameObject fxObject = PhotonNetwork.Instantiate("Effect/" + effect.name, position, Quaternion.identity);
             audioSoure.Play();
