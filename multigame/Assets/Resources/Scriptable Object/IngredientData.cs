@@ -26,4 +26,9 @@ public class IngredientData : ScriptableObject
   private GameObject prepIngredient;
   public GameObject PrepIngredient { get { return prepIngredient; } }
 
+  [SerializeField]
+  private bool isCook;
+  public bool IsCook { get { return isCook; } }
+
+
 }
