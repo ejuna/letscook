@@ -100,7 +100,7 @@ public class OrderRecipe : MonoBehaviour
 
       //타임 설정
       timer = orderUI.GetComponentInChildren<Slider>();
-      timer.maxValue = order.TimeLimit;
+      timer.maxValue = order.timeLimit;
       timer.value = timer.maxValue;
       orderUI.transform.SetParent(canvas.transform);
 

@@ -134,23 +134,24 @@ public class OrderManager
 
     public void createOrder(){
       int rand = Random.Range(0, todayFoods.Count);
-      Order order = new Order(todayFoods[rand], DEFALT_TIME);
+      Order order = new Order(todayFoods[rand]);
       orderList.Add(order);
       Debug.Log(order.Food.FoodName);
   }
 
-    public void createOrder(int time)
+    public void createOrder(int per)
     {
       int rand = Random.Range(0, todayFoods.Count);
-      Order order = new Order(todayFoods[rand], time);
+      Order order = new Order(todayFoods[rand]);
+      order.timeLimit -= (float)(1.0f + per / 100);
       orderList.Add(order);
       Debug.Log(order.Food.FoodName);
     }
 
 
   
-    public void createGourmandOrder(int time){
-      createOrder((int)(DEFALT_TIME - time));
+    public void createGourmandOrder(int per){
+      createOrder(per);
     }
 
 
