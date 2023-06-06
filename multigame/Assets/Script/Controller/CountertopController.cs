@@ -12,6 +12,8 @@ public class CountertopController : MonoBehaviourPun
     //public string st;
     bool isPlayerEnter;
     public PhotonView PV;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -32,8 +34,9 @@ public class CountertopController : MonoBehaviourPun
     {
         if (Input.GetKeyDown(KeyCode.LeftAlt) && isPlayerEnter)
         {
-             makeFood();
-             PV.RPC(nameof(clearIngres), RpcTarget.Others);
+            
+            makeFood();
+            PV.RPC(nameof(clearIngres), RpcTarget.Others);
         }
 
     }
@@ -87,6 +90,7 @@ public class CountertopController : MonoBehaviourPun
         for (int i = 1; i < transform.childCount; i++)
         {
             Debug.Log(transform.GetChild(i).gameObject.name);
+            transform.GetChild(i).GetComponent<PhotonView>().RequestOwnership();
             PhotonNetwork.Destroy(transform.GetChild(i).gameObject);
         }
         //음식 생성
@@ -151,6 +155,9 @@ public class CountertopController : MonoBehaviourPun
         if (other.gameObject.tag=="Player"&& other.gameObject.GetComponent<PhotonView>().IsMine)
         {
             isPlayerEnter = true;
+
+            
+
         }
         if (other.gameObject.GetComponent<Ingredient>() != null && other.gameObject.tag == "Pickup" &&  (other.gameObject.transform.parent == null || other.gameObject.transform.parent.name != "GameObject"))
         {
