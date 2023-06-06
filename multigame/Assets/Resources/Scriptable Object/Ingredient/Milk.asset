@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: Milk
   m_EditorClassIdentifier: 
   ingredientName: Milk
-  price: 15
+  price: 450
   ingredientType: 3
   img: {fileID: 2800000, guid: 8043fcd6d49d3cd4db4cea2771c1b072, type: 3}
   prepIngredient: {fileID: 4940650200524590521, guid: 18419e5e88bb1054faa1e0b23383e6e7, type: 3}
+  isCook: 0

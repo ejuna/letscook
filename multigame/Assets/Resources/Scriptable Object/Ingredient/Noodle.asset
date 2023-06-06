@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: Noodle
   m_EditorClassIdentifier: 
   ingredientName: Noodle
-  price: 10
+  price: 300
   ingredientType: 0
   img: {fileID: 2800000, guid: 65dc27686d08b2548bc4f115fb59a030, type: 3}
   prepIngredient: {fileID: 2266884516952822298, guid: e62c92f5c4a542f4c8dd982999d018c0, type: 3}
+  isCook: 0

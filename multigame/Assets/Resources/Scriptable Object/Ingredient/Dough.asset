@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: Dough
   m_EditorClassIdentifier: 
   ingredientName: Dough
-  price: 10
+  price: 300
   ingredientType: 0
   img: {fileID: 2800000, guid: e45cad4f127bca6458f5a297663a5667, type: 3}
   prepIngredient: {fileID: 6173555098168729124, guid: 000028ba49176584fa98a61976fc5128, type: 3}
+  isCook: 0

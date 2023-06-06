@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: Potato
   m_EditorClassIdentifier: 
   ingredientName: Potato
-  price: 5
+  price: 150
   ingredientType: 2
   img: {fileID: 2800000, guid: 0567982c450bb7b47b8773ef00e362d4, type: 3}
   prepIngredient: {fileID: 2001083050086279300, guid: 5ad04ce4d8861aa4891d027991d43145, type: 3}
+  isCook: 0
