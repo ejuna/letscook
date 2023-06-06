@@ -65,14 +65,14 @@ public class EventManager
         if (Managers.Orders.complete >= randOrderCountTrigger && isTodayGourmand)
         {
               Debug.Log("Gourmand");
-              Warning("미식가 이벤트 발생!");
+              eventInfo = "미식가 이벤트 발생!";
               gourmandEvent();
               isTodayGourmand = false;
         }
         //시간 조건을 확인하고 랜덤한 시간에 단체손님 발생
         if (Managers.Date.time >= randTimeTrigger && isTodayGroupGeuset) {
             Debug.Log("GroupGeuset");
-            Warning("단체손님 이벤트 발생!");
+            eventInfo = "단체손님 이벤트 발생!";
             groupGuestEvent();
              isTodayGroupGeuset = false;
         }
@@ -85,7 +85,8 @@ public class EventManager
 
         if(!eventInfo.Equals("")){
           timer += Time.deltaTime;
-          if(timer > 5.0f){
+          Warning(eventInfo);
+        if (timer > 5.0f){
             Debug.Log(timer);
             eventInfo = "";
             warning.SetActive(false);
@@ -95,10 +96,9 @@ public class EventManager
   }
     public void Warning(String str)
     {
-        eventInfo = str;
         warning.SetActive(true);
         TextMeshProUGUI warningText = warning.GetComponentInChildren<TextMeshProUGUI>();
-        warningText.text = eventInfo;
+        warningText.text = str;
     }
 
     public void gourmandEvent() 
