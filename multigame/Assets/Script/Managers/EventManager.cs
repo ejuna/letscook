@@ -43,14 +43,14 @@ public class EventManager
     public void OnUpdate()
       {
         //조건을 확인 하면서 미식가 이벤트 발생시킨다.
-        if (Managers.Orders.complete == randOrderCountTrigger && isTodayGourmand)
+        if (Managers.Orders.complete >= randOrderCountTrigger && isTodayGourmand)
         {
             Debug.Log("Gourmand");
               gourmandEvent();
               isTodayGourmand = false;
         }
         //시간 조건을 확인하고 랜덤한 시간에 단체손님 발생
-        if (Managers.Date.time == randTimeTrigger && isTodayGroupGeuset) {
+        if (Managers.Date.time >= randTimeTrigger && isTodayGroupGeuset) {
             Debug.Log("GroupGeuset");
             groupGuestEvent();
               isTodayGroupGeuset = false;
