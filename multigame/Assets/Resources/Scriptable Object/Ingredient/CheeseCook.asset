@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba273b57ec42fd146b34742391a4cfd3, type: 3}
+  m_Name: CheeseCook
+  m_EditorClassIdentifier: 
+  ingredientName: cookedCheese
+  price: 15
+  ingredientType: 3
+  img: {fileID: 2800000, guid: 3787cd4f2d4d259419f711bf709a78af, type: 3}
+  prepIngredient: {fileID: 4669359552052621892, guid: 6780d904d9af6b94baf6b9202e82d73c, type: 3}
+  isCook: 1

@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba273b57ec42fd146b34742391a4cfd3, type: 3}
+  m_Name: StrawberryCook
+  m_EditorClassIdentifier: 
+  ingredientName: cookedStrawberry
+  price: 5
+  ingredientType: 2
+  img: {fileID: 2800000, guid: d5870c194e7784c4aadc222abf4d8d95, type: 3}
+  prepIngredient: {fileID: 8739810746283269344, guid: 811827d0d583188498f385c60f69aa5a, type: 3}
+  isCook: 1

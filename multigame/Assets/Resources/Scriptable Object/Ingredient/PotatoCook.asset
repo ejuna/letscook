@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba273b57ec42fd146b34742391a4cfd3, type: 3}
+  m_Name: PotatoCook
+  m_EditorClassIdentifier: 
+  ingredientName: cookedPotato
+  price: 5
+  ingredientType: 2
+  img: {fileID: 2800000, guid: 0567982c450bb7b47b8773ef00e362d4, type: 3}
+  prepIngredient: {fileID: 2001083050086279300, guid: 5ad04ce4d8861aa4891d027991d43145, type: 3}
+  isCook: 1

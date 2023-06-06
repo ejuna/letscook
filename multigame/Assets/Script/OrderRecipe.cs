@@ -89,11 +89,14 @@ public class OrderRecipe : MonoBehaviour
         Sprite ingre_sprite = Sprite.Create(ingre_texture, new Rect(0, 0, ingre_texture.width, ingre_texture.height), Vector2.one * 0.5f);
         ingredient.sprite = ingre_sprite;
 
-        TextMeshProUGUI ingre_text = ingredient.GetComponentInChildren<TextMeshProUGUI>();
+        TextMeshProUGUI ingre_text = ingredient.transform.Find("Name").GetComponent<TextMeshProUGUI>();
 
         ingre_text.text = order.Food.Ingredients[i].IngredientName;
-
-      }
+        if(!order.Food.Ingredients[i].IsCook){
+        TextMeshProUGUI cook_text = ingredient.transform.Find("cook").GetComponent<TextMeshProUGUI>();
+        cook_text.text = "";
+        }
+    }
 
       //타임 설정
       timer = orderUI.GetComponentInChildren<Slider>();
