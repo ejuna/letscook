@@ -30,8 +30,6 @@ public class Managers : MonoBehaviourPun, IPunObservable
     public static FameManager Fame { get{ return Instance._fame; } }
     public static ResourceManager Resource { get { return Instance._resource;} }
 
-    public PhotonView PV;
-    public static PhotonView PhotonView { get { return Instance.PV; } }
     void Start()
     {
         init();
