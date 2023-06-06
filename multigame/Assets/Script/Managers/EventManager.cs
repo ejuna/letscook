@@ -1,15 +1,25 @@
+using Photon.Pun;
+using POpusCodec.Enums;
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Xml.Linq;
+using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class EventManager
 {
+    public Action<string> WarningAction;
+
     private float randOrderCountTrigger;
     //이벤트 이벤트 발생하는 시기에 랜덤한 시간을 생성
     private float randTimeTrigger;
     //랜덤으로 생성된 단체손님 수
     int randGroupNum = 0;
     public GameObject uiContainer;
+    public GameObject warning;
+
     bool isTodayGourmand;
     bool isTodayGroupGeuset;
     bool isGameOver;
@@ -18,11 +28,12 @@ public class EventManager
 
     public void init()
     {
-        randOrderCountTrigger = Random.Range(0, 7);
-        randTimeTrigger = Random.Range(30, Constants.Day_MAX_time);
+        randOrderCountTrigger = UnityEngine.Random.Range(0, 7);
+        randTimeTrigger = UnityEngine.Random.Range(30, Constants.Day_MAX_time);
         //randOrderCountTrigger = -1;
-        //randTimeTrigger = -1;
-
+        //randTimeTrigger = 1;
+        WarningAction -= Warning;
+        WarningAction += Warning;
         isTodayGourmand = true;
         isTodayGroupGeuset = true;
         isGameOver = true;
@@ -30,6 +41,8 @@ public class EventManager
         //게임 종료 UI연결
         uiContainer = GameObject.FindGameObjectWithTag("GameEnd");
         uiContainer.SetActive(false);
+        warning = GameObject.FindGameObjectWithTag("warning");
+        warning.SetActive(false);
 
         //============이준하 수정=============//
         GameObject obj = GameObject.Find("PhotonManager");
@@ -46,12 +59,14 @@ public class EventManager
         if (Managers.Orders.complete >= randOrderCountTrigger && isTodayGourmand)
         {
             Debug.Log("Gourmand");
+            WarningAction("미식가 이벤트");
               gourmandEvent();
               isTodayGourmand = false;
         }
         //시간 조건을 확인하고 랜덤한 시간에 단체손님 발생
         if (Managers.Date.time >= randTimeTrigger && isTodayGroupGeuset) {
             Debug.Log("GroupGeuset");
+            WarningAction("단체손님 이벤트");
             groupGuestEvent();
               isTodayGroupGeuset = false;
         }
@@ -61,6 +76,10 @@ public class EventManager
             gameClear();
             isGameOver = false;
         }
+    }
+    public void Warning(String str)
+    {
+        warning.SetActive(true);
     }
 
     public void gourmandEvent() 
