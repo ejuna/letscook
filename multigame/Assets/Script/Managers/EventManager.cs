@@ -58,11 +58,17 @@ public class EventManager
         //조건을 확인 하면서 미식가 이벤트 발생시킨다.
         if (Managers.Orders.complete >= randOrderCountTrigger && isTodayGourmand)
         {
-            if (Managers.PhotonView.IsMine) Managers.PhotonView.RPC(nameof(gourmand), RpcTarget.All);
+            Debug.Log("Gourmand");
+            WarningAction("미식가 이벤트");
+              gourmandEvent();
+              isTodayGourmand = false;
         }
         //시간 조건을 확인하고 랜덤한 시간에 단체손님 발생
         if (Managers.Date.time >= randTimeTrigger && isTodayGroupGeuset) {
-            if (Managers.PhotonView.IsMine) Managers.PhotonView.RPC(nameof(groupGuest), RpcTarget.All);
+            Debug.Log("GroupGeuset");
+            WarningAction("단체손님 이벤트");
+            groupGuestEvent();
+              isTodayGroupGeuset = false;
         }
         //목표일짜 및 목표 금액 달성시 게임 클리어
         if (isGameOver && (Managers.Date.day == targetDate || Managers.Money.money >= targetMoney|| Managers.Life.life <= 0 ))
@@ -75,14 +81,7 @@ public class EventManager
     {
         warning.SetActive(true);
     }
-    [PunRPC]
-    public void gourmand()
-    {
-        Debug.Log("Gourmand");
-        WarningAction("미식가 이벤트");
-        gourmandEvent();
-        isTodayGourmand = false;
-    }
+
     public void gourmandEvent() 
     {
         int fameLogicCount = 0;
@@ -95,14 +94,6 @@ public class EventManager
         //미식가 주문생성
         //주문생성에 필요한 변수등의 식을 생성(명성,)
         Managers.Orders.createGourmandOrder(fameLogicCount);
-    }
-    [PunRPC]
-    public void groupGuest() 
-    {
-        Debug.Log("GroupGeuset");
-        WarningAction("단체손님 이벤트");
-        groupGuestEvent();
-        isTodayGroupGeuset = false;
     }
     public void groupGuestEvent() 
     {
