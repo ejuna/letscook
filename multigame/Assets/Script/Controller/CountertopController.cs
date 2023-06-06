@@ -6,7 +6,7 @@ using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class CountertopController : MonoBehaviourPun, IPunObservable
+public class CountertopController : MonoBehaviourPun
 {
     public List<string> ingres;
     //public string st;
@@ -32,24 +32,14 @@ public class CountertopController : MonoBehaviourPun, IPunObservable
     {
         if (Input.GetKeyDown(KeyCode.LeftAlt) && isPlayerEnter)
         {
-            if (PV.IsMine) PV.RPC(nameof(makeFood), RpcTarget.All);
+             makeFood();
+             PV.RPC(nameof(clearIngres), RpcTarget.Others);
         }
 
     }
     [PunRPC]
     void makeFood()
     {
-        /*
-if (st.Length != 0)
-{
-    String[] starr = st.Split(",");
-    for (int i = 0; i < starr.Length-1; i++)
-    {
-        Debug.Log(i);
-        ingres.Add(starr[i]);
-    }
-}
-*/
         if (ingres.Count == 0)
         {
             return;
@@ -119,15 +109,30 @@ if (st.Length != 0)
         go.GetComponent<BoxCollider>().size = new Vector3(1f, 1.2f, 1f);
         go.GetComponent<BoxCollider>().center = new Vector3(0, go.GetComponent<BoxCollider>().size.y / 2, 0);
     }
-    [PunRPC]
-    void onTheboard(string str)
+    private void DestroyChild()
     {
-        GameObject other = GameObject.Find(str);
-        other.transform.SetParent(transform, false);
+        for (int i = 1; i < transform.childCount; i++)
+        {
+            Debug.Log(transform.GetChild(i).gameObject.name);
+            if (PV.IsMine) PhotonNetwork.Destroy(transform.GetChild(i).gameObject);
+        }
+    }
+    [PunRPC]
+    void clearIngres()
+    {
+        ingres.Clear();
+        ingres = new List<string>();
+    }
+    [PunRPC]
+    void onTheboard(int viewId , int parentviewId)
+    {
+        GameObject other = PhotonView.Find(viewId).gameObject;
+        GameObject parent = PhotonView.Find(parentviewId).gameObject;
+        other.transform.SetParent(parent.transform, false);
         other.transform.localPosition = Vector3.zero;
         other.transform.rotation = new Quaternion(0, 1, 0, 0);
         setEquip(other.gameObject, true);
-        ingres.Add(other.gameObject.GetComponent<Ingredient>().ingredientName);
+ 
     }
     public void setEquip(GameObject gameObject, bool isEquip)
     {
@@ -141,31 +146,19 @@ if (st.Length != 0)
         gameObjectRigidbody.isKinematic = isEquip;
     }
 
-    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
-    {
-        
-        if (stream.IsWriting)
-        {
-            // We own this player: send the others our data
-            //stream.SendNext(st);
-        }
-        else
-        {
-            // Network player, receive data
-            //this.st = (string)stream.ReceiveNext();
-
-        }
-    }
-
     void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag=="Player")
+        if (other.gameObject.tag=="Player"&& other.gameObject.GetComponent<PhotonView>().IsMine)
         {
             isPlayerEnter = true;
         }
         if (other.gameObject.GetComponent<Ingredient>() != null && other.gameObject.tag == "Pickup" &&  (other.gameObject.transform.parent == null || other.gameObject.transform.parent.name != "GameObject"))
         {
-            if (PV.IsMine) PV.RPC(nameof(onTheboard), RpcTarget.All,other.name);
+            //if (PV.IsMine) PV.RPC(nameof(onTheboard), RpcTarget.All ,other.gameObject.GetComponent<PhotonView>().ViewID,transform.gameObject.GetComponent<PhotonView>().ViewID);
+            Debug.Log(other.gameObject.GetComponent<PhotonView>().ViewID);
+            Debug.Log(transform.gameObject.GetComponent<PhotonView>().ViewID);
+            onTheboard(other.gameObject.GetComponent<PhotonView>().ViewID, transform.gameObject.GetComponent<PhotonView>().ViewID);
+            ingres.Add(other.gameObject.GetComponent<Ingredient>().ingredientName);
             //st = st + other.gameObject.GetComponent<Ingredient>().ingredientName + ","
         }
     }
