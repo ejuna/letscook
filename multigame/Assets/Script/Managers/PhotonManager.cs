@@ -6,6 +6,7 @@ using Photon.Realtime;
 using UnityEngine.UI;
 using TMPro;
 using Hashtable = ExitGames.Client.Photon.Hashtable;
+using UnityEngine.SceneManagement;
 
 
 public class PhotonManager : MonoBehaviourPunCallbacks
@@ -139,6 +140,7 @@ public class PhotonManager : MonoBehaviourPunCallbacks
         if (inGameRoom)
         {
             PhotonNetwork.Destroy(GameObject.Find(PhotonNetwork.NickName));
+            inGameRoom = false;
             
         }
         else
@@ -499,11 +501,9 @@ public class PhotonManager : MonoBehaviourPunCallbacks
 
     public void GoToLobbyButtonClick()
     {
-        if (PhotonNetwork.IsMasterClient)
-        {
 
-            PhotonNetwork.LoadLevel("Lobby");
-
-        }
+        PhotonNetwork.LeaveRoom();
+        SceneManager.LoadScene("Lobby");
+        
     }
 }
