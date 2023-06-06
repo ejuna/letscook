@@ -19,7 +19,7 @@ public class EventManager
     public void init()
     {
         randOrderCountTrigger = Random.Range(0, 7);
-        randTimeTrigger = Random.Range(0, Constants.Day_MAX_time);
+        randTimeTrigger = Random.Range(30, Constants.Day_MAX_time);
         //randOrderCountTrigger = -1;
         //randTimeTrigger = -1;
 
