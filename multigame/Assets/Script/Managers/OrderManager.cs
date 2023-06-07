@@ -96,17 +96,17 @@ public class OrderManager
 
     //임의로 계산하기 
     //day로 기본 min max 계산
-    if (day > 20){
+    if (day > 7){
       tierScopeMin = 3;
-    }else if(day > 10){
+    }else if(day > 3){
       tierScopeMin = 2;
     }
 
-    if(day>15){
+    if(day>5){
       tierScopeMax = 4;
-    }else if(day>10){
-      tierScopeMax = 3;
     }else if(day>3){
+      tierScopeMax = 3;
+    }else if(day>1){
       tierScopeMax = 2;
     }
 
@@ -125,7 +125,8 @@ public class OrderManager
 
     foreach(FoodData foodData in allFoods){
       int tier = foodData.FoodTier;
-      if(tierScopeMin <= tier && tier <= tierScopeMax){
+      if(tierScopeMin <= tier && tier <= tierScopeMax)
+      {
         todayFoods.Add(foodData);
       }
     }

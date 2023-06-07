@@ -40,8 +40,8 @@ public class EventManager
         //randTimeTrigger = 1;
         WarningAction -= Warning;
         WarningAction += Warning;
-        isTodayGourmand = true;
-        isTodayGroupGeuset = true;
+        isTodayGourmand = false;
+        isTodayGroupGeuset = false;
         isGameOver = true;
 
         //게임 종료 UI연결
@@ -68,6 +68,7 @@ public class EventManager
               eventInfo = "미식가 이벤트 발생!";
               gourmandEvent();
               isTodayGourmand = false;
+
         }
         //시간 조건을 확인하고 랜덤한 시간에 단체손님 발생
         if (Managers.Date.time >= randTimeTrigger && isTodayGroupGeuset) {
